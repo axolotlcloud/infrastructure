@@ -33,3 +33,13 @@ helmCharts:
   repo: https://istio-release.storage.googleapis.com/charts
   valuesFile: ztunnel.values.yaml
   version: 1.26.3
+
+patches:
+- target:
+    group: admissionregistration.k8s.io
+    kind: ValidatingWebhookConfiguration
+    version: v1
+  patch: |-
+    - op: replace
+      path: /webhooks/0/failurePolicy
+      value: Fail
