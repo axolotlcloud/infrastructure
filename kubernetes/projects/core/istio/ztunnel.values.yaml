@@ -97,10 +97,11 @@ logLevel: info
 logAsJson: false
 
 # Set to `type: RuntimeDefault` to use the default profile if available.
-seLinuxOptions: {}
+seccompProfile:
+  type: RuntimeDefault
 # TODO Ambient inpod - for OpenShift, set to the following to get writable sockets in hostmounts to work, eventually consider CSI driver instead
-#seLinuxOptions:
-#  type: spc_t
+seLinuxOptions:
+  type: spc_t
 
 # K8s DaemonSet update strategy.
 # https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/daemon-set-v1/#DaemonSetSpec).
