@@ -17,7 +17,7 @@ spec:
           - path: kubernetes/projects/*/*
           values:
             app: '{{ .path.basename }}'
-            project: '{{ index .path.segments 1 }}'
+            project: '{{ index .path.segments 2 }}'
       - list:
           elements:
           - autoSyncExclusions: []
