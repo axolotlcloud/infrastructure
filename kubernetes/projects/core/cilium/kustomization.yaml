@@ -6,6 +6,7 @@ resources:
 - ./bgpclusterconfig.yaml
 - ./bgppeerconfig.yaml
 - ./gateway.yaml
+- ./hubble-ui.httproute.yaml
 - ./ippool.yaml
 
 helmCharts:
