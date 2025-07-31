@@ -30,3 +30,14 @@ spec:
       mode: Terminate
       certificateRefs:
       - name: axolotl-cloud-tls
+  - name: wildcard-lan-axolotl-cloud
+    hostname: "*.lan.axolotl.cloud"
+    port: 443
+    protocol: HTTPS
+    allowedRoutes:
+      namespaces:
+        from: All
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - name: axolotl-cloud-tls
