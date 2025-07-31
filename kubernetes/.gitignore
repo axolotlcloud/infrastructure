@@ -1,0 +1,12 @@
+# Secrets
+secret.yaml
+*.secret.yaml
+!/**/localized-*/charts/**/secret.yaml
+!/**/localized-*/charts/**/*.secret.yaml
+
+# Secret exceptions
+!axolotl-cluster.secret.yaml
+
+# Non-localized helm charts
+/**/charts/
+!/**/localized-*/**/charts/

@@ -1,0 +1,47 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: bootstrap
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions:
+  - missingkey=error
+  generators:
+  - matrix:
+      generators:
+      - git:
+          repoURL: https://github.com/axolotlcloud/infrastructure
+          revision: HEAD
+          directories:
+          - path: projects/*/*
+          values:
+            app: '{{ .path.basename }}'
+            project: '{{ index .path.segments 1 }}'
+      - list:
+          elements:
+          - autoSyncExclusions: []
+  template:
+    metadata:
+      name: '{{ .values.app }}'
+      annotations:
+        argocd.argoproj.io/compare-options: ServerSideDiff=true
+    spec:
+      project: '{{ .values.project }}'
+      source:
+        repoURL: https://github.com/axolotlcloud/infrastructure
+        targetRevision: HEAD
+        path: '{{ .path.path }}'
+      destination:
+        server: https://kubernetes.default.svc
+      syncPolicy:
+        syncOptions:
+        - ServerSideApply=true
+  templatePatch: |
+    {{- if not (has .values.app .autoSyncExclusions) }}
+    spec:
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+    {{- end }}

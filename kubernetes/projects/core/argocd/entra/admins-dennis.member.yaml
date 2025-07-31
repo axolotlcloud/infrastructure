@@ -1,0 +1,11 @@
+apiVersion: groups.azuread.upbound.io/v1beta1
+kind: Member
+metadata:
+  name: argocd-admins-dennis
+spec:
+  forProvider:
+    groupObjectIdRef:
+      name: argocd-admins
+    memberObjectId: bc024785-2433-48fa-ab23-d6211ddcf431 # dennis@axolotl.cloud
+  providerConfigRef:
+    name: default

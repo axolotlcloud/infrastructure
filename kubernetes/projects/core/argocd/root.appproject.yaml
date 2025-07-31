@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: root
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Root bootstrapping for Axolotl Cloud
+  sourceRepos:
+  - https://github.com/axolotlcloud/infrastructure
+  destinations:
+  - server: "*"
+    namespace: "*"
+  namespaceResourceWhitelist:
+  - group: "*"
+    kind: "*"
+  clusterResourceWhitelist:
+  - group: "*"
+    kind: "*"

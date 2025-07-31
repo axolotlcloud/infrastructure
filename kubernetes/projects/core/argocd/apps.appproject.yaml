@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: apps
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Applications hosted on Axolotl Cloud
+  sourceRepos:
+  - https://github.com/axolotlcloud/infrastructure
+  destinations:
+  - server: "*"
+    namespace: "*"
+  namespaceResourceWhitelist:
+  - group: "*"
+    kind: "*"
+  clusterResourceWhitelist:
+  - group: "*"
+    kind: "*"

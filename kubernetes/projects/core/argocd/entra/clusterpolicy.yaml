@@ -1,0 +1,28 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: argocd-generate-client-id-secret
+spec:
+  rules:
+  - name: generate-client-id-secret
+    match:
+      any:
+      - resources:
+          kinds:
+          - applications.azuread.upbound.io/v1beta2/Application
+          names:
+          - argocd
+    generate:
+      generateExisting: true
+      apiVersion: v1
+      kind: Secret
+      name: argocd-client-id
+      namespace: argocd
+      synchronize: true
+      data:
+        metadata:
+          labels:
+            app.kubernetes.io/part-of: argocd
+        type: Opaque
+        stringData:
+          attribute.value: "{{request.object.status.atProvider.clientId}}"

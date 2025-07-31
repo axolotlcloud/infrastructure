@@ -1,0 +1,207 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/name: argocd-cm
+    app.kubernetes.io/part-of: argocd
+  name: argocd-cm
+data:
+  admin.enabled: "false"
+  resource.exclusions: |-
+    - apiGroups:
+      - velero.io
+      kinds:
+      - Backup
+      clusters:
+      - "*"
+    - apiGroups:
+      - "*"
+      kinds:
+      - ProviderConfigUsage
+      clusters:
+      - "*"
+  exec.enabled: "true"
+  statusbadge.enabled: "true"
+  kustomize.buildOptions: --enable-helm --enable-alpha-plugins --network --as-current-user
+  url: https://argocd.lan.axolotl.cloud
+  oidc.config: |-
+    name: Microsoft
+    issuer: https://login.microsoftonline.com/ecf32f86-3c92-49c6-8326-ce16b6789462/v2.0
+    clientID: $argocd-client-id:attribute.value
+    clientSecret: $argocd-client-secret:attribute.value
+    requestedIDTokenClaims:
+      groups:
+        essential: true
+    requestedScopes:
+    - openid
+    - profile
+    - email
+  application.resourceTrackingMethod: annotation
+  resource.customizations: |
+    "*.upbound.io/*":
+      health.lua: |
+        health_status = {
+          status = "Progressing",
+          message = "Provisioning ..."
+        }
+
+        local function contains (table, val)
+          for i, v in ipairs(table) do
+            if v == val then
+              return true
+            end
+          end
+          return false
+        end
+
+        local has_no_status = {
+          "ProviderConfig",
+          "ProviderConfigUsage",
+          "StoreConfig"
+        }
+
+        if obj.status == nil and contains(has_no_status, obj.kind) then
+          health_status.status = "Healthy"
+          health_status.message = "Resource is up-to-date."
+          return health_status
+        end
+
+        if obj.status == nil or obj.status.conditions == nil then
+          if obj.kind == "ProviderConfig" and obj.status.users ~= nil then
+            health_status.status = "Healthy"
+            health_status.message = "Resource is in use."
+            return health_status
+          end
+          return health_status
+        end
+
+        for i, condition in ipairs(obj.status.conditions) do
+          if condition.type == "LastAsyncOperation" then
+            if condition.status == "False" then
+              health_status.status = "Degraded"
+              health_status.message = condition.message
+              return health_status
+            end
+          end
+
+          if condition.type == "Synced" then
+            if condition.status == "False" then
+              health_status.status = "Degraded"
+              health_status.message = condition.message
+              return health_status
+            end
+          end
+
+          if condition.type == "Ready" then
+            if condition.status == "True" then
+              health_status.status = "Healthy"
+              health_status.message = "Resource is up-to-date."
+              return health_status
+            end
+          end
+        end
+
+        return health_status
+
+    "*.crossplane.io/*":
+      health.lua: |
+        health_status = {
+          status = "Progressing",
+          message = "Provisioning ..."
+        }
+
+        local function contains (table, val)
+          for i, v in ipairs(table) do
+            if v == val then
+              return true
+            end
+          end
+          return false
+        end
+
+        local has_no_status = {
+          "Composition",
+          "CompositionRevision",
+          "DeploymentRuntimeConfig",
+          "ControllerConfig",
+          "StoreConfig"
+        }
+        if obj.status == nil and contains(has_no_status, obj.kind) then
+            health_status.status = "Healthy"
+            health_status.message = "Resource is up-to-date."
+          return health_status
+        end
+
+        if obj.status == nil or obj.status.conditions == nil then
+          if obj.kind == "ProviderConfig" and obj.status.users ~= nil then
+            health_status.status = "Healthy"
+            health_status.message = "Resource is in use."
+            return health_status
+          end
+          return health_status
+        end
+
+        for i, condition in ipairs(obj.status.conditions) do
+          if condition.type == "LastAsyncOperation" then
+            if condition.status == "False" then
+              health_status.status = "Degraded"
+              health_status.message = condition.message
+              return health_status
+            end
+          end
+
+          if condition.type == "Synced" then
+            if condition.status == "False" then
+              health_status.status = "Degraded"
+              health_status.message = condition.message
+              return health_status
+            end
+          end
+
+          if contains({"Ready", "Healthy", "Offered", "Established"}, condition.type) then
+            if condition.status == "True" then
+              health_status.status = "Healthy"
+              health_status.message = "Resource is up-to-date."
+              return health_status
+            end
+          end
+        end
+
+        return health_status
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/name: argocd-cmd-params-cm
+    app.kubernetes.io/part-of: argocd
+  name: argocd-cmd-params-cm
+data:
+  server.insecure: "true"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/name: argocd-rbac-cm
+    app.kubernetes.io/part-of: argocd
+  name: argocd-rbac-cm
+data:
+  policy.default: role:default
+  policy.csv: |
+    p, role:default, *, *, */*, deny
+    p, role:admin, *, *, */*, allow
+    g, 84743e11-449a-4207-b672-d35b7fad1a51, role:admin
+  scopes: "[groups, email]"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-image-updater-config
+data:
+  git.commit-message-template: |
+    Build: automated update of {{ .AppName }}.
+
+    {{ range .AppChanges -}}
+    - Updates {{ .Image }} from '{{ .OldTag }}' to '{{ .NewTag }}'
+    {{ end -}}

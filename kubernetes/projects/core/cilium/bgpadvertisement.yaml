@@ -1,0 +1,18 @@
+apiVersion: cilium.io/v2alpha1
+kind: CiliumBGPAdvertisement
+metadata:
+  name: default
+  labels:
+    networking.axolotl.cloud/bgp-config: default
+spec:
+  advertisements:
+  - advertisementType: Service
+    service:
+      addresses:
+      - LoadBalancerIP
+    selector:
+      matchExpressions:
+      - key: networking.axolotl.cloud/no-advertise-routes
+        operator: NotIn
+        values:
+        - "true"

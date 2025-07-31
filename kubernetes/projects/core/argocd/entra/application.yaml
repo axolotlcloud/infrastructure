@@ -1,0 +1,19 @@
+apiVersion: applications.azuread.upbound.io/v1beta2
+kind: Application
+metadata:
+  name: argocd
+spec:
+  forProvider:
+    displayName: Axolotl Cloud - Argo CD
+    requiredResourceAccess:
+    - resourceAppId: 00000003-0000-0000-c000-000000000000 # Microsoft Graph
+      resourceAccess:
+      - id: e1fe6dd8-ba31-4d61-89e7-88639da4683d # User.Read
+        type: Scope
+    web:
+      redirectUris:
+      - https://argocd.lan.axolotl.cloud/auth/callback
+    groupMembershipClaims:
+    - SecurityGroup
+  providerConfigRef:
+    name: default

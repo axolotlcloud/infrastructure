@@ -1,0 +1,8 @@
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  name: upbound-provider-azuread
+spec:
+  package: xpkg.upbound.io/upbound/provider-azuread:v1.8.0
+  runtimeConfigRef:
+    name: azuread-runtime-config

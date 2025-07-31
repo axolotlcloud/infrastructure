@@ -1,0 +1,7 @@
+apiVersion: azuread.upbound.io/v1alpha1
+kind: StoreConfig
+metadata:
+  name: argocd-store-config
+spec:
+  defaultScope: argocd
+  type: Kubernetes

@@ -1,0 +1,10 @@
+apiVersion: groups.azuread.upbound.io/v1beta2
+kind: Group
+metadata:
+  name: argocd-admins
+spec:
+  forProvider:
+    displayName: Axolotl Cloud - Argo CD - Admins
+    securityEnabled: true
+  providerConfigRef:
+    name: default
