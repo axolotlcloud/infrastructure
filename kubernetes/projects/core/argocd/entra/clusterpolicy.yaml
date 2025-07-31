@@ -34,11 +34,6 @@ spec:
           - groups.azuread.upbound.io/v1beta2/Group
           names:
           - argocd-admins
-    context:
-    - name: rbac
-      configMap:
-        name: argocd-rbac
-        namespace: argocd
     generate:
       generateExisting: true
       synchronize: true
@@ -54,8 +49,9 @@ spec:
             app.kubernetes.io/name: argocd-rbac-cm
             app.kubernetes.io/part-of: argocd
         data:
-          policy.default: '{{ rbac.data."policy.default" }}'
+          policy.default: role:default
           policy.csv: |-
             g, {{ request.object.status.atProvider.objectId }}, role:admin
-            {{ rbac.data."policy.csv" }}
-          scopes: "{{ rbac.data.scopes }}"
+            p, role:default, *, *, */*, deny
+            p, role:admin, *, *, */*, allow
+          scopes: "[groups, email]"
