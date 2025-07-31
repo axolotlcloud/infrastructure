@@ -14,7 +14,7 @@ spec:
           repoURL: https://github.com/axolotlcloud/infrastructure
           revision: HEAD
           directories:
-          - path: projects/*/*
+          - path: kubernetes/projects/*/*
           values:
             app: '{{ .path.basename }}'
             project: '{{ index .path.segments 1 }}'
