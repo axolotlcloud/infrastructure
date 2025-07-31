@@ -1173,7 +1173,7 @@ hubble:
     #
     #   --set hubble.metrics.enabled="{dns:query;ignoreAAAA,drop,tcp,flow,icmp,http}"
     #
-    enabled: true
+    enabled: ~
     # -- Enables exporting hubble metrics in OpenMetrics format.
     enableOpenMetrics: false
     # -- Configure the port the hubble metric server listens on.
@@ -1640,7 +1640,7 @@ hubble:
       port: 6062
   ui:
     # -- Whether to enable the Hubble UI.
-    enabled: false
+    enabled: true
     standalone:
       # -- When true, it will allow installing the Hubble UI only, without checking dependencies.
       # It is useful if a cluster already has cilium and Hubble relay installed and you just
