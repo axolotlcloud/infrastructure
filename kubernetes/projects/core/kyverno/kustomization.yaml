@@ -11,3 +11,9 @@ patches:
     - op: add
       path: /metadata/annotations/argocd.argoproj.io~1sync-options
       value: Replace=true
+- target:
+    kind: Namespace
+  patch: |-
+    - op: add
+      path: /metadata/labels/istio.io~1dataplane-mode
+      value: ambient
