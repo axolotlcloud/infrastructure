@@ -33,3 +33,23 @@ rules:
   verbs:
   - list
   - get
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: kyverno:argocd-configmap-writer
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - get
+  - update
+- apiGroups:
+  - groups.azuread.upbound.io
+  resources:
+  - groups
+  verbs:
+  - list
+  - get

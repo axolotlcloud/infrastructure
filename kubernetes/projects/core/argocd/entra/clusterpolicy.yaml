@@ -1,7 +1,7 @@
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
-  name: argocd-generate-client-id-secret
+  name: argocd
 spec:
   rules:
   - name: generate-client-id-secret
@@ -14,15 +14,48 @@ spec:
           - argocd
     generate:
       generateExisting: true
+      synchronize: true
       apiVersion: v1
       kind: Secret
       name: argocd-client-id
       namespace: argocd
-      synchronize: true
       data:
         metadata:
           labels:
             app.kubernetes.io/part-of: argocd
         type: Opaque
         stringData:
-          attribute.value: "{{request.object.status.atProvider.clientId}}"
+          attribute.value: "{{ request.object.status.atProvider.clientId }}"
+  - name: generate-rbac-cm
+    match:
+      any:
+      - resources:
+          kinds:
+          - groups.azuread.upbound.io/v1beta2/Group
+          names:
+          - argocd-admins
+    context:
+    - name: rbac
+      configMap:
+        name: argocd-rbac
+        namespace: argocd
+    generate:
+      generateExisting: true
+      synchronize: true
+      apiVersion: v1
+      kind: ConfigMap
+      name: argocd-rbac-cm
+      namespace: argocd
+      data:
+        metadata:
+          annotations:
+            argocd.argoproj.io/tracking-id: argocd:/ConfigMap:argocd/argocd-rbac-cm
+          labels:
+            app.kubernetes.io/name: argocd-rbac-cm
+            app.kubernetes.io/part-of: argocd
+        data:
+          policy.default: '{{ rbac.data."policy.default" }}'
+          policy.csv: |-
+            g, {{ request.object.status.atProvider.objectId }}, role:admin
+            {{ rbac.data."policy.csv" }}
+          scopes: "{{ rbac.data.scopes }}"

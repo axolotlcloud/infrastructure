@@ -12,6 +12,7 @@ resources:
 - ./httproute.yaml
 - ./infrastructure-repo.sealedsecret.yaml
 - ./namespace.yaml
+- ./rbac.configmap.yaml
 - ./root.appproject.yaml
 - ./service.yaml
 
