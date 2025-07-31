@@ -1173,7 +1173,7 @@ hubble:
     #
     #   --set hubble.metrics.enabled="{dns:query;ignoreAAAA,drop,tcp,flow,icmp,http}"
     #
-    enabled: ~
+    enabled: true
     # -- Enables exporting hubble metrics in OpenMetrics format.
     enableOpenMetrics: false
     # -- Configure the port the hubble metric server listens on.
@@ -1423,7 +1423,7 @@ hubble:
       extraIpAddresses: []
   relay:
     # -- Enable Hubble Relay (requires hubble.enabled=true)
-    enabled: false
+    enabled: true
     # -- Roll out Hubble Relay pods automatically when configmap is updated.
     rollOutPods: false
     # -- Hubble-relay container image.
