@@ -5,5 +5,8 @@ resources:
 - ./admins-dennis.member.yaml
 - ./admins.group.yaml
 - ./application.yaml
+- ./clusterpolicy.yaml
 - ./password.yaml
+- ./role.yaml
+- ./rolebinding.yaml
 - ./storeconfig.yaml
