@@ -38,7 +38,7 @@ spec:
         syncOptions:
         - ServerSideApply=true
   templatePatch: |
-    {{- if (has .values.app .autoSyncExclusions) }}
+    {{- if not (has .values.app .autoSyncExclusions) }}
     spec:
       syncPolicy:
         automated:
