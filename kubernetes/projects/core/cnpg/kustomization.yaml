@@ -3,17 +3,3 @@ kind: Kustomization
 
 resources:
 - https://github.com/cloudnative-pg/cloudnative-pg/releases/download/v1.26.1/cnpg-1.26.1.yaml
-
-patches:
-- target:
-    kind: CustomResourceDefinition
-  patch: |-
-    - op: add
-      path: /metadata/annotations/argocd.argoproj.io~1sync-options
-      value: Replace=true
-- target:
-    kind: Namespace
-  patch: |-
-    - op: add
-      path: /metadata/labels/istio.io~1dataplane-mode
-      value: ambient
