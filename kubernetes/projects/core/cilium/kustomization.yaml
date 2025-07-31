@@ -5,7 +5,7 @@ resources:
 - ./bgpadvertisement.yaml
 - ./bgpclusterconfig.yaml
 - ./bgppeerconfig.yaml
-- ./gateway.yaml
+# - ./gateway.yaml
 - ./hubble-ui.httproute.yaml
 - ./ippool.yaml
 

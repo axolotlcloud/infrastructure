@@ -683,7 +683,7 @@ cni:
   # node, renaming all non-Cilium CNI configurations to `*.cilium_bak`.
   # This ensures no Pods can be scheduled using other CNI plugins during Cilium
   # agent downtime.
-  exclusive: true
+  exclusive: false
   # -- Configure the log file for CNI logging with retention policy of 7 days.
   # Disable CNI file logging by setting this field to empty explicitly.
   logFile: /var/run/cilium/cilium-cni.log
@@ -932,7 +932,7 @@ ingressController:
 gatewayAPI:
   # -- Enable support for Gateway API in cilium
   # This will automatically set enable-envoy-config as well.
-  enabled: true
+  enabled: false
   # -- Enable proxy protocol for all GatewayAPI listeners. Note that _only_ Proxy protocol traffic will be accepted once this is enabled.
   enableProxyProtocol: false
   # -- Enable Backend Protocol selection support (GEP-1911) for Gateway API via appProtocol.
@@ -950,7 +950,7 @@ gatewayAPI:
     # -- Enable creation of GatewayClass resource
     # The default value is 'auto' which decides according to presence of gateway.networking.k8s.io/v1/GatewayClass in the cluster.
     # Other possible values are 'true' and 'false', which will either always or never create the GatewayClass, respectively.
-    create: "true"
+    create: auto
   # -- SecretsNamespace is the namespace in which envoy SDS will retrieve TLS secrets from.
   secretsNamespace:
     # -- Create secrets namespace for Gateway API.
@@ -1090,7 +1090,7 @@ socketLB:
   # -- Enable socket LB
   enabled: false
   # -- Disable socket lb for non-root ns. This is used to enable Istio routing rules.
-  # hostNamespaceOnly: false
+  hostNamespaceOnly: true
   # -- Enable terminating pod connections to deleted service backends.
   # terminatePodConnections: true
   # -- Enables tracing for socket-based load balancing.

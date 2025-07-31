@@ -6,7 +6,7 @@ metadata:
 spec:
   parentRefs:
   - name: axolotl
-    namespace: default
+    namespace: istio-ingress
   hostnames:
   - whoami.lan.axolotl.cloud
   rules:

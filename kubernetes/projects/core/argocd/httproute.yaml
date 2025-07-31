@@ -6,7 +6,7 @@ metadata:
 spec:
   parentRefs:
   - name: axolotl
-    namespace: default
+    namespace: istio-ingress
   hostnames:
   - argocd.lan.axolotl.cloud
   rules:

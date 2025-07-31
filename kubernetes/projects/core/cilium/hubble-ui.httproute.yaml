@@ -6,7 +6,7 @@ metadata:
 spec:
   parentRefs:
   - name: axolotl
-    namespace: default
+    namespace: istio-ingress
   hostnames:
   - hubble.lan.axolotl.cloud
   rules:
