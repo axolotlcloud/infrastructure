@@ -11,4 +11,7 @@
 | Service  | URL                                 |
 |----------|-------------------------------------|
 | Argo CD  | https://argocd.lan.axolotl.cloud    |
+| Ceph     | https://ceph.lan.axolotl.cloud      |
+| Hubble   | https://hubble.lan.axolotl.cloud    |
+| S3       | https://s3.lan.axolotl.cloud        |
 | Whoami   | https://whoami.lan.axolotl.cloud    |
