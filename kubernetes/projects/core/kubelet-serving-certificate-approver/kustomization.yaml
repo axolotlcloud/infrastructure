@@ -3,3 +3,11 @@ kind: Kustomization
 
 resources:
 - https://raw.githubusercontent.com/alex1989hu/kubelet-serving-cert-approver/refs/tags/v0.9.3/deploy/ha-install.yaml
+
+patches:
+- target:
+    kind: Namespace
+  patch: |-
+    - op: add
+      path: /metadata/labels/istio.io~1dataplane-mode
+      value: ambient
