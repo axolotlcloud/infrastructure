@@ -4,7 +4,7 @@ metadata:
   name: argocd-admins
 spec:
   forProvider:
-    displayName: Axolotl Cloud - Argo CD - Administrators
+    displayName: Axolotl Cloud - Argo CD - Admins
     securityEnabled: true
   providerConfigRef:
     name: default
