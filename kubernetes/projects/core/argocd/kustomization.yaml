@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: argocd
 resources:
 - ./entra
-- https://raw.githubusercontent.com/argoproj/argo-cd/v3.0.12/manifests/install.yaml
+- https://raw.githubusercontent.com/argoproj/argo-cd/v3.0.12/manifests/ha/install.yaml
 - https://raw.githubusercontent.com/argoproj-labs/argocd-image-updater/v0.16.0/manifests/install.yaml
 - ./apps.appproject.yaml
 - ./axolotl-cluster.secret.yaml
@@ -37,7 +37,11 @@ patches:
   path: networkpolicy1.patch.yaml
 - target:
     kind: NetworkPolicy
-    name: argocd-redis-network-policy
+    name: argocd-redis-ha-proxy-network-policy
+  path: networkpolicy1.patch.yaml
+- target:
+    kind: NetworkPolicy
+    name: argocd-redis-ha-server-network-policy
   path: networkpolicy1.patch.yaml
 - target:
     kind: NetworkPolicy
