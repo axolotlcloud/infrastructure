@@ -1,7 +1,7 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: rook-cephfs
+  name: rook-ceph-fs
 provisioner: rook-ceph.cephfs.csi.ceph.com # csi-provisioner-name
 parameters:
   # clusterID is the namespace where the rook cluster is running
@@ -9,11 +9,11 @@ parameters:
   clusterID: rook-ceph # namespace:cluster
 
   # CephFS filesystem name into which the volume shall be created
-  fsName: myfs
+  fsName: axolotl-fs
 
   # Ceph pool into which the volume shall be created
   # Required for provisionVolume: "true"
-  pool: myfs-replicated
+  pool: axolotl-fs-replicated
 
   # The secrets contain Ceph admin credentials. These are generated automatically by the operator
   # in the same namespace as the cluster.

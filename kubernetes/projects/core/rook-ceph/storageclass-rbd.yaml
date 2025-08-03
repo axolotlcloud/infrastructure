@@ -14,7 +14,7 @@ parameters:
   # used for the metadata of the images.
   # The erasure coded pool must be set as the `dataPool` parameter below.
   #dataPool: ec-data-pool
-  pool: replicapool
+  pool: axolotl-block-pool
 
   # (optional) mapOptions is a comma-separated list of map options.
   # For krbd options refer

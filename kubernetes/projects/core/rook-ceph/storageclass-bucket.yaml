@@ -7,7 +7,7 @@ provisioner: rook-ceph.ceph.rook.io/bucket # driver:namespace:cluster
 # when its OBC is deleted.
 reclaimPolicy: Delete
 parameters:
-  objectStoreName: my-store
+  objectStoreName: axolotl-object-store
   objectStoreNamespace: rook-ceph # namespace:cluster
   # To accommodate brownfield cases reference the existing bucket name here instead
   # of in the ObjectBucketClaim (OBC). In this case the provisioner will grant
