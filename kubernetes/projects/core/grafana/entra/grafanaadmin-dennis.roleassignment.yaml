@@ -1,0 +1,10 @@
+apiVersion: app.azuread.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  name: grafana-grafanaadmin-dennis
+spec:
+  forProvider:
+    appRoleId: 5759ae91-3287-465f-a355-7a0dc3a1f05b # Grafana Server Admin
+    principalObjectId: bc024785-2433-48fa-ab23-d6211ddcf431 # dennis@axolotl.cloud
+    resourceObjectIdRef:
+      name: grafana

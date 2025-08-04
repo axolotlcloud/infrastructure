@@ -1,0 +1,14 @@
+apiVersion: applications.azuread.upbound.io/v1beta1
+kind: AppRole
+metadata:
+  name: grafana-editor
+spec:
+  forProvider:
+    allowedMemberTypes:
+    - User
+    applicationIdRef:
+      name: grafana
+    description: Grafana Editor
+    displayName: Grafana Editor
+    roleId: c2cb2c38-fa89-4f07-b4d8-e95e62caa9ff
+    value: Editor

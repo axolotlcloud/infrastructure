@@ -1,0 +1,7 @@
+apiVersion: azuread.upbound.io/v1alpha1
+kind: StoreConfig
+metadata:
+  name: grafana-store-config
+spec:
+  defaultScope: grafana
+  type: Kubernetes

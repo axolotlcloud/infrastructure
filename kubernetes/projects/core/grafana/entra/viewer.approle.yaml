@@ -1,0 +1,14 @@
+apiVersion: applications.azuread.upbound.io/v1beta1
+kind: AppRole
+metadata:
+  name: grafana-viewer
+spec:
+  forProvider:
+    allowedMemberTypes:
+    - User
+    applicationIdRef:
+      name: grafana
+    description: Grafana Viewer
+    displayName: Grafana Viewer
+    roleId: 480fecda-5267-40a6-86dc-a45dd83d680e
+    value: Viewer

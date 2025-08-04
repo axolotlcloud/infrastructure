@@ -1,0 +1,19 @@
+apiVersion: applications.azuread.upbound.io/v1beta2
+kind: Application
+metadata:
+  name: grafana
+spec:
+  forProvider:
+    displayName: Axolotl Cloud - Grafana
+    requiredResourceAccess:
+    - resourceAppId: 00000003-0000-0000-c000-000000000000 # Microsoft Graph
+      resourceAccess:
+      - id: e1fe6dd8-ba31-4d61-89e7-88639da4683d # User.Read
+        type: Scope
+    web:
+      redirectUris:
+      - https://grafana.lan.axolotl.cloud
+      - https://grafana.lan.axolotl.cloud/login/azuread
+    groupMembershipClaims:
+    - ApplicationGroup
+    - SecurityGroup

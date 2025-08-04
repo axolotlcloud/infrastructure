@@ -1,0 +1,253 @@
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: loki
+  namespace: grafana
+spec:
+  resyncPeriod: 5s
+  instanceSelector:
+    matchLabels:
+      dashboards: grafana
+  json: >
+    {
+      "annotations": {
+        "list": [
+          {
+            "builtIn": 1,
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "enable": true,
+            "hide": true,
+            "iconColor": "rgba(0, 211, 255, 1)",
+            "name": "Annotations & Alerts",
+            "target": {
+              "limit": 100,
+              "matchAny": false,
+              "tags": [],
+              "type": "dashboard"
+            },
+            "type": "dashboard"
+          }
+        ]
+      },
+      "editable": false,
+      "fiscalYearStartMonth": 0,
+      "graphTooltip": 0,
+      "id": 28,
+      "links": [],
+      "liveNow": false,
+      "panels": [
+        {
+          "datasource": {
+            "uid": "$lokidatasource"
+          },
+          "gridPos": {
+            "h": 24,
+            "w": 24,
+            "x": 0,
+            "y": 0
+          },
+          "id": 2,
+          "options": {
+            "dedupStrategy": "none",
+            "enableLogDetails": true,
+            "prettifyLogMessage": false,
+            "showCommonLabels": false,
+            "showLabels": false,
+            "showTime": true,
+            "sortOrder": "Descending",
+            "wrapLogMessage": false
+          },
+          "targets": [
+            {
+              "datasource": {
+                "uid": "$lokidatasource"
+              },
+              "editorMode": "code",
+              "expr": "{namespace=~\"$namespace\", app=~\"$app\"} | regexp `$regexp` | line_format `$linefmt` |~ `$regex`",
+              "queryType": "range",
+              "refId": "A"
+            }
+          ],
+          "title": "Log Browser",
+          "transparent": true,
+          "type": "logs"
+        }
+      ],
+      "refresh": "5s",
+      "schemaVersion": 37,
+      "style": "dark",
+      "tags": [],
+      "templating": {
+        "list": [
+          {
+            "current": {
+              "selected": false,
+              "text": "loki",
+              "value": "loki"
+            },
+            "hide": 0,
+            "includeAll": false,
+            "label": "Loki Data Source",
+            "multi": false,
+            "name": "lokidatasource",
+            "options": [],
+            "query": "loki",
+            "refresh": 1,
+            "regex": "",
+            "skipUrlSync": false,
+            "type": "datasource"
+          },
+          {
+            "current": {
+              "selected": false,
+              "text": "prometheus",
+              "value": "prometheus"
+            },
+            "hide": 0,
+            "includeAll": false,
+            "label": "Prometheus Data Source",
+            "multi": false,
+            "name": "prometheusdatasource",
+            "options": [],
+            "query": "prometheus",
+            "refresh": 1,
+            "regex": "",
+            "skipUrlSync": false,
+            "type": "datasource"
+          },
+          {
+            "current": {
+              "selected": true,
+              "text": [
+                "All"
+              ],
+              "value": [
+                "$__all"
+              ]
+            },
+            "datasource": {
+              "uid": "$lokidatasource"
+            },
+            "definition": "label_values(namespace)",
+            "hide": 0,
+            "includeAll": true,
+            "label": "Namespace",
+            "multi": true,
+            "name": "namespace",
+            "options": [],
+            "query": "label_values(namespace)",
+            "refresh": 1,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 0,
+            "type": "query"
+          },
+          {
+            "current": {
+              "selected": true,
+              "text": [
+                "All"
+              ],
+              "value": [
+                "$__all"
+              ]
+            },
+            "datasource": {
+              "uid": "$prometheusdatasource"
+            },
+            "definition": "label_values(kube_pod_container_info{namespace=~\"$namespace\"}, container)",
+            "hide": 0,
+            "includeAll": true,
+            "label": "Application",
+            "multi": true,
+            "name": "app",
+            "options": [],
+            "query": {
+              "query": "label_values(kube_pod_container_info{namespace=~\"$namespace\"}, container)",
+              "refId": "StandardVariableQuery"
+            },
+            "refresh": 1,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 0,
+            "type": "query"
+          },
+          {
+            "current": {
+              "selected": true,
+              "text": "",
+              "value": ""
+            },
+            "description": "Perform a regex search",
+            "hide": 0,
+            "label": "Regex",
+            "name": "regex",
+            "options": [
+              {
+                "selected": true,
+                "text": "",
+                "value": ""
+              }
+            ],
+            "query": "",
+            "skipUrlSync": false,
+            "type": "textbox"
+          },
+          {
+            "current": {
+              "selected": true,
+              "text": "(?P<all>.+)",
+              "value": "(?P<all>.+)"
+            },
+            "description": "Run the log line through a the regexp query to extract parameters.",
+            "hide": 0,
+            "label": "Regular Expression Parser",
+            "name": "regexp",
+            "options": [
+              {
+                "selected": true,
+                "text": "(?P<all>.+)",
+                "value": "(?P<all>.+)"
+              }
+            ],
+            "query": "(?P<all>.+)",
+            "skipUrlSync": false,
+            "type": "textbox"
+          },
+          {
+            "current": {
+              "selected": true,
+              "text": "| {{.app}} | {{.all}}",
+              "value": "| {{.app}} | {{.all}}"
+            },
+            "description": "Format the line using the Go templating language.",
+            "hide": 0,
+            "label": "Line Format Expression",
+            "name": "linefmt",
+            "options": [
+              {
+                "selected": true,
+                "text": "| {{.app}} | {{.all}}",
+                "value": "| {{.app}} | {{.all}}"
+              }
+            ],
+            "query": "| {{.app}} | {{.all}}",
+            "skipUrlSync": false,
+            "type": "textbox"
+          }
+        ]
+      },
+      "time": {
+        "from": "now-15m",
+        "to": "now"
+      },
+      "timepicker": {},
+      "timezone": "browser",
+      "title": "Loki",
+      "uid": "loki",
+      "version": 1,
+      "weekStart": ""
+    }

@@ -1,0 +1,14 @@
+apiVersion: applications.azuread.upbound.io/v1beta1
+kind: AppRole
+metadata:
+  name: grafana-grafanaadmin
+spec:
+  forProvider:
+    allowedMemberTypes:
+    - User
+    applicationIdRef:
+      name: grafana
+    description: Grafana Server Admin
+    displayName: Grafana Server Admin
+    roleId: 5759ae91-3287-465f-a355-7a0dc3a1f05b
+    value: GrafanaAdmin

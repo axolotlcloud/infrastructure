@@ -1,0 +1,27 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: grafana
+spec:
+  rules:
+  - name: generate-client-id-secret
+    match:
+      any:
+      - resources:
+          kinds:
+          - serviceprincipals.azuread.upbound.io/v1beta2/Principal
+          names:
+          - grafana
+    generate:
+      generateExisting: true
+      synchronize: true
+      apiVersion: v1
+      kind: Secret
+      name: grafana-client
+      namespace: grafana
+      data:
+        type: Opaque
+        stringData:
+          clientId: "{{ request.object.status.atProvider.clientId }}"
+          authUrl: https://login.microsoftonline.com/{{ request.object.status.atProvider.applicationTenantId }}/oauth2/v2.0/authorize
+          tokenUrl: https://login.microsoftonline.com/{{ request.object.status.atProvider.applicationTenantId }}/oauth2/v2.0/token
