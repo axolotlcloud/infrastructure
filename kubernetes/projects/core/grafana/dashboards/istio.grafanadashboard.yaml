@@ -7,7 +7,9 @@ spec:
   instanceSelector:
     matchLabels:
       dashboards: grafana
-  url: https://grafana.com/api/dashboards/7645/revisions/262/download
+  grafanaCom:
+    id: 7645
+    revision: 262
 ---
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
@@ -18,7 +20,9 @@ spec:
   instanceSelector:
     matchLabels:
       dashboards: grafana
-  url: https://grafana.com/api/dashboards/7639/revisions/262/download
+  grafanaCom:
+    id: 7639
+    revision: 262
 ---
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
@@ -29,7 +33,9 @@ spec:
   instanceSelector:
     matchLabels:
       dashboards: grafana
-  url: https://grafana.com/api/dashboards/11829/revisions/262/download
+  grafanaCom:
+    id: 11829
+    revision: 262
 ---
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
@@ -40,7 +46,9 @@ spec:
   instanceSelector:
     matchLabels:
       dashboards: grafana
-  url: https://grafana.com/api/dashboards/7636/revisions/262/download
+  grafanaCom:
+    id: 7636
+    revision: 262
 ---
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
@@ -51,7 +59,9 @@ spec:
   instanceSelector:
     matchLabels:
       dashboards: grafana
-  url: https://grafana.com/api/dashboards/13277/revisions/219/download
+  grafanaCom:
+    id: 13277
+    revision: 219
 ---
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
@@ -62,7 +72,9 @@ spec:
   instanceSelector:
     matchLabels:
       dashboards: grafana
-  url: https://grafana.com/api/dashboards/7630/revisions/262/download
+  grafanaCom:
+    id: 7630
+    revision: 262
 ---
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
@@ -73,4 +85,6 @@ spec:
   instanceSelector:
     matchLabels:
       dashboards: grafana
-  url: https://grafana.com/api/dashboards/21306/revisions/29/download
+  grafanaCom:
+    id: 21306
+    revision: 29
