@@ -19,6 +19,7 @@ patches:
       path: /metadata/labels
       value:
         istio.io/dataplane-mode: ambient
+        pod-security.kubernetes.io/enforce: privileged
 - target:
     kind: NetworkPolicy
     name: alertmanager-main
