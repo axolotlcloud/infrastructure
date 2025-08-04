@@ -10,10 +10,10 @@ resources:
 - ./axolotl-cluster.secret.yaml
 - ./core.appproject.yaml
 - ./httproute.yaml
+- ./image-updater.service.yaml
 - ./infrastructure-repo.sealedsecret.yaml
 - ./namespace.yaml
 - ./root.appproject.yaml
-- ./service.yaml
 
 patchesStrategicMerge:
 - ./configmap.yaml
@@ -47,3 +47,78 @@ patches:
     kind: NetworkPolicy
     name: argocd-repo-server-network-policy
   path: ../../../common/networkpolicy/networkpolicyi2.patch.yaml
+- target:
+    version: v1
+    kind: Deployment
+    name: argocd-image-updater
+  patch: |
+    - op: replace
+      path: /spec/template/spec/containers/0/ports/0
+      value:
+        name: app
+        containerPort: 8080
+    - op: add
+      path: /spec/template/spec/containers/0/ports/-
+      value:
+        name: metrics
+        containerPort: 8082
+- target:
+    version: v1
+    kind: Service
+    name: argocd-applicationset-controller
+  patch: |
+    - op: add
+      path: /metadata/annotations
+      value:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+- target:
+    version: v1
+    kind: Service
+    name: argocd-dex-server
+  patch: |
+    - op: add
+      path: /metadata/annotations
+      value:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "5558"
+- target:
+    version: v1
+    kind: Service
+    name: argocd-metrics
+  patch: |
+    - op: add
+      path: /metadata/annotations
+      value:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8082"
+- target:
+    version: v1
+    kind: Service
+    name: argocd-notifications-controller-metrics
+  patch: |
+    - op: add
+      path: /metadata/annotations
+      value:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9001"
+- target:
+    version: v1
+    kind: Service
+    name: argocd-repo-server
+  patch: |
+    - op: add
+      path: /metadata/annotations
+      value:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8084"
+- target:
+    version: v1
+    kind: Service
+    name: argocd-server-metrics
+  patch: |
+    - op: add
+      path: /metadata/annotations
+      value:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8083"

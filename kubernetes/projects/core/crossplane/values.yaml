@@ -175,7 +175,7 @@ securityContextRBACManager:
 
 metrics:
   # -- Enable Prometheus path, port and scrape annotations and expose port 8080 for both the Crossplane and RBAC Manager pods.
-  enabled: false
+  enabled: true
   # -- The port the metrics server listens on.
   port: ""
 
@@ -215,4 +215,3 @@ extraObjects: []
   #   spec:
   #     podSecurityContext:
   #       fsGroup: 2000
-

@@ -1215,7 +1215,7 @@ hubble:
       # -- Create ServiceMonitor resources for Prometheus Operator.
       # This requires the prometheus CRDs to be available.
       # ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/example/prometheus-operator-crd/monitoring.coreos.com_servicemonitors.yaml)
-      enabled: false
+      enabled: true
       # -- Labels to add to ServiceMonitor hubble
       labels: {}
       # -- Annotations to add to ServiceMonitor hubble
@@ -1243,13 +1243,13 @@ hubble:
     # grafana can import dashboards based on the label and value
     # ref: https://github.com/grafana/helm-charts/tree/main/charts/grafana#sidecar-for-dashboards
     dashboards:
-      enabled: false
-      label: grafana_dashboard
+      enabled: true
+      label: dashboards
       # @schema
       # type: [null, string]
       # @schema
       namespace: ~
-      labelValue: "1"
+      labelValue: grafana
       annotations: {}
     # Dynamic metrics  may be reconfigured without a need of agent restarts.
     dynamic:
@@ -1601,12 +1601,12 @@ hubble:
     # -- Enable prometheus metrics for hubble-relay on the configured port at
     # /metrics
     prometheus:
-      enabled: false
+      enabled: true
       port: 9966
       serviceMonitor:
         # -- Enable service monitors.
         # This requires the prometheus CRDs to be available (see https://github.com/prometheus-operator/prometheus-operator/blob/main/example/prometheus-operator-crd/monitoring.coreos.com_servicemonitors.yaml)
-        enabled: false
+        enabled: true
         # -- Labels to add to ServiceMonitor hubble-relay
         labels: {}
         # -- Annotations to add to ServiceMonitor hubble-relay
@@ -2205,13 +2205,13 @@ pprof:
   port: 6060
 # -- Configure prometheus metrics on the configured port at /metrics
 prometheus:
-  metricsService: false
-  enabled: false
+  metricsService: true
+  enabled: true
   port: 9962
   serviceMonitor:
     # -- Enable service monitors.
     # This requires the prometheus CRDs to be available (see https://github.com/prometheus-operator/prometheus-operator/blob/main/example/prometheus-operator-crd/monitoring.coreos.com_servicemonitors.yaml)
-    enabled: false
+    enabled: true
     # -- Labels to add to ServiceMonitor cilium-agent
     labels: {}
     # -- Annotations to add to ServiceMonitor cilium-agent
@@ -2235,7 +2235,7 @@ prometheus:
     # -- Metrics relabeling configs for the ServiceMonitor cilium-agent
     metricRelabelings: ~
     # -- Set to `true` and helm will not check for monitoring.coreos.com/v1 CRDs before deploying
-    trustCRDsExist: false
+    trustCRDsExist: true
   # @schema
   # type: [null, array]
   # @schema
@@ -2256,13 +2256,13 @@ prometheus:
 # grafana can import dashboards based on the label and value
 # ref: https://github.com/grafana/helm-charts/tree/main/charts/grafana#sidecar-for-dashboards
 dashboards:
-  enabled: false
-  label: grafana_dashboard
+  enabled: true
+  label: dashboards
   # @schema
   # type: [null, string]
   # @schema
   namespace: ~
-  labelValue: "1"
+  labelValue: grafana
   annotations: {}
 # Configure Cilium Envoy options.
 envoy:
@@ -2526,7 +2526,7 @@ envoy:
       # This requires the prometheus CRDs to be available (see https://github.com/prometheus-operator/prometheus-operator/blob/main/example/prometheus-operator-crd/monitoring.coreos.com_servicemonitors.yaml)
       # Note that this setting applies to both cilium-envoy _and_ cilium-agent
       # with Envoy enabled.
-      enabled: false
+      enabled: true
       # -- Labels to add to ServiceMonitor cilium-envoy
       labels: {}
       # -- Annotations to add to ServiceMonitor cilium-envoy
@@ -2835,13 +2835,13 @@ operator:
   # -- Enable prometheus metrics for cilium-operator on the configured port at
   # /metrics
   prometheus:
-    metricsService: false
+    metricsService: true
     enabled: true
     port: 9963
     serviceMonitor:
       # -- Enable service monitors.
       # This requires the prometheus CRDs to be available (see https://github.com/prometheus-operator/prometheus-operator/blob/main/example/prometheus-operator-crd/monitoring.coreos.com_servicemonitors.yaml)
-      enabled: false
+      enabled: true
       # -- Labels to add to ServiceMonitor cilium-operator
       labels: {}
       # -- Annotations to add to ServiceMonitor cilium-operator
@@ -2864,13 +2864,13 @@ operator:
   # grafana can import dashboards based on the label and value
   # ref: https://github.com/grafana/helm-charts/tree/main/charts/grafana#sidecar-for-dashboards
   dashboards:
-    enabled: false
-    label: grafana_dashboard
+    enabled: true
+    label: dashboards
     # @schema
     # type: [null, string]
     # @schema
     namespace: ~
-    labelValue: "1"
+    labelValue: grafana
     annotations: {}
   # -- Skip CRDs creation for cilium-operator
   skipCRDCreation: false
@@ -3489,7 +3489,7 @@ clustermesh:
       serviceMonitor:
         # -- Enable service monitor.
         # This requires the prometheus CRDs to be available (see https://github.com/prometheus-operator/prometheus-operator/blob/main/example/prometheus-operator-crd/monitoring.coreos.com_servicemonitors.yaml)
-        enabled: false
+        enabled: true
         # -- Labels to add to ServiceMonitor clustermesh-apiserver
         labels: {}
         # -- Annotations to add to ServiceMonitor clustermesh-apiserver
