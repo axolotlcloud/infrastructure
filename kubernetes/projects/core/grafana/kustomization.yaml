@@ -3,7 +3,6 @@ kind: Kustomization
 
 resources:
 # - ./dashboards
-- ./application.yaml
 - ./grafana.yaml
 - ./httproute.yaml
 - ./postgres.yaml
