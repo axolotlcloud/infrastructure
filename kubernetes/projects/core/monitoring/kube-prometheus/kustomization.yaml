@@ -1,0 +1,45 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+generators:
+- ./generator.yaml
+
+patches:
+- path: ./clusterrole.yaml
+- target:
+    kind: CustomResourceDefinition
+  patch: |-
+    - op: add
+      path: /metadata/annotations/argocd.argoproj.io~1sync-options
+      value: Replace=true
+- target:
+    kind: Namespace
+  patch: |-
+    - op: add
+      path: /metadata/labels
+      value:
+        istio.io/dataplane-mode: ambient
+- target:
+    kind: NetworkPolicy
+    name: alertmanager-main
+  path: ../../../../common/networkpolicy/networkpolicyi2.patch.yaml
+- target:
+    kind: NetworkPolicy
+    name: blackbox-exporter
+  path: ../../../../common/networkpolicy/networkpolicyi1.patch.yaml
+- target:
+    kind: NetworkPolicy
+    name: kube-state-metrics
+  path: ../../../../common/networkpolicy/networkpolicyi1.patch.yaml
+- target:
+    kind: NetworkPolicy
+    name: node-exporter
+  path: ../../../../common/networkpolicy/networkpolicyi1.patch.yaml
+- target:
+    kind: NetworkPolicy
+    name: prometheus-k8s
+  path: ../../../../common/networkpolicy/networkpolicyi2.patch.yaml
+- target:
+    kind: NetworkPolicy
+    name: prometheus-operator
+  path: ../../../../common/networkpolicy/networkpolicyi1.patch.yaml

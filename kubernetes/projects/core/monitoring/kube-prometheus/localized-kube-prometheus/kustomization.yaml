@@ -1,0 +1,19 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+generators:
+- generator.yaml
+kind: Kustomization
+patches:
+- path: clusterrole.yaml
+- patch: |-
+    - op: add
+      path: /metadata/annotations/argocd.argoproj.io~1sync-options
+      value: Replace=true
+  target:
+    kind: CustomResourceDefinition
+- patch: |-
+    - op: add
+      path: /metadata/labels
+      value:
+        istio.io/dataplane-mode: ambient
+  target:
+    kind: Namespace
