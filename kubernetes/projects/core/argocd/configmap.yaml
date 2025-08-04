@@ -22,7 +22,7 @@ data:
       - "*"
   exec.enabled: "true"
   statusbadge.enabled: "true"
-  kustomize.buildOptions: --enable-helm --enable-alpha-plugins --network --as-current-user
+  kustomize.buildOptions: --enable-helm --enable-alpha-plugins --network --as-current-user --load-restrictor LoadRestrictionsNone
   url: https://argocd.lan.axolotl.cloud
   oidc.config: |-
     name: Microsoft

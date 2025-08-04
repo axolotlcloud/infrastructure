@@ -22,28 +22,28 @@ patches:
 - target:
     kind: NetworkPolicy
     name: argocd-application-controller-network-policy
-  path: networkpolicyi1.patch.yaml
+  path: ../../../common/networkpolicy/networkpolicyi1.patch.yaml
 - target:
     kind: NetworkPolicy
     name: argocd-applicationset-controller-network-policy
-  path: networkpolicyi1.patch.yaml
+  path: ../../../common/networkpolicy/networkpolicyi1.patch.yaml
 - target:
     kind: NetworkPolicy
     name: argocd-dex-server-network-policy
-  path: networkpolicyi2.patch.yaml
+  path: ../../../common/networkpolicy/networkpolicyi2.patch.yaml
 - target:
     kind: NetworkPolicy
     name: argocd-notifications-controller-network-policy
-  path: networkpolicyi1.patch.yaml
+  path: ../../../common/networkpolicy/networkpolicyi1.patch.yaml
 - target:
     kind: NetworkPolicy
     name: argocd-redis-ha-proxy-network-policy
-  path: networkpolicyi1.patch.yaml
+  path: ../../../common/networkpolicy/networkpolicyi1.patch.yaml
 - target:
     kind: NetworkPolicy
     name: argocd-redis-ha-server-network-policy
-  path: networkpolicyi1e1.patch.yaml
+  path: ../../../common/networkpolicy/networkpolicyi1e1.patch.yaml
 - target:
     kind: NetworkPolicy
     name: argocd-repo-server-network-policy
-  path: networkpolicyi2.patch.yaml
+  path: ../../../common/networkpolicy/networkpolicyi2.patch.yaml
