@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- https://github.com/grafana/grafana-operator/releases/download/v5.18.0/kustomize-cluster_scoped.yaml
+
+patches:
+- target:
+    kind: CustomResourceDefinition
+  patch: |-
+    - op: add
+      path: /metadata/annotations/argocd.argoproj.io~1sync-options
+      value: Replace=true
+- target:
+    kind: Namespace
+  patch: |-
+    - op: add
+      path: /metadata/labels
+      value:
+        istio.io/dataplane-mode: ambient
