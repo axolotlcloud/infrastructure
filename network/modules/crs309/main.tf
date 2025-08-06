@@ -3,8 +3,8 @@ resource "routeros_system_clock" "set" {
 }
 
 resource "routeros_system_ntp_client" "set" {
-  enabled  = true
-  servers  = ["time.cloudflare.com", "time.nist.gov"]
+  enabled = true
+  servers = ["time.cloudflare.com", "time.nist.gov"]
 }
 
 resource "routeros_interface_bridge" "bridge1" {
