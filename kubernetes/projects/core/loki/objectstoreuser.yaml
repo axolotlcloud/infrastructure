@@ -1,0 +1,11 @@
+apiVersion: ceph.rook.io/v1
+kind: CephObjectStoreUser
+metadata:
+  name: axolotl-infra-loki
+  namespace: loki
+spec:
+  store: axolotl-object-store
+  clusterNamespace: rook-ceph
+  displayName: Axolotl Infrastructure - Loki
+  quotas:
+    maxBuckets: 2

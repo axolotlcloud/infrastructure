@@ -1,0 +1,21 @@
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: loki-chunks-bucket
+  namespace: loki
+spec:
+  bucketName: axolotl-infra-loki-chunks
+  storageClassName: rook-ceph-bucket
+  additionalConfig:
+    bucketOwner: axolotl-infra-loki
+---
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: loki-ruler-bucket
+  namespace: loki
+spec:
+  bucketName: axolotl-infra-loki-ruler
+  storageClassName: rook-ceph-bucket
+  additionalConfig:
+    bucketOwner: axolotl-infra-loki
