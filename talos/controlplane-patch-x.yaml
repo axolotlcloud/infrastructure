@@ -1,0 +1,41 @@
+machine:
+  kubelet:
+    extraArgs:
+      rotate-server-certificates: true
+  certSANs:
+  - k8s.lan.axolotl.cloud
+  network:
+    interfaces:
+    - interface: enp7s0
+      routes:
+      - network: 0.0.0.0/0
+        gateway: 10.0.10.1
+        metric: 10
+      mtu: 1500
+    nameservers:
+    - 10.0.10.1
+  install:
+    disk: /dev/nvme0n1
+    image: factory.talos.dev/metal-installer-secureboot/376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba:v1.10.5
+  time:
+    disabled: false
+    servers:
+    - time.cloudflare.com
+  systemDiskEncryption:
+    ephemeral:
+      provider: luks2
+      keys:
+      - slot: 0
+        tpm: {}
+    state:
+      provider: luks2
+      keys:
+      - slot: 0
+        tpm: {}
+cluster:
+  allowSchedulingOnControlPlanes: true
+  network:
+    cni:
+      name: none
+  proxy:
+    disabled: true

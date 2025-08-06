@@ -1,2 +1,7 @@
 # Visual Studio Code Configuration
 .vscode/
+
+# Talos Configuration
+talos/controlplane.yaml
+talos/talosconfig
+talos/worker.yaml

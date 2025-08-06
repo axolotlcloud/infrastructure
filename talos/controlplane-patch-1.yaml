@@ -1,0 +1,7 @@
+machine:
+  network:
+    interfaces:
+    - interface: enp7s0
+      addresses:
+      - 10.0.10.11/24
+    hostname: axolotl-1
