@@ -23,6 +23,15 @@ provider "routeros" {
   password       = var.rb5009ug_password
 }
 
+locals {
+  vlan = {
+    common  = "10"
+    cluster = "20"
+    mgmt    = "99"
+    oobm    = "199"
+  }
+}
+
 resource "routeros_system_clock" "set" {
   provider       = routeros.crs309
   time_zone_name = "America/New_York"
@@ -51,32 +60,30 @@ resource "routeros_interface_bridge_port" "sfp-sfpplus8" {
 resource "routeros_interface_bridge_vlan" "cluster" {
   provider = routeros.crs309
   bridge   = routeros_interface_bridge.bridge1.name
-  vlan_ids = ["20"]
-  tagged = [
-    routeros_interface_bridge_port.sfp-sfpplus8.interface
-  ]
+  vlan_ids = [local.vlan.cluster]
+  tagged   = [routeros_interface_bridge_port.sfp-sfpplus8.interface]
 }
 
 resource "routeros_interface_bridge_port" "sfp-sfpplus1" {
   provider    = routeros.crs309
   bridge      = routeros_interface_bridge.bridge1.name
+  pvid        = local.vlan.cluster
   interface   = "sfp-sfpplus1"
-  pvid        = "20"
   frame_types = "admit-only-untagged-and-priority-tagged"
 }
 
 resource "routeros_interface_bridge_port" "sfp-sfpplus2" {
   provider    = routeros.crs309
   bridge      = routeros_interface_bridge.bridge1.name
+  pvid        = local.vlan.cluster
   interface   = "sfp-sfpplus2"
-  pvid        = "20"
   frame_types = "admit-only-untagged-and-priority-tagged"
 }
 
 resource "routeros_interface_bridge_port" "sfp-sfpplus3" {
   provider    = routeros.crs309
   bridge      = routeros_interface_bridge.bridge1.name
+  pvid        = local.vlan.cluster
   interface   = "sfp-sfpplus3"
-  pvid        = "20"
   frame_types = "admit-only-untagged-and-priority-tagged"
 }
