@@ -1,0 +1,30 @@
+- name: Add printer driver
+  become: true
+  copy:
+    src: Oki-C5500.ppd
+    dest: /opt/airprint-bridge/
+
+- name: Configure CUPS
+  become: true
+  template:
+    src: printers.conf
+    dest: /opt/airprint-bridge/
+
+- name: Configure Avahi
+  become: true
+  copy:
+    src: Oki-C5500.service
+    dest: /opt/airprint-bridge/
+
+- name: Start AirPrint Bridge container
+  become: true
+  community.docker.docker_container:
+    name: airprint-bridge
+    image: ghcr.io/axolotlcloud/cups-avahi-airprint:v0.1.3
+    detach: true
+    recreate: true
+    network_mode: host
+    volumes:
+    - /opt/airprint-bridge/Oki-C5500.ppd:/config/ppd/Oki-C5500.ppd
+    - /opt/airprint-bridge/printers.conf:/config/printers.conf
+    - /opt/airprint-bridge/Oki-C5500.service:/services/AirPrint-Oki-C5500.service

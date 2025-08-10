@@ -1,0 +1,4 @@
+okis:
+  hosts:
+    oki:
+      printer_uri: socket://192.168.1.191
