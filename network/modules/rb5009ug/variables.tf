@@ -20,6 +20,17 @@ variable "password" {
   sensitive   = true
 }
 
+variable "warp_public_key" {
+  description = "Cloudflare WARP PoP public key"
+  type        = string
+}
+
+variable "warp_private_key" {
+  description = "Cloudflare WARP client private key"
+  type        = string
+  sensitive   = true
+}
+
 variable "vlans" {
   description = "VLAN IDs"
   type = object({

@@ -26,5 +26,8 @@ module "rb5009ug" {
   username = var.rb5009ug_username
   password = var.rb5009ug_password
 
+  warp_public_key  = var.warp_public_key
+  warp_private_key = var.warp_private_key
+
   vlans = local.vlans
 }

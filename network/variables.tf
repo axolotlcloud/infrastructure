@@ -41,3 +41,14 @@ variable "rb5009ug_password" {
   type        = string
   sensitive   = true
 }
+
+variable "warp_public_key" {
+  description = "Cloudflare WARP public key"
+  type        = string
+}
+
+variable "warp_private_key" {
+  description = "Cloudflare WARP private key"
+  type        = string
+  sensitive   = true
+}
