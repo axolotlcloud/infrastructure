@@ -11,4 +11,4 @@ spec:
     name: loki
     type: loki
     access: proxy
-    url: http://loki-read.loki.svc:3100
+    url: http://loki-gateway.loki.svc
