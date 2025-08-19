@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: axolotl-cloud
+  namespace: axolotl-cloud
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: axolotl-cloud
+  template:
+    metadata:
+      labels:
+        app: axolotl-cloud
+    spec:
+      containers:
+      - name: axolotl-cloud
+        image: nginx:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: axolotl-cloud-src
+          mountPath: /usr/share/nginx/html/
+          readOnly: true
+      volumes:
+      - name: axolotl-cloud-src
+        configMap:
+          name: axolotl-cloud-src
