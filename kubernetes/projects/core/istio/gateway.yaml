@@ -41,3 +41,25 @@ spec:
       mode: Terminate
       certificateRefs:
       - name: axolotl-cloud-tls
+  - name: dennispham-me
+    hostname: dennispham.me
+    port: 443
+    protocol: HTTPS
+    allowedRoutes:
+      namespaces:
+        from: All
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - name: dennispham-me-tls
+  - name: wildcard-dennispham-me
+    hostname: "*.dennispham.me"
+    port: 443
+    protocol: HTTPS
+    allowedRoutes:
+      namespaces:
+        from: All
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - name: dennispham-me-tls
