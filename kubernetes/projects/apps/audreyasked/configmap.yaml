@@ -5,3 +5,4 @@ metadata:
   namespace: audreyasked
 data:
   NEXTAUTH_URL: https://audreyasked.com/api/auth
+  NEXTAUTH_URL_INTERNAL: http://audreyasked.audreyasked.svc
