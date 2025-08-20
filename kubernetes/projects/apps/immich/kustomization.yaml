@@ -15,7 +15,7 @@ helmCharts:
   namespace: immich
   name: immich
   repo: oci://ghcr.io/immich-app/immich-charts
-  version: 0.7.0
+  version: 0.9.3
   valuesFile: values.yaml
 
 patches:
@@ -34,21 +34,3 @@ patches:
         name: immich-config-file
         mountPath: /config
         readOnly: true
-- target:
-    kind: Deployment
-    name: immich-server
-  patch: |
-    - op: remove
-      path: /spec/template/spec/containers/0/livenessProbe/httpGet
-    - op: remove
-      path: /spec/template/spec/containers/0/readinessProbe/httpGet
-    - op: add
-      path: /spec/template/spec/containers/0/livenessProbe/exec
-      value:
-        command:
-        - immich-healthcheck
-    - op: add
-      path: /spec/template/spec/containers/0/readinessProbe/exec
-      value:
-        command:
-        - immich-healthcheck
