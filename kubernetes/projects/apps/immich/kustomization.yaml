@@ -10,6 +10,12 @@ resources:
 - ./redis.yaml
 - ./sealedsecret.yaml
 
+replicas:
+- name: immich-machine-learning
+  count: 3
+- name: immich-server
+  count: 3
+
 helmCharts:
 - releaseName: immich
   namespace: immich
