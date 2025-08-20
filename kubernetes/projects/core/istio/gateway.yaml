@@ -8,6 +8,28 @@ metadata:
 spec:
   gatewayClassName: istio
   listeners:
+  - name: audreyasked-com
+    hostname: audreyasked.com
+    port: 443
+    protocol: HTTPS
+    allowedRoutes:
+      namespaces:
+        from: All
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - name: audreyasked-com-tls
+  - name: wildcard-audreyasked-com
+    hostname: "*.audreyasked.com"
+    port: 443
+    protocol: HTTPS
+    allowedRoutes:
+      namespaces:
+        from: All
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - name: audreyasked-com-tls
   - name: axolotl-cloud
     hostname: axolotl.cloud
     port: 443
