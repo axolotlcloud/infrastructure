@@ -1,0 +1,18 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgres
+  namespace: immich
+spec:
+  instances: 1
+  storage:
+    size: 250Gi
+  imageName: ghcr.io/tensorchord/cloudnative-vectorchord:17-0.4.3
+  bootstrap:
+    initdb:
+      postInitSQL:
+      - CREATE EXTENSION IF NOT EXISTS vchord CASCADE;
+      - CREATE EXTENSION IF NOT EXISTS earthdistance CASCADE;
+  postgresql:
+    shared_preload_libraries:
+    - vchord.so
