@@ -79,8 +79,6 @@ server:
   image:
     repository: ghcr.io/immich-app/immich-server
     pullPolicy: IfNotPresent
-  env:
-    IMMICH_PORT: "3001"
 
 machine-learning:
   enabled: true
