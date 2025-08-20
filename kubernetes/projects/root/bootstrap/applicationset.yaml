@@ -20,7 +20,7 @@ spec:
             project: '{{ index .path.segments 2 }}'
       - list:
           elements:
-          - autoSyncExclusions: []
+          - autoSyncExclusions: [ audreyasked ]
   template:
     metadata:
       name: '{{ .values.app }}'
