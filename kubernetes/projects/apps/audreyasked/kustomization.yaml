@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ./configmap.yaml
+- ./deployment.yaml
+- ./httproute.yaml
+- ./namespace.yaml
+- ./postgres.yaml
+- ./sealedsecret.yaml
+- ./service.yaml
+images:
+- name: ghcr.io/den4200/audreyasked
+  digest: sha256:cf0128b052c38ea3dc5d6d45a4a3dd95766509ecdbe439faed421f61dcb95b32

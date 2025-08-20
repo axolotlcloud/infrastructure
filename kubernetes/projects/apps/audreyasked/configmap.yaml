@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: audreyasked-config
+  namespace: audreyasked
+data:
+  NEXTAUTH_URL: https://audreyasked.com/api/auth

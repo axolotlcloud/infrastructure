@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: audreyasked
+  namespace: audreyasked
+spec:
+  selector:
+    matchLabels:
+      app: audreyasked
+  template:
+    metadata:
+      labels:
+        app: audreyasked
+    spec:
+      containers:
+      - name: audreyasked
+        image: ghcr.io/den4200/audreyasked
+        imagePullPolicy: Always
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: postgres-app
+              key: uri
+        readinessProbe:
+          failureThreshold: 8
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        livenessProbe:
+          failureThreshold: 8
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        ports:
+        - containerPort: 3000
+        envFrom:
+        - configMapRef:
+            name: audreyasked-config
+        - secretRef:
+            name: audreyasked-secret
