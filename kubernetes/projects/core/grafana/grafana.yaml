@@ -55,8 +55,8 @@ spec:
                   key: tokenUrl
   config:
     server:
-      domain: grafana.lan.axolotl.cloud
-      root_url: https://grafana.lan.axolotl.cloud
+      domain: grafana.axolotl.cloud
+      root_url: https://grafana.axolotl.cloud
     log:
       mode: console
     database:

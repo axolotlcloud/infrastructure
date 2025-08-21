@@ -12,7 +12,7 @@ spec:
         type: Scope
     web:
       redirectUris:
-      - https://argocd.lan.axolotl.cloud/auth/callback
+      - https://argocd.axolotl.cloud/auth/callback
     groupMembershipClaims:
     - SecurityGroup
   providerConfigRef:

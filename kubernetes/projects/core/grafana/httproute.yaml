@@ -8,7 +8,7 @@ spec:
   - name: axolotl
     namespace: istio-ingress
   hostnames:
-  - grafana.lan.axolotl.cloud
+  - grafana.axolotl.cloud
   rules:
   - matches:
     - path:

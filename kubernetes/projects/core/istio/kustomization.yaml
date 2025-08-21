@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
 - https://raw.githubusercontent.com/istio/istio/refs/tags/1.26.3/samples/addons/extras/prometheus-operator.yaml
 - ./gateway.yaml
+- ./lan.gateway.yaml
 - ./namespace.yaml
 - ./networkpolicy.yaml
 
@@ -44,3 +45,24 @@ patches:
     - op: replace
       path: /webhooks/0/failurePolicy
       value: Fail
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+secretGenerator:
+- name: aniplix-xyz-tls-cacert
+  namespace: istio-ingress
+  files:
+  - cacert=cloudflare.pem
+- name: audreyasked-com-tls-cacert
+  namespace: istio-ingress
+  files:
+  - cacert=cloudflare.pem
+- name: axolotl-cloud-tls-cacert
+  namespace: istio-ingress
+  files:
+  - cacert=cloudflare.pem
+- name: dennispham-me-tls-cacert
+  namespace: istio-ingress
+  files:
+  - cacert=cloudflare.pem
