@@ -12,8 +12,8 @@ spec:
         type: Scope
     web:
       redirectUris:
-      - https://grafana.lan.axolotl.cloud
-      - https://grafana.lan.axolotl.cloud/login/azuread
+      - https://grafana.axolotl.cloud
+      - https://grafana.axolotl.cloud/login/azuread
     groupMembershipClaims:
     - ApplicationGroup
     - SecurityGroup

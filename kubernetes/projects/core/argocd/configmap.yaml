@@ -23,7 +23,7 @@ data:
   exec.enabled: "true"
   statusbadge.enabled: "true"
   kustomize.buildOptions: --enable-helm --enable-alpha-plugins --network --as-current-user --load-restrictor LoadRestrictionsNone
-  url: https://argocd.lan.axolotl.cloud
+  url: https://argocd.axolotl.cloud
   oidc.config: |-
     name: Microsoft
     issuer: https://login.microsoftonline.com/ecf32f86-3c92-49c6-8326-ce16b6789462/v2.0

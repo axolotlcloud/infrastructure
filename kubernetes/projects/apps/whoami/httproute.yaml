@@ -8,7 +8,7 @@ spec:
   - name: axolotl
     namespace: istio-ingress
   hostnames:
-  - whoami.lan.axolotl.cloud
+  - whoami.axolotl.cloud
   rules:
   - matches:
     - path:

@@ -19,6 +19,8 @@ spec:
       mode: Terminate
       certificateRefs:
       - name: audreyasked-com-tls
+      options:
+        gateway.istio.io/tls-terminate-mode: MUTUAL
   - name: wildcard-audreyasked-com
     hostname: "*.audreyasked.com"
     port: 443
@@ -30,6 +32,8 @@ spec:
       mode: Terminate
       certificateRefs:
       - name: audreyasked-com-tls
+      options:
+        gateway.istio.io/tls-terminate-mode: MUTUAL
   - name: axolotl-cloud
     hostname: axolotl.cloud
     port: 443
@@ -41,6 +45,8 @@ spec:
       mode: Terminate
       certificateRefs:
       - name: axolotl-cloud-tls
+      options:
+        gateway.istio.io/tls-terminate-mode: MUTUAL
   - name: wildcard-axolotl-cloud
     hostname: "*.axolotl.cloud"
     port: 443
@@ -52,17 +58,8 @@ spec:
       mode: Terminate
       certificateRefs:
       - name: axolotl-cloud-tls
-  - name: wildcard-lan-axolotl-cloud
-    hostname: "*.lan.axolotl.cloud"
-    port: 443
-    protocol: HTTPS
-    allowedRoutes:
-      namespaces:
-        from: All
-    tls:
-      mode: Terminate
-      certificateRefs:
-      - name: axolotl-cloud-tls
+      options:
+        gateway.istio.io/tls-terminate-mode: MUTUAL
   - name: dennispham-me
     hostname: dennispham.me
     port: 443
@@ -74,6 +71,8 @@ spec:
       mode: Terminate
       certificateRefs:
       - name: dennispham-me-tls
+      options:
+        gateway.istio.io/tls-terminate-mode: MUTUAL
   - name: wildcard-dennispham-me
     hostname: "*.dennispham.me"
     port: 443
@@ -85,3 +84,5 @@ spec:
       mode: Terminate
       certificateRefs:
       - name: dennispham-me-tls
+      options:
+        gateway.istio.io/tls-terminate-mode: MUTUAL
