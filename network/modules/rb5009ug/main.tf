@@ -484,3 +484,8 @@ resource "routeros_ip_address" "warp" {
   address   = "100.96.0.6/12"
   interface = routeros_interface_wireguard.warp.name
 }
+
+resource "routeros_ip_cloud" "set" {
+  ddns_enabled         = true
+  ddns_update_interval = "1m"
+}
