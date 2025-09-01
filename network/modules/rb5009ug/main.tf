@@ -284,7 +284,7 @@ resource "routeros_ip_firewall_nat" "wan-dstnat-443-tcp" {
   in_interface = routeros_ip_address.wan.interface
   port         = "443"
   protocol     = "tcp"
-  to_addresses = "10.0.1.4"
+  to_addresses = "10.0.11.0"
 }
 
 resource "routeros_ip_firewall_nat" "wan-dstnat-32766-tcp" {
@@ -486,6 +486,6 @@ resource "routeros_ip_address" "warp" {
 }
 
 resource "routeros_ip_cloud" "set" {
-  ddns_enabled         = true
+  ddns_enabled         = "yes"
   ddns_update_interval = "1m"
 }
