@@ -81010,7 +81010,7 @@ spec:
         - ReadWriteOnce
         resources:
           requests:
-            storage: 40Gi
+            storage: 100Gi
   version: 2.46.0
 ---
 apiVersion: monitoring.coreos.com/v1

@@ -27,7 +27,7 @@ local kp = (import 'kube-prometheus/main.libsonnet') +
             kind: 'PersistentVolumeClaim',
             spec: {
               accessModes: ['ReadWriteOnce'],
-              resources: { requests: { storage: '40Gi' } },
+              resources: { requests: { storage: '100Gi' } },
             },
           },
         },
