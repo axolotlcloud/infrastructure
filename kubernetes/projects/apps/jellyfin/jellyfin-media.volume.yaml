@@ -4,6 +4,7 @@ metadata:
   name: jellyfin-media
   namespace: jellyfin
 spec:
+  storageClassName: rook-ceph-fs
   accessModes:
   - ReadWriteMany
   resources:
