@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gluetun-config
+  namespace: jellyfin
+data:
+  TZ: America/New_York
+  VPN_SERVICE_PROVIDER: surfshark
+  VPN_TYPE: wireguard
+  WIREGUARD_ADDRESSES: 10.14.0.2/16
+  FIREWALL_INPUT_PORTS: "9696"
+  FIREWALL_OUTBOUND_SUBNETS: 10.0.0.0/8
+  ROUTE_ALLOWED_IPS: 10.0.0.0/8
+  SERVER_HOSTNAMES: us-nyc.prod.surfshark.com
+  DNS_ADDRESS: 10.96.0.10

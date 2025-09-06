@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: radarr
+  namespace: jellyfin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: radarr
+  template:
+    metadata:
+      labels:
+        app: radarr
+    spec:
+      containers:
+      - name: gluetun
+        image: ghcr.io/qdm12/gluetun:latest
+        imagePullPolicy: Always
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+        ports:
+        - containerPort: 9091
+        envFrom:
+        - configMapRef:
+            name: gluetun-config
+        - secretRef:
+            name: radarr-gluetun-secret
+      - name: radarr
+        image: lscr.io/linuxserver/radarr:5.18.4
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            cpu: 100m
+            memory: 2Gi
+          limits:
+            cpu: 500m
+            memory: 4Gi
+        envFrom:
+        - configMapRef:
+            name: radarr-config
+        ports:
+        - containerPort: 7878
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        - name: downloads
+          mountPath: /downloads
+        - name: media
+          mountPath: /media
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: radarr-config
+      - name: downloads
+        persistentVolumeClaim:
+          claimName: qbittorrent-downloads
+      - name: media
+        persistentVolumeClaim:
+          claimName: jellyfin-media

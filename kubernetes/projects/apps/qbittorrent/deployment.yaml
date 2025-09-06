@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qbittorrent
+  namespace: jellyfin
+spec:
+  selector:
+    matchLabels:
+      app: qbittorrent
+  template:
+    metadata:
+      labels:
+        app: qbittorrent
+    spec:
+      containers:
+      - name: gluetun
+        image: ghcr.io/qdm12/gluetun:latest
+        imagePullPolicy: Always
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+        ports:
+        - containerPort: 9091
+        envFrom:
+        - configMapRef:
+            name: gluetun-config
+        - secretRef:
+            name: qbittorrent-gluetun-secret
+      - name: qbittorrent
+        image: lscr.io/linuxserver/qbittorrent:5.0.3
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            cpu: 500m
+            memory: 2Gi
+          limits:
+            cpu: 2000m
+            memory: 8Gi
+        envFrom:
+        - configMapRef:
+            name: qbittorrent-config
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        - name: downloads
+          mountPath: /downloads
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: qbittorrent-config
+      - name: downloads
+        persistentVolumeClaim:
+          claimName: qbittorrent-downloads

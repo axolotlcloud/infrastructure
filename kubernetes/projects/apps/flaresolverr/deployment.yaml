@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flaresolverr
+  namespace: flaresolverr
+spec:
+  selector:
+    matchLabels:
+      app: flaresolverr
+  template:
+    metadata:
+      labels:
+        app: flaresolverr
+    spec:
+      containers:
+      - name: gluetun
+        image: ghcr.io/qdm12/gluetun:latest
+        imagePullPolicy: Always
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+        ports:
+        - containerPort: 9091
+        envFrom:
+        - configMapRef:
+            name: gluetun-config
+        - secretRef:
+            name: gluetun-secret
+      - name: flaresolverr
+        image: ghcr.io/flaresolverr/flaresolverr:v3.4.0
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            cpu: 100m
+            memory: 2Gi
+          limits:
+            cpu: 500m
+            memory: 4Gi
+        envFrom:
+        - configMapRef:
+            name: flaresolverr-config
+        ports:
+        - containerPort: 8191
