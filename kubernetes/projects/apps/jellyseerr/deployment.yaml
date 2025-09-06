@@ -30,27 +30,27 @@ spec:
         - name: DB_USER
           valueFrom:
             secretKeyRef:
-              name: postgres-jellyseerr-app
+              name: postgres-app
               key: user
         - name: DB_PASS
           valueFrom:
             secretKeyRef:
-              name: postgres-jellyseerr-app
+              name: postgres-app
               key: password
         - name: DB_HOST
           valueFrom:
             secretKeyRef:
-              name: postgres-jellyseerr-app
+              name: postgres-app
               key: host
         - name: DB_PORT
           valueFrom:
             secretKeyRef:
-              name: postgres-jellyseerr-app
+              name: postgres-app
               key: port
         - name: DB_NAME
           valueFrom:
             secretKeyRef:
-              name: postgres-jellyseerr-app
+              name: postgres-app
               key: dbname
         envFrom:
         - configMapRef:
