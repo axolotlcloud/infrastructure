@@ -7,6 +7,5 @@ resources:
 - ./gluetun.sealedsecret.yaml
 - ./httproute.yaml
 - ./qbittorrent-config.volume.yaml
-- ./qbittorrent-downloads.volume.yaml
 - ./qbittorrent.configmap.yaml
 - ./service.yaml
