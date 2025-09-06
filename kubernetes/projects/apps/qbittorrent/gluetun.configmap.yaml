@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: gluetun-config
+  name: qbittorrent-gluetun-config
   namespace: jellyfin
 data:
   TZ: America/New_York

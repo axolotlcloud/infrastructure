@@ -25,7 +25,7 @@ spec:
         - containerPort: 9091
         envFrom:
         - configMapRef:
-            name: gluetun-config
+            name: radarr-gluetun-config
         - secretRef:
             name: radarr-gluetun-secret
       - name: radarr
