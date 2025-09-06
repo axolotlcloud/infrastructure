@@ -46,12 +46,13 @@ spec:
         volumeMounts:
         - name: config
           mountPath: /config
-        - name: downloads
+        - name: media
           mountPath: /downloads
+          subPath: downloads
       volumes:
       - name: config
         persistentVolumeClaim:
           claimName: qbittorrent-config
-      - name: downloads
+      - name: media
         persistentVolumeClaim:
-          claimName: qbittorrent-downloads
+          claimName: jellyfin-media

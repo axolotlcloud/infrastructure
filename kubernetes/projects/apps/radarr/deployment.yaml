@@ -47,17 +47,16 @@ spec:
         volumeMounts:
         - name: config
           mountPath: /config
-        - name: downloads
-          mountPath: /downloads
         - name: media
-          mountPath: /media
+          mountPath: /downloads
+          subPath: downloads
+        - name: media
+          mountPath: /media/movies
+          subPath: movies
       volumes:
       - name: config
         persistentVolumeClaim:
           claimName: radarr-config
-      - name: downloads
-        persistentVolumeClaim:
-          claimName: qbittorrent-downloads
       - name: media
         persistentVolumeClaim:
           claimName: jellyfin-media
