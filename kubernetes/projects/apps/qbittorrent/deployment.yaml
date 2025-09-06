@@ -24,7 +24,7 @@ spec:
         - containerPort: 9091
         envFrom:
         - configMapRef:
-            name: gluetun-config
+            name: qbittorrent-gluetun-config
         - secretRef:
             name: qbittorrent-gluetun-secret
       - name: qbittorrent
