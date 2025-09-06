@@ -11,6 +11,7 @@ spec:
     metadata:
       labels:
         app: flaresolverr
+        istio.io/dataplane-mode: none
     spec:
       containers:
       - name: gluetun

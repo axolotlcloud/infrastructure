@@ -12,6 +12,7 @@ spec:
     metadata:
       labels:
         app: radarr
+        istio.io/dataplane-mode: none
     spec:
       containers:
       - name: gluetun
