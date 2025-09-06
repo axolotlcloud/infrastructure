@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: radarr-config
+  namespace: jellyfin
+data:
+  PUID: "1000"
+  PGID: "1000"
+  TZ: America/New_York

@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jellyseerr
+  namespace: jellyseerr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jellyseerr
+  template:
+    metadata:
+      labels:
+        app: jellyseerr
+    spec:
+      containers:
+      - name: jellyseerr
+        image: fallenbagel/jellyseerr:2.3.0
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            cpu: 100m
+            memory: 1Gi
+          limits:
+            cpu: 500m
+            memory: 2Gi
+        env:
+        - name: DB_TYPE
+          value: postgres
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: postgres-jellyseerr-app
+              key: user
+        - name: DB_PASS
+          valueFrom:
+            secretKeyRef:
+              name: postgres-jellyseerr-app
+              key: password
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: postgres-jellyseerr-app
+              key: host
+        - name: DB_PORT
+          valueFrom:
+            secretKeyRef:
+              name: postgres-jellyseerr-app
+              key: port
+        - name: DB_NAME
+          valueFrom:
+            secretKeyRef:
+              name: postgres-jellyseerr-app
+              key: dbname
+        envFrom:
+        - configMapRef:
+            name: jellyseerr-config
+        ports:
+        - containerPort: 5055
+        volumeMounts:
+        - name: config
+          mountPath: /app/config
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: jellyseerr-config

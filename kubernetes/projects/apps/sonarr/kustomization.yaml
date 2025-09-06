@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- ./deployment.yaml
+- ./gluetun.configmap.yaml
+- ./gluetun.sealedsecret.yaml
+- ./httproute.yaml
+- ./sonarr-config.volume.yaml
+- ./sonarr.configmap.yaml
+- ./service.yaml
