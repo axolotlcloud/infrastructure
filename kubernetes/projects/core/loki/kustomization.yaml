@@ -5,6 +5,7 @@ resources:
 - ./grafanadatasource.yaml
 - ./namespace.yaml
 - ./objectbucketclaim.yaml
+- ./objectstoreuser.yaml
 
 helmCharts:
 - name: loki
