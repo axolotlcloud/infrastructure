@@ -21,13 +21,13 @@ helmCharts:
   namespace: immich
   name: immich
   repo: oci://ghcr.io/immich-app/immich-charts
-  version: 0.9.3
+  version: 0.10.1
   valuesFile: values.yaml
 
 patches:
 - target:
     kind: Deployment
-  patch: |-
+  patch: |
     - op: add
       path: /spec/template/spec/volumes/-
       value:
@@ -40,3 +40,29 @@ patches:
         name: immich-config-file
         mountPath: /config
         readOnly: true
+- target:
+    kind: Deployment
+    name: immich-server
+  patch: |
+    - op: add
+      path: /spec/template/spec/topologySpreadConstraints
+      value:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: server
+- target:
+    kind: Deployment
+    name: immich-machine-learning
+  patch: |
+    - op: add
+      path: /spec/template/spec/topologySpreadConstraints
+      value:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: machine-learning
