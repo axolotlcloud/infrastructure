@@ -18,4 +18,4 @@ spec:
     tls:
       mode: Terminate
       certificateRefs:
-      - name: axolotl-cloud-tls
+      - name: lan-axolotl-cloud-tls
