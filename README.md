@@ -1,4 +1,5 @@
 # Axolotl Cloud Infrastructure
+[![Static Badge](https://img.shields.io/badge/docs-axolotl.cloud-%23ec9e01)](https://docs.axolotl.cloud)
 
 ## Git-Crypt
 We use [git-crypt](https://github.com/AGWA/git-crypt) to encrypt and store certain secrets transparently in this repository, such as Talos secrets and Terraform variables.
