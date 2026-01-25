@@ -1,0 +1,9 @@
+[project]
+name = "infrastructure"
+version = "0.1.0"
+description = "Documentation for Axolotl Cloud infrastructure"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "zensical>=0.0.19",
+]

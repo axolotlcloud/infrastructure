@@ -1,2 +1,8 @@
 # Visual Studio Code Configuration
 .vscode/
+
+# Docs site build
+site/
+
+# Python virtual environment
+.venv/
