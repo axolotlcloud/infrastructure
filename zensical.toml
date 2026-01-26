@@ -48,17 +48,25 @@ Copyright &copy; 2026 Axolotl Cloud
 #
 # Read more: https://zensical.org/docs/setup/navigation/
 nav = [
-
-  {"Overview" = [
-    "index.md",
-    "overview/hardware.md",
-    "overview/networking.md",
-    "overview/out-of-band-management.md",
+ {"Home" = "index.md"}, 
+  {"Foundation" = [
+    "foundation/hardware.md",
+    "foundation/networking.md",
+    "foundation/out-of-band-management.md",
   ]},
   {"Kubernetes" = [
-    "kubernetes/index.md",
+    "kubernetes/overview.md",
     "kubernetes/networking.md",
     "kubernetes/storage.md",
+    "kubernetes/gitops.md",
+    "kubernetes/observability.md",
+  ]},
+  {"Internal Services" = [
+    {"Argo CD" = "https://argocd.axolotl.cloud"},
+    {"Ceph" = "https://ceph.axolotl.cloud"},
+    {"Grafana" = "https://grafana.axolotl.cloud"},
+    {"Hubble" = "https://hubble.axolotl.cloud"},
+    {"Kiali" = "https://kiali.axolotl.cloud"},
   ]},
 ]
 

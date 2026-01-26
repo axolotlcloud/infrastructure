@@ -27,4 +27,6 @@ The PDU is a [CyberPower CPS1215RMS](https://www.cyberpowersystems.com/product/s
 
 ## Server Rack
 
-![Server Rack](../assets/rack.svg){ width="420" }
+<figure markdown="span">
+    ![Server Rack](../assets/rack.svg){ width="420" }
+</figure>

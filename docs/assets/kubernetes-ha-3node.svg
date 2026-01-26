@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1440" height="480" viewBox="0 -30 1440 480" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three-node highly available Kubernetes cluster diagram">
+  <defs>
+    <style>
+      :root {
+        --stroke: #1f2937;
+        --text: #111827;
+        --muted: #6b7280;
+        --node-bg: #ffffff;
+        --panel-bg: #f8fafc;
+        --badge-bg: #fff7ed;
+        --badge-stroke: #fdba74;
+        --badge-text: #9a3412;
+        --work-bg: #eef2ff;
+        --work-stroke: #c7d2fe;
+        --cp-bg: #ecfeff;
+        --cp-stroke: #a5f3fc;
+        --etcd-bg: #ecfdf5;
+        --etcd-stroke: #a7f3d0;
+      }
+
+  .title { font: 800 32px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial; fill: var(--text); }
+  .subtitle { font: 700 20px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial; fill: var(--muted); }
+  .label { font: 900 24px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial; fill: var(--text); }
+  .small { font: 900 22px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial; fill: var(--text); }
+  .tiny { font: 800 18px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial; fill: var(--muted); }
+
+      .frame { stroke: var(--stroke); stroke-width: 1.5; }
+      .dashed { stroke-dasharray: 6 6; }
+      .node { fill: var(--node-bg); }
+      .panel { fill: var(--panel-bg); }
+
+      .box-cp { fill: var(--cp-bg); stroke: var(--cp-stroke); stroke-width: 1.25; }
+      .box-etcd { fill: var(--etcd-bg); stroke: var(--etcd-stroke); stroke-width: 1.25; }
+      .box-work { fill: var(--work-bg); stroke: var(--work-stroke); stroke-width: 1.25; }
+
+      .badge { fill: var(--badge-bg); stroke: var(--badge-stroke); stroke-width: 1.25; }
+  .badge-text { font: 800 14px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial; fill: var(--badge-text); }
+
+      .arrow { stroke: var(--muted); stroke-width: 1.5; fill: none; marker-end: url(#arrowhead); }
+      .arrow-strong { stroke: var(--stroke); stroke-width: 1.75; fill: none; marker-end: url(#arrowhead); }
+    </style>
+
+    <marker id="arrowhead" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#6b7280" />
+    </marker>
+
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.12" />
+    </filter>
+  </defs>
+
+  <!-- Nodes row -->
+  <!-- Node dimensions -->
+  <!-- Node 1 -->
+  <g transform="translate(0, 70)">
+  <rect x="0" y="0" width="440" height="360" rx="18" class="node frame" filter="url(#shadow)"/>
+  <text x="18" y="44" class="label">Node 1</text>
+  <text x="18" y="74" class="tiny">Bare metal • Talos Linux</text>
+
+  <rect x="18" y="102" width="404" height="52" rx="12" class="box-etcd"/>
+  <text x="30" y="134" class="small">etcd member</text>
+
+  <rect x="18" y="172" width="404" height="76" rx="12" class="box-cp"/>
+  <text x="30" y="204" class="small" dominant-baseline="middle">Kubernetes control plane</text>
+  <text x="30" y="226" class="tiny" dominant-baseline="middle">API server, scheduler, controller manager</text>
+
+  <rect x="18" y="262" width="404" height="76" rx="12" class="box-work"/>
+  <text x="30" y="297" class="small">Workloads</text>
+  <text x="30" y="320" class="tiny">Apps, operators, controllers</text>
+
+  </g>
+
+  <!-- Node 2 -->
+  <g transform="translate(470, 70)">
+  <rect x="0" y="0" width="440" height="360" rx="18" class="node frame" filter="url(#shadow)"/>
+  <text x="18" y="44" class="label">Node 2</text>
+  <text x="18" y="74" class="tiny">Bare metal • Talos Linux</text>
+
+  <rect x="18" y="102" width="404" height="52" rx="12" class="box-etcd"/>
+  <text x="30" y="134" class="small">etcd member</text>
+
+  <rect x="18" y="172" width="404" height="76" rx="12" class="box-cp"/>
+  <text x="30" y="204" class="small" dominant-baseline="middle">Kubernetes control plane</text>
+  <text x="30" y="226" class="tiny" dominant-baseline="middle">API server, scheduler, controller manager</text>
+
+  <rect x="18" y="262" width="404" height="76" rx="12" class="box-work"/>
+  <text x="30" y="297" class="small">Workloads</text>
+  <text x="30" y="320" class="tiny">Apps, operators, controllers</text>
+  </g>
+
+  <!-- Node 3 -->
+  <g transform="translate(940, 70)">
+  <rect x="0" y="0" width="440" height="360" rx="18" class="node frame" filter="url(#shadow)"/>
+  <text x="18" y="44" class="label">Node 3</text>
+  <text x="18" y="74" class="tiny">Bare metal • Talos Linux</text>
+
+  <rect x="18" y="102" width="404" height="52" rx="12" class="box-etcd"/>
+  <text x="30" y="134" class="small">etcd member</text>
+
+  <rect x="18" y="172" width="404" height="76" rx="12" class="box-cp"/>
+  <text x="30" y="204" class="small" dominant-baseline="middle">Kubernetes control plane</text>
+  <text x="30" y="226" class="tiny" dominant-baseline="middle">API server, scheduler, controller manager</text>
+
+  <rect x="18" y="262" width="404" height="76" rx="12" class="box-work"/>
+  <text x="30" y="297" class="small">Workloads</text>
+  <text x="30" y="320" class="tiny">Apps, operators, controllers</text>
+  </g>
+
+</svg>

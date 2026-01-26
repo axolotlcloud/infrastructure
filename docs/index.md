@@ -1,6 +1,10 @@
-# Overview
+---
+icon: lucide/house
+---
 
-Welcome to the documentation for Axolotl Cloud infrastructure! We primarily operate a Kubernetes cluster on our hardware.
+# Axolotl Cloud
+
+Welcome to the documentation for Axolotl Cloud infrastructure! We primarily operate a hyperconverged, highly available Kubernetes cluster on our hardware.
 
 !!! info
 
@@ -23,10 +27,10 @@ Welcome to the documentation for Axolotl Cloud infrastructure! We primarily oper
 
 ## Management Services
 
-| Service        | URL                           |
-| -------------- | ----------------------------- |
-| Argo CD        | https://argocd.axolotl.cloud  |
-| Ceph Dashboard | https://ceph.axolotl.cloud    |
-| Grafana        | https://grafana.axolotl.cloud |
-| Hubble         | https://hubble.axolotl.cloud  |
-| Kiali          | https://kiali.axolotl.cloud   |
+| Service | URL                           |
+| ------- | ----------------------------- |
+| Argo CD | https://argocd.axolotl.cloud  |
+| Ceph    | https://ceph.axolotl.cloud    |
+| Grafana | https://grafana.axolotl.cloud |
+| Hubble  | https://hubble.axolotl.cloud  |
+| Kiali   | https://kiali.axolotl.cloud   |

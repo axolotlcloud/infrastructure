@@ -18,7 +18,9 @@ Each of the 3 nodes in the cluster has a 10Gb link to the switch, and is BGP pee
 
 Each node also has a KVM over IP module for out-of-band management (OOBM), which is connected directly to the router with a 1Gb link.
 
-![Network](../assets/network.svg){ width="600" }
+<figure markdown="span">
+    ![Network](../assets/network.svg){ width="600" }
+</figure>
 
 ## Cloudflare
 
