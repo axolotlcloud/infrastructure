@@ -16,6 +16,9 @@ Each of the 3 nodes in this cluster contains 3x 8TB HDDs that are all dedicated 
 
 With failure domain set to `host`, we are able to survive a 1-node failure with no issues and a 2-node failure with writes disrupted (but no data loss). At least 2 healthy nodes are necessary to maintain quorum, so if there is only 1 healthy node, the cluster loses quorum and writes are disabled until quorum is re-established.
 
+### Object Storage Multisite Replication
+In the future, we plan to set up object storage multisite replication with another Ceph cluster located off-site for backups. This will finish the implementation of the 3-2-1 backup strategy: 3 copies of data, 2 different devices, 1 off-site copy.
+
 ### Public Telemetry Dashboard
 
 Check out this awesome dashboard on Ceph usage: https://telemetry-public.ceph.com/
