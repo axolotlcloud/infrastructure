@@ -72,7 +72,7 @@ resource "routeros_ip_dns_record" "k8s_lan_axolotl_cloud_A_2" {
 resource "routeros_ip_dns_record" "gateway_lan_axolotl_cloud_A" {
   type    = "A"
   name    = "gateway.lan.axolotl.cloud"
-  address = "10.0.11.0"
+  address = "10.0.11.1"
   ttl     = "30s"
 }
 
