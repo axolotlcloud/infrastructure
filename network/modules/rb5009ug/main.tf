@@ -475,13 +475,13 @@ resource "routeros_interface_wireguard_peer" "cloudflare-pop" {
     "0.0.0.0/0",
     "::/0",
   ]
-  endpoint_address     = "162.159.193.6"
+  endpoint_address     = "162.159.193.1"
   endpoint_port        = "2408"
-  persistent_keepalive = "1m"
+  persistent_keepalive = "30s"
 }
 
 resource "routeros_ip_address" "warp" {
-  address   = "100.96.0.6/12"
+  address   = "100.96.0.1/12"
   interface = routeros_interface_wireguard.warp.name
 }
 

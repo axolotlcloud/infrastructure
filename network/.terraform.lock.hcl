@@ -1,7 +1,7 @@
-# This file is maintained automatically by "terraform init".
+# This file is maintained automatically by "tofu init".
 # Manual edits may be lost in future updates.
 
-provider "registry.terraform.io/terraform-routeros/routeros" {
+provider "registry.opentofu.org/terraform-routeros/routeros" {
   version     = "1.86.2"
   constraints = "1.86.2"
   hashes = [
