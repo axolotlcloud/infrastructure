@@ -1,0 +1,13 @@
+# Reset configuration
+/system reset-configuration no-defaults=yes skip-backup=yes
+
+# Generate certificates
+/certificate
+add name=AxolotlCloudNetworkCRS309CA common-name="Axolotl Cloud Network CA" country=US organization="Axolotl Cloud" trusted=yes key-usage=key-cert-sign,crl-sign days-valid=3650
+sign AxolotlCloudNetworkCRS309CA
+add name=WwwSsl common-name="WWW SSL" subject-alt-name=IP:10.0.0.2 country=US organization="Axolotl Cloud" trusted=yes key-usage=tls-server
+sign ca=AxolotlCloudNetworkCRS309CA WwwSsl
+
+# Enable SSL
+/ip service set www-ssl certificate=WwwSsl
+/ip service enable www-ssl
