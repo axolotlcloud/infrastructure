@@ -17,3 +17,23 @@ spec:
     backendRefs:
     - name: immich-server
       port: 2283
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: immich-server-lan
+  namespace: immich
+spec:
+  parentRefs:
+  - name: axolotl-lan
+    namespace: istio-ingress
+  hostnames:
+  - photos.lan.axolotl.cloud
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /
+    backendRefs:
+    - name: immich-server
+      port: 2283
