@@ -162,6 +162,23 @@ resource "routeros_interface_bridge_port" "ether4" {
   frame_types = "admit-only-untagged-and-priority-tagged"
 }
 
+resource "routeros_ip_pool" "dhcp_common" {
+  name   = "DHCP_COMMON"
+  ranges = ["10.0.1.2-10.0.1.254"]
+}
+
+resource "routeros_ip_dhcp_server_network" "common" {
+  address    = "10.0.1.0/24"
+  gateway    = "10.0.1.1"
+  dns_server = ["10.0.1.1"]
+}
+
+resource "routeros_ip_dhcp_server" "common" {
+  address_pool = routeros_ip_pool.dhcp_common.name
+  interface    = routeros_interface_vlan.common.name
+  name         = "DHCP_COMMON"
+}
+
 resource "routeros_interface_bridge_port" "sfp-sfpplus1" {
   bridge      = routeros_interface_bridge.bridge1.name
   interface   = "sfp-sfpplus1"
