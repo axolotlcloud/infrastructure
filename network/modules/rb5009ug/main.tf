@@ -1,5 +1,9 @@
+locals {
+  wan_ip_address = "192.168.1.42"
+}
+
 resource "routeros_ip_address" "wan" {
-  address   = "192.168.1.42/24"
+  address   = "${local.wan_ip_address}/24"
   interface = "ether8"
 }
 
@@ -280,19 +284,33 @@ resource "routeros_ip_dhcp_server" "oobm" {
   name         = "DHCP_OOBM"
 }
 
+resource "routeros_interface_6to4" "sit1" {
+  name           = "sit1"
+  local_address  = local.wan_ip_address
+  remote_address = "209.51.161.14"
+  mtu            = "1280"
+  comment        = "Hurricane Electric IPv6 Tunnel Broker"
+}
+
+resource "routeros_ipv6_route" "sit1_default" {
+  dst_address  = "2000::/3"
+  gateway      = "2001:470:1f06:68::1"
+  distance     = 1
+  scope        = 30
+  target_scope = 10
+}
+
+resource "routeros_ipv6_address" "sit1" {
+  address   = "2001:470:1f06:68::2/64"
+  interface = routeros_interface_6to4.sit1.name
+  advertise = false
+  eui_64    = false
+}
+   
 resource "routeros_ip_firewall_nat" "wan-srcnat-masq" {
   action        = "masquerade"
   chain         = "srcnat"
   out_interface = routeros_ip_address.wan.interface
-}
-
-resource "routeros_ip_firewall_nat" "wan-dstnat-80-tcp" {
-  action       = "dst-nat"
-  chain        = "dstnat"
-  in_interface = routeros_ip_address.wan.interface
-  port         = "80"
-  protocol     = "tcp"
-  to_addresses = "10.0.1.4"
 }
 
 resource "routeros_ip_firewall_nat" "wan-dstnat-443-tcp" {
@@ -302,51 +320,6 @@ resource "routeros_ip_firewall_nat" "wan-dstnat-443-tcp" {
   port         = "443"
   protocol     = "tcp"
   to_addresses = "10.0.11.0"
-}
-
-resource "routeros_ip_firewall_nat" "wan-dstnat-32766-tcp" {
-  action       = "dst-nat"
-  chain        = "dstnat"
-  in_interface = routeros_ip_address.wan.interface
-  port         = "32766"
-  protocol     = "tcp"
-  to_addresses = "10.0.1.4"
-}
-
-resource "routeros_ip_firewall_nat" "wan-dstnat-32767-tcp" {
-  action       = "dst-nat"
-  chain        = "dstnat"
-  in_interface = routeros_ip_address.wan.interface
-  port         = "32767"
-  protocol     = "tcp"
-  to_addresses = "10.0.1.4"
-}
-
-resource "routeros_ip_firewall_nat" "wan-dstnat-6443-tcp" {
-  action       = "dst-nat"
-  chain        = "dstnat"
-  in_interface = routeros_ip_address.wan.interface
-  port         = "6443"
-  protocol     = "tcp"
-  to_addresses = "10.0.1.4"
-}
-
-resource "routeros_ip_firewall_nat" "wan-dstnat-8472-tcp" {
-  action       = "dst-nat"
-  chain        = "dstnat"
-  in_interface = routeros_ip_address.wan.interface
-  port         = "8472"
-  protocol     = "tcp"
-  to_addresses = "10.0.1.4"
-}
-
-resource "routeros_ip_firewall_nat" "wan-dstnat-10250-tcp" {
-  action       = "dst-nat"
-  chain        = "dstnat"
-  in_interface = routeros_ip_address.wan.interface
-  port         = "10250"
-  protocol     = "tcp"
-  to_addresses = "10.0.1.4"
 }
 
 resource "routeros_ip_firewall_filter" "rule-0010" {
@@ -378,6 +351,43 @@ resource "routeros_ip_firewall_filter" "rule-0040" {
   connection_nat_state = "!dstnat"
   in_interface         = routeros_ip_address.wan.interface
   comment              = "drop access to clients behind NAT from WAN"
+}
+
+resource "routeros_ip_firewall_filter" "wan-input-rule-0010" {
+  action           = "accept"
+  chain            = "input"
+  connection_state = "established,related,untracked"
+  comment          = "accept established,related,untracked"
+}
+
+resource "routeros_ip_firewall_filter" "wan-input-rule-0020" {
+  action           = "drop"
+  chain            = "input"
+  connection_state = "invalid"
+  comment          = "drop invalid"
+}
+
+resource "routeros_ip_firewall_filter" "wan-input-rule-0030" {
+  action       = "accept"
+  chain        = "input"
+  in_interface = routeros_ip_address.wan.interface
+  protocol     = "icmp"
+  comment      = "accept ICMP from WAN"
+}
+
+resource "routeros_ip_firewall_filter" "wan-input-rule-0031" {
+  action       = "accept"
+  chain        = "input"
+  in_interface = routeros_ip_address.wan.interface
+  protocol     = "icmpv6"
+  comment      = "accept ICMPv6 from WAN"
+}
+
+resource "routeros_ip_firewall_filter" "wan-input-rule-0040" {
+  action       = "drop"
+  chain        = "input"
+  in_interface = routeros_ip_address.wan.interface
+  comment      = "drop everything else"
 }
 
 resource "routeros_interface_list" "netmgmt" {
