@@ -15,10 +15,12 @@ resources:
 - ./filesystem.yaml
 - ./groupsnapshotclass-fs.yaml
 - ./objectstore.yaml
+- ./private.objectstore.yaml
 - ./rgw.httproute.yaml
 - ./snapshotclass-fs.yaml
 - ./snapshotclass-rbd.yaml
 - ./storageclass-bucket.yaml
+- ./storageclass-bucket-private.yaml
 - ./storageclass-fs.yaml
 - ./storageclass-rbd.yaml
 
