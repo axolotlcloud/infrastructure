@@ -9,7 +9,7 @@ controllers:
     containers:
       main:
         image:
-          tag: v2.2.1
+          tag: v2.7.5
         env:
           REDIS_HOSTNAME: redis
           REDIS_PORT: "6379"
@@ -21,6 +21,8 @@ controllers:
           DB_STORAGE_TYPE: HDD
           IMMICH_CONFIG_FILE: /config/immich-config.yaml
           IMMICH_MACHINE_LEARNING_URL: '{{ printf "http://%s-machine-learning:3003" .Release.Name }}'
+          IMMICH_ALLOW_SETUP: "false"
+          IMMICH_HELMET_FILE: "true"
 
 immich:
   metrics:
