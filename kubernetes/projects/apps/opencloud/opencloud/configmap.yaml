@@ -13,7 +13,7 @@ data:
   OC_EXCLUDE_RUN_SERVICES: idp
   OC_INSECURE: "false"
   OC_LOG_COLOR: "false"
-  OC_LOG_LEVEL: debug
+  OC_LOG_LEVEL: info
   OC_LOG_PRETTY: "false"
   OC_PASSWORD_POLICY_BANNED_PASSWORDS_LIST: /etc/opencloud-custom/banned-password-list.txt
   OC_PASSWORD_POLICY_DISABLED: "false"
