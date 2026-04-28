@@ -28,7 +28,7 @@ spec:
   - name: axolotl-lan
     namespace: istio-ingress
   hostnames:
-  - opencloud.lan.axolotl.cloud
+  - office.lan.axolotl.cloud
   rules:
   - matches:
     - path:
