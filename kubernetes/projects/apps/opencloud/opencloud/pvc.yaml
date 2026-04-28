@@ -9,4 +9,4 @@ spec:
   - ReadWriteMany
   resources:
     requests:
-      storage: 250Gi # Needs to be large as it is temporary storage before files are uploaded to S3
+      storage: 500Gi # Needs to be large as it is temporary storage before files are uploaded to S3
