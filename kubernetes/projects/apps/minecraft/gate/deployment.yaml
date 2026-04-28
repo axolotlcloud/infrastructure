@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gate
+  namespace: minecraft
+spec:
+  selector:
+    matchLabels:
+      app: gate
+  template:
+    metadata:
+      labels:
+        app: gate
+    spec:
+      containers:
+      - name: gate
+        image: ghcr.io/minekube/gate:v0.64.0
+        imagePullPolicy: IfNotPresent
+        envFrom:
+        - secretRef:
+            name: gate-secret
+        ports:
+        - name: tcp
+          containerPort: 25565
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: [ "ALL" ]
+          runAsNonRoot: true
+          runAsUser: 1000
+          runAsGroup: 1000
+          seccompProfile:
+            type: RuntimeDefault
+        volumeMounts:
+        - name: gate-config
+          mountPath: /config.yaml
+          subPath: config.yaml
+          readOnly: true
+      volumes:
+      - name: gate-config
+        configMap:
+          name: gate-config

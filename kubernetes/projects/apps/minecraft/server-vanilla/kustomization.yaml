@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- ./configmap.yaml
+- ./service.yaml
+- ./statefulset.yaml
+
+configMapGenerator:
+- name: minecraft-vanilla-spigot-config
+  namespace: minecraft
+  files:
+  - spigot.yml=files/spigot.yaml

@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: minecraft-vanilla-config
+  namespace: minecraft
+data:
+  TYPE: PUFFERFISH
+  PUFFERFISH_CONFIG_REPO: ""
+  EULA: "true"
+  VERSION: "1.21"
+  MEMORY: 4G
+  OVERRIDE_SERVER_PROPERTIES: "true"
+  MOTD: Just can't get enough axolotls!
+  DIFFICULTY: normal
+  OPS: Den4200
+  MAX_PLAYERS: "69420"
+  ALLOW_NETHER: "true"
+  ANNOUNCE_PLAYER_ACHIEVEMENTS: "true"
+  ENABLE_COMMAND_BLOCK: "true"
+  FORCE_GAMEMODE: "false"
+  GENERATE_STRUCTURES: "true"
+  HARDCORE: "false"
+  SNOOPER_ENABLED: "false"
+  MAX_BUILD_HEIGHT: "256"
+  MAX_TICK_TIME: "60000"
+  SPAWN_ANIMALS: "true"
+  SPAWN_MONSTERS: "true"
+  SPAWN_NPCS: "true"
+  SPAWN_PROTECTION: "0"
+  VIEW_DISTANCE: "16"
+  MODE: survival
+  PVP: "true"
+  LEVEL_TYPE: default
+  LEVEL: world
+  ONLINE_MODE: "false"
+  ALLOW_FLIGHT: "false"
+  SERVER_NAME: Axolotl Cloud - Vanilla Minecraft Server
+  SERVER_PORT: "25565"
