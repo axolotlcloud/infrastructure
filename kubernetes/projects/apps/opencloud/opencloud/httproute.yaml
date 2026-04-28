@@ -7,6 +7,8 @@ spec:
   parentRefs:
   - name: axolotl
     namespace: istio-ingress
+  - name: axolotl-lan
+    namespace: istio-ingress
   hostnames:
   - office.axolotl.cloud
   rules:
@@ -28,7 +30,6 @@ spec:
   - name: axolotl-lan
     namespace: istio-ingress
   hostnames:
-  - office.axolotl.cloud
   - office.lan.axolotl.cloud
   rules:
   - matches:
