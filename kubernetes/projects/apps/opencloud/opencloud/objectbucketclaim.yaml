@@ -1,0 +1,10 @@
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: opencloud-bucket
+  namespace: opencloud
+spec:
+  bucketName: axolotl-opencloud
+  storageClassName: rook-ceph-bucket-private
+  additionalConfig:
+    bucketOwner: axolotl-opencloud

@@ -1,0 +1,45 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: opencloud
+spec:
+  rules:
+  - name: generate-oauth2-configmap
+    match:
+      any:
+      - resources:
+          kinds:
+          - applications.azuread.upbound.io/v1beta2/Application
+          names:
+          - opencloud
+    generate:
+      generateExisting: true
+      synchronize: true
+      apiVersion: v1
+      kind: ConfigMap
+      name: opencloud-oauth2-config
+      namespace: opencloud
+      data:
+        type: Opaque
+        data:
+          OC_OIDC_CLIENT_ID: "{{ request.object.status.atProvider.clientId }}"
+  - name: generate-bucket-configmap
+    match:
+      any:
+      - resources:
+          kinds:
+          - v1/ConfigMap
+          names:
+          - opencloud-bucket
+    generate:
+      generateExisting: true
+      synchronize: true
+      apiVersion: v1
+      kind: ConfigMap
+      name: opencloud-s3-config
+      namespace: opencloud
+      data:
+        type: Opaque
+        data:
+          STORAGE_USERS_DECOMPOSEDS3_BUCKET: "{{ request.object.data.BUCKET_NAME }}"
+          STORAGE_USERS_DECOMPOSEDS3_REGION: us-east-1

@@ -1,0 +1,8 @@
+apiVersion: serviceprincipals.azuread.upbound.io/v1beta2
+kind: Principal
+metadata:
+  name: opencloud
+spec:
+  forProvider:
+    applicationIdRef:
+      name: opencloud

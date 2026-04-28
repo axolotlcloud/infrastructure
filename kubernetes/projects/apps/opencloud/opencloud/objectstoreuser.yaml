@@ -1,0 +1,11 @@
+apiVersion: ceph.rook.io/v1
+kind: CephObjectStoreUser
+metadata:
+  name: axolotl-opencloud
+  namespace: opencloud
+spec:
+  store: axolotl-private-object-store
+  clusterNamespace: rook-ceph
+  displayName: Axolotl Cloud - OpenCloud
+  quotas:
+    maxBuckets: 1

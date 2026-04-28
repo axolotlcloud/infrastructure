@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: opencloud
+  namespace: opencloud
+spec:
+  selector:
+    matchLabels:
+      app: opencloud
+  template:
+    metadata:
+      labels:
+        app: opencloud
+    spec:
+      securityContext:
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+      containers:
+      - name: opencloud
+        image: opencloudeu/opencloud-rolling:6.1.0
+        command:
+        - /bin/sh
+        args:
+        - -c
+        - opencloud server
+        # - sleep infinity
+        envFrom:
+        - configMapRef:
+            name: opencloud-config
+        - configMapRef:
+            name: opencloud-oauth2-config
+        - configMapRef:
+            name: opencloud-s3-config
+        - secretRef:
+            name: opencloud-s3-secret
+        - secretRef:
+            name: opencloud-smtp-secret
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: [ "ALL" ]
+          runAsNonRoot: true
+          runAsUser: 1000
+          runAsGroup: 1000
+          seccompProfile:
+            type: RuntimeDefault
+        ports:
+        - name: http
+          containerPort: 9200
+        volumeMounts:
+        - name: opencloud-config
+          mountPath: /etc/opencloud/opencloud.yaml
+          subPath: opencloud.yaml
+          readOnly: true
+        - name: opencloud-config-files
+          mountPath: /etc/opencloud-custom
+          readOnly: true
+        - name: opencloud-data
+          mountPath: /var/lib/opencloud
+      volumes:
+      - name: opencloud-config
+        secret:
+          secretName: opencloud-config-secret
+      - name: opencloud-config-files
+        configMap:
+          name: opencloud-config-files
+      - name: opencloud-data
+        persistentVolumeClaim:
+          claimName: opencloud-data

@@ -1,0 +1,21 @@
+apiVersion: app.azuread.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  name: opencloud-opencloudadmin-admin
+spec:
+  forProvider:
+    appRoleId: 9bfbf937-a41a-4027-808f-18c1519b64fb # opencloudAdmin
+    principalObjectId: 4244405f-54db-422e-b58a-14c19c164a53 # admin@axolotl.cloud
+    resourceObjectIdRef:
+      name: opencloud
+---
+apiVersion: app.azuread.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  name: opencloud-openclouduser-dennis
+spec:
+  forProvider:
+    appRoleId: 24d067bb-cdf9-4124-a342-85d7810517c5 # opencloudUser
+    principalObjectId: bc024785-2433-48fa-ab23-d6211ddcf431 # dennis@axolotl.cloud
+    resourceObjectIdRef:
+      name: opencloud

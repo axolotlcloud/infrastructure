@@ -1,0 +1,96 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: opencloud-config
+  namespace: opencloud
+data:
+  # General
+  FRONTEND_ARCHIVER_MAX_SIZE: "10000000000"
+  FRONTEND_CHECK_FOR_UPDATES: "true"
+  GRAPH_ASSIGN_DEFAULT_USER_ROLE: "false"
+  OC_ADD_RUN_SERVICES: "notifications"
+  OC_DEFAULT_LANGUAGE: en
+  OC_EXCLUDE_RUN_SERVICES: idp
+  OC_INSECURE: "false"
+  OC_LOG_COLOR: "false"
+  OC_LOG_LEVEL: debug
+  OC_LOG_PRETTY: "false"
+  OC_PASSWORD_POLICY_BANNED_PASSWORDS_LIST: /etc/opencloud-custom/banned-password-list.txt
+  OC_PASSWORD_POLICY_DISABLED: "false"
+  OC_PASSWORD_POLICY_MIN_CHARACTERS: "8"
+  OC_PASSWORD_POLICY_MIN_LOWERCASE_CHARACTERS: "1"
+  OC_PASSWORD_POLICY_MIN_UPPERCASE_CHARACTERS: "1"
+  OC_PASSWORD_POLICY_MIN_DIGITS: "1"
+  OC_PASSWORD_POLICY_MIN_SPECIAL_CHARACTERS: "1"
+  OC_SHARING_PUBLIC_SHARE_MUST_HAVE_PASSWORD: "false"
+  OC_SHARING_PUBLIC_WRITEABLE_SHARE_MUST_HAVE_PASSWORD: "false"
+  OC_URL: https://office.axolotl.cloud
+  PROXY_CSP_CONFIG_FILE_LOCATION: /etc/opencloud-custom/csp.yaml
+  PROXY_ENABLE_BASIC_AUTH: "false"
+  PROXY_HTTP_ADDR: "0.0.0.0:9200"
+  PROXY_AUTOPROVISION_ACCOUNTS: "true"
+  PROXY_AUTOPROVISION_CLAIM_GROUPS: roles
+  PROXY_OIDC_ACCESS_TOKEN_VERIFY_METHOD: jwt
+  PROXY_OIDC_SKIP_USER_INFO: "true"
+  PROXY_OIDC_JWKS_URI: https://login.microsoftonline.com/ecf32f86-3c92-49c6-8326-ce16b6789462/discovery/v2.0/keys
+  PROXY_OIDC_REWRITE_WELLKNOWN: "true"
+  PROXY_ROLE_ASSIGNMENT_DRIVER: oidc
+  PROXY_ROLE_ASSIGNMENT_OIDC_CLAIM: roles
+  PROXY_TLS: "false"
+
+  # SMTP
+  NOTIFICATIONS_SMTP_HOST: mail.axolotl.cloud
+  NOTIFICATIONS_SMTP_PORT: "465"
+  NOTIFICATIONS_SMTP_SENDER: Axolotl Office <office@axolotl.cloud>
+  NOTIFICATIONS_SMTP_USERNAME: office@axolotl.cloud
+  NOTIFICATIONS_SMTP_AUTHENTICATION: "plain"
+  NOTIFICATIONS_SMTP_ENCRYPTION: ssltls
+  NOTIFICATIONS_SMTP_INSECURE: "false"
+
+  # Search
+  SEARCH_EXTRACTOR_TYPE: tika
+  SEARCH_EXTRACTOR_TIKA_TIKA_URL: http://tika
+  FRONTEND_FULL_TEXT_SEARCH_ENABLED: "true"
+
+  # Storage
+  STORAGE_USERS_DRIVER: decomposeds3
+  STORAGE_SYSTEM_DRIVER: decomposed
+  STORAGE_USERS_EVENTS_NUM_CONSUMERS: "5"
+
+  # OIDC
+  OC_OIDC_ISSUER: https://login.microsoftonline.com/ecf32f86-3c92-49c6-8326-ce16b6789462/v2.0
+  OC_OIDC_CLIENT_SCOPES: openid,profile,email,offline_access,api://opencloud/OpenCloud.Read
+
+# # Collabora
+# COLLABORA_DOMAIN: collabora.axolotl.cloud
+# NATS_NATS_HOST: 0.0.0.0
+# GATEWAY_GRPC_ADDR: 0.0.0.0:9142
+# FRONTEND_APP_HANDLER_SECURE_VIEW_APP_ADDR: eu.opencloud.api.collaboration
+# GRAPH_AVAILABLE_ROLES: b1e2218d-eef8-4d4c-b82d-0f1a1b48f3b5,a8d5fe5e-96e3-418d-825b-534dbdf22b99,fb6c3e19-e378-47e5-b277-9732f9de6e21,58c63c02-1d89-4572-916a-870abc5a1b7d,2d00ce52-1fc2-4dbc-8b95-a73b73395f5a,1c996275-f1c9-4e71-abdf-a42f6495e960,312c0871-5ef7-4b3a-85b6-0e4074c64049,aa97fe03-7980-45ac-9e50-b325749fd7e6
+
+# ### Collabora Settings ###
+# # Domain of Collabora, where you can find the frontend.
+# # Defaults to "collabora.opencloud.test"
+# COLLABORA_DOMAIN=
+# # Domain of the wopiserver which handles Collabora.
+# # Defaults to "wopiserver.opencloud.test"
+# WOPISERVER_DOMAIN=
+# # Admin user for Collabora.
+# # Defaults to "admin".
+# # Collabora Admin Panel URL:
+# # https://{COLLABORA_DOMAIN}/browser/dist/admin/admin.html
+# COLLABORA_ADMIN_USER=
+# # Admin password for Collabora.
+# # Defaults to "admin".
+# COLLABORA_ADMIN_PASSWORD=
+# # Set to true to enable SSL handling in Collabora Online, this is only required if you are not using a reverse proxy.
+# # Default is true if not specified.
+# COLLABORA_SSL_ENABLE=false
+# # If you're on an internet-facing server, enable SSL verification for Collabora Online.
+# # Please comment out the following line:
+# COLLABORA_SSL_VERIFICATION=false
+# # Enable home mode in Collabore Online.
+# # Home users can enable this setting, which in turn disables welcome screen and user feedback popups,
+# # but also limits concurrent open connections to 20 and concurrent open documents to 10.
+# # Default is false if not specified.
+# COLLABORA_HOME_MODE=

@@ -1,0 +1,63 @@
+apiVersion: applications.azuread.upbound.io/v1beta2
+kind: Application
+metadata:
+  name: opencloud
+spec:
+  forProvider:
+    displayName: Axolotl Cloud - OpenCloud
+    requiredResourceAccess:
+    - resourceAppId: 00000003-0000-0000-c000-000000000000 # Microsoft Graph
+      resourceAccess:
+      - id: e1fe6dd8-ba31-4d61-89e7-88639da4683d # User.Read
+        type: Scope
+    singlePageApplication:
+      redirectUris:
+      - https://office.axolotl.cloud/
+      - https://office.axolotl.cloud/oidc-callback.html
+      - https://office.axolotl.cloud/oidc-silent-redirect.html
+    publicClient:
+      redirectUris:
+      - oc://android.opencloud.eu
+      - oc://ios.opencloud.eu
+      - http://127.0.0.1
+      - http://localhost
+    api:
+      oauth2PermissionScope:
+      - adminConsentDescription: Allow the application to access OpenCloud on a user's behalf.
+        adminConsentDisplayName: Access OpenCloud
+        enabled: true
+        id: 32ac6518-1373-4788-9fa4-878f201dcd09
+        type: User
+        userConsentDescription: Allow the application to access OpenCloud on your behalf.
+        userConsentDisplayName: Access OpenCloud
+        value: OpenCloud.Read
+      requestedAccessTokenVersion: 2
+    identifierUris:
+    - api://opencloud
+    appRole:
+    - allowedMemberTypes:
+      - User
+      description: OpenCloud Administrator
+      displayName: opencloudAdmin
+      id: 9bfbf937-a41a-4027-808f-18c1519b64fb
+      value: opencloudAdmin
+    - allowedMemberTypes:
+      - User
+      description: OpenCloud Space Administrator
+      displayName: opencloudSpaceAdmin
+      id: f13555b7-54ff-4e8f-9b1e-2337e8fe0f93
+      value: opencloudSpaceAdmin
+    - allowedMemberTypes:
+      - User
+      description: OpenCloud User
+      displayName: opencloudUser
+      id: 24d067bb-cdf9-4124-a342-85d7810517c5
+      value: opencloudUser
+    - allowedMemberTypes:
+      - User
+      description: OpenCloud Guest
+      displayName: opencloudGuest
+      id: 211c8fca-d18a-4d6b-838a-44cda252fc4e
+      value: opencloudGuest
+  providerConfigRef:
+    name: default
