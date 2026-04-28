@@ -1,10 +1,8 @@
 directives:
   child-src:
   - '''self'''
-  - 'https://office.axolotl.cloud/'
   connect-src:
   - '''self'''
-  - 'https://office.axolotl.cloud/'
   - 'blob:'
   # - 'https://${COMPANION_DOMAIN|companion.opencloud.test}${TRAEFIK_PORT_HTTPS}/'
   # - 'wss://${COMPANION_DOMAIN|companion.opencloud.test}${TRAEFIK_PORT_HTTPS}/'
@@ -13,16 +11,12 @@ directives:
   - 'https://update.opencloud.eu/'
   default-src:
   - '''none'''
-  - 'https://office.axolotl.cloud/'
   font-src:
   - '''self'''
-  - 'https://office.axolotl.cloud/'
   frame-ancestors:
   - '''self'''
-  - 'https://office.axolotl.cloud/'
   frame-src:
   - '''self'''
-  - 'https://office.axolotl.cloud/'
   - 'blob:'
   - 'https://embed.diagrams.net/'
   # In contrary to bash and docker the default is given after the | character
@@ -31,7 +25,6 @@ directives:
   - 'https://docs.opencloud.eu'
   img-src:
   - '''self'''
-  - 'https://office.axolotl.cloud/'
   - 'data:'
   - 'blob:'
   - 'https://raw.githubusercontent.com/opencloud-eu/awesome-apps/'
@@ -40,20 +33,15 @@ directives:
   # - 'https://${COLLABORA_DOMAIN|collabora.opencloud.test}${TRAEFIK_PORT_HTTPS}/'
   manifest-src:
   - '''self'''
-  - 'https://office.axolotl.cloud/'
   media-src:
   - '''self'''
-  - 'https://office.axolotl.cloud/'
   object-src:
   - '''self'''
-  - 'https://office.axolotl.cloud/'
   - 'blob:'
   script-src:
   - '''self'''
-  - 'https://office.axolotl.cloud/'
   - '''unsafe-inline'''
   - 'https://login.microsoftonline.com/'
   style-src:
   - '''self'''
-  - 'https://office.axolotl.cloud/'
   - '''unsafe-inline'''
