@@ -24,6 +24,33 @@ spec:
       securityContext:
         fsGroup: 1000
         fsGroupChangePolicy: OnRootMismatch
+      initContainers:
+      - name: minecraft-init
+        image: busybox:1.37.0
+        imagePullPolicy: IfNotPresent
+        command: [ "sh" ]
+        args:
+        - -c
+        - cp /spigot.yml /data/spigot.yml
+        envFrom:
+        - configMapRef:
+            name: minecraft-vanilla-config
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: [ "ALL" ]
+          runAsNonRoot: true
+          runAsUser: 1000
+          runAsGroup: 1000
+          seccompProfile:
+            type: RuntimeDefault
+        volumeMounts:
+        - name: minecraft-vanilla-storage
+          mountPath: /data
+        - name: minecraft-vanilla-spigot-config
+          mountPath: /spigot.yml
+          subPath: spigot.yml
+          readOnly: true
       containers:
       - name: minecraft
         image: itzg/minecraft-server:java25
@@ -64,14 +91,10 @@ spec:
         volumeMounts:
         - name: minecraft-vanilla-storage
           mountPath: /data
-        - name: minecraft-vanilla-spigot-config
-          mountPath: /data/spigot.yml
-          subPath: spigot.yml
       volumes:
       - name: minecraft-vanilla-spigot-config
         configMap:
           name: minecraft-vanilla-spigot-config
-          defaultMode: 511 # 0777
   volumeClaimTemplates:
   - metadata:
       name: minecraft-vanilla-storage
