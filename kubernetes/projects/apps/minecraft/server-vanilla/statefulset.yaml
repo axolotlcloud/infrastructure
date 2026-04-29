@@ -71,7 +71,7 @@ spec:
       - name: minecraft-vanilla-spigot-config
         configMap:
           name: minecraft-vanilla-spigot-config
-          defaultMode: 777
+          defaultMode: 511 # 0777
   volumeClaimTemplates:
   - metadata:
       name: minecraft-vanilla-storage
