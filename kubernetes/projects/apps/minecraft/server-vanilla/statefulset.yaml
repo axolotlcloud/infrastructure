@@ -67,7 +67,7 @@ spec:
         - name: minecraft-vanilla-spigot-config
           mountPath: /data/spigot.yml
           subPath: spigot.yml
-          readOnly: true
+          readOnly: false
       volumes:
       - name: minecraft-vanilla-spigot-config
         configMap:
