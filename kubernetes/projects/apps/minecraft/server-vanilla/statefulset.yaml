@@ -23,7 +23,7 @@ spec:
             app: minecraft-vanilla
       securityContext:
         fsGroup: 1000
-        # fsGroupChangePolicy: OnRootMismatch
+        fsGroupChangePolicy: OnRootMismatch
       containers:
       - name: minecraft
         image: itzg/minecraft-server:java25
@@ -67,11 +67,11 @@ spec:
         - name: minecraft-vanilla-spigot-config
           mountPath: /data/spigot.yml
           subPath: spigot.yml
-          readOnly: false
       volumes:
       - name: minecraft-vanilla-spigot-config
         configMap:
           name: minecraft-vanilla-spigot-config
+          defaultMode: 777
   volumeClaimTemplates:
   - metadata:
       name: minecraft-vanilla-storage
