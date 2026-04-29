@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: collabora-config
+  namespace: opencloud
+data:
+  aliasgroup1: https://office-wopiserver.axolotl.cloud
+  DONT_GEN_SSL_CERT: "YES"
+  extra_params: |
+    --o:ssl.enable=false \
+    --o:ssl.ssl_verification=false \
+    --o:ssl.termination=true \
+    --o:welcome.enable=false \
+    --o:net.frame_ancestors=office.axolotl.cloud \
+    --o:net.lok_allow.host[14]=office.axolotl.cloud \
+    --o:home_mode.enable=false

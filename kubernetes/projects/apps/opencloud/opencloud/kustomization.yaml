@@ -21,5 +21,6 @@ configMapGenerator:
 - name: opencloud-config-files
   namespace: opencloud
   files:
+  - files/app-registry.yaml
   - files/csp.yaml
   - files/banned-password-list.txt

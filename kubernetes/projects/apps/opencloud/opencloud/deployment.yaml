@@ -23,7 +23,6 @@ spec:
         args:
         - -c
         - opencloud server
-        # - sleep infinity
         envFrom:
         - configMapRef:
             name: opencloud-config
@@ -47,13 +46,24 @@ spec:
         ports:
         - name: http
           containerPort: 9200
+        - name: microregistry
+          containerPort: 9233
         volumeMounts:
         - name: opencloud-config
           mountPath: /etc/opencloud/opencloud.yaml
           subPath: opencloud.yaml
           readOnly: true
-        - name: opencloud-config-files
-          mountPath: /etc/opencloud-custom
+        - name: opencloud-app-registry
+          mountPath: /etc/opencloud/app-registry.yaml
+          subPath: app-registry.yaml
+          readOnly: true
+        - name: opencloud-csp
+          mountPath: /etc/opencloud/csp.yaml
+          subPath: csp.yaml
+          readOnly: true
+        - name: opencloud-banned-password-list
+          mountPath: /etc/opencloud/banned-password-list.txt
+          subPath: banned-password-list.txt
           readOnly: true
         - name: opencloud-data
           mountPath: /var/lib/opencloud
@@ -61,9 +71,24 @@ spec:
       - name: opencloud-config
         secret:
           secretName: opencloud-config-secret
-      - name: opencloud-config-files
+      - name: opencloud-app-registry
         configMap:
           name: opencloud-config-files
+          items:
+          - key: app-registry.yaml
+            path: app-registry.yaml
+      - name: opencloud-csp
+        configMap:
+          name: opencloud-config-files
+          items:
+          - key: csp.yaml
+            path: csp.yaml
+      - name: opencloud-banned-password-list
+        configMap:
+          name: opencloud-config-files
+          items:
+          - key: banned-password-list.txt
+            path: banned-password-list.txt
       - name: opencloud-data
         persistentVolumeClaim:
           claimName: opencloud-data

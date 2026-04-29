@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: collaboration-config
+  namespace: opencloud
+data:
+  COLLABORATION_GRPC_ADDR: 0.0.0.0:9301
+  COLLABORATION_HTTP_ADDR: 0.0.0.0:9300
+  MICRO_REGISTRY: nats-js-kv
+  MICRO_REGISTRY_ADDRESS: opencloud-microregistry:80
+  COLLABORATION_WOPI_SRC: https://office-wopiserver.axolotl.cloud
+  COLLABORATION_APP_NAME: CollaboraOnline
+  COLLABORATION_APP_PRODUCT: Collabora
+  COLLABORATION_APP_ADDR: https://office-collabora.axolotl.cloud
+  COLLABORATION_APP_ICON: https://office-collabora.axolotl.cloud/favicon.ico
+  COLLABORATION_APP_INSECURE: "false"
+  COLLABORATION_CS3API_DATAGATEWAY_INSECURE: "false"
+  COLLABORATION_LOG_LEVEL: info
+  OC_URL: https://office.axolotl.cloud

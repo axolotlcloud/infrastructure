@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: collaboration
+  namespace: opencloud
+spec:
+  selector:
+    matchLabels:
+      app: collaboration
+  template:
+    metadata:
+      labels:
+        app: collaboration
+    spec:
+      securityContext:
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+      containers:
+      - name: collaboration
+        image: opencloudeu/opencloud-rolling:6.1.0
+        command:
+        - /bin/sh
+        args:
+        - -c
+        - opencloud collaboration server
+        envFrom:
+        - configMapRef:
+            name: collaboration-config
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: [ "ALL" ]
+          runAsNonRoot: true
+          runAsUser: 1000
+          runAsGroup: 1000
+          seccompProfile:
+            type: RuntimeDefault
+        ports:
+        - name: http
+          containerPort: 9300
+        volumeMounts:
+        - name: opencloud-config
+          mountPath: /etc/opencloud/opencloud.yaml
+          subPath: opencloud.yaml
+          readOnly: true
+      volumes:
+      - name: opencloud-config
+        secret:
+          secretName: opencloud-config-secret

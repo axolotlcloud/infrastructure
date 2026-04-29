@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: collabora
+  namespace: opencloud
+spec:
+  selector:
+    matchLabels:
+      app: collabora
+  template:
+    metadata:
+      labels:
+        app: collabora
+    spec:
+      containers:
+      - name: collabora
+        image: collabora/code:25.04.9.4.1
+        command:
+        - /bin/sh
+        args:
+        - -c
+        - coolconfig generate-proof-key && /start-collabora-online.sh
+        envFrom:
+        - configMapRef:
+            name: collabora-config
+        - secretRef:
+            name: collabora-secret
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 1001
+          runAsGroup: 1001
+          seccompProfile:
+            type: Localhost
+            localhostProfile: profiles/opencloud-collabora.json
+        ports:
+        - name: http
+          containerPort: 9980
+        volumeMounts:
+        - name: opencloud-config
+          mountPath: /etc/opencloud/opencloud.yaml
+          subPath: opencloud.yaml
+          readOnly: true
+      volumes:
+      - name: opencloud-config
+        secret:
+          secretName: opencloud-config-secret
