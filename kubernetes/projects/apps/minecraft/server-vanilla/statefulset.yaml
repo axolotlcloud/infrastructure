@@ -23,7 +23,7 @@ spec:
             app: minecraft-vanilla
       securityContext:
         fsGroup: 1000
-        fsGroupChangePolicy: OnRootMismatch
+        # fsGroupChangePolicy: OnRootMismatch
       containers:
       - name: minecraft
         image: itzg/minecraft-server:java25
