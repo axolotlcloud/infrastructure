@@ -16,9 +16,14 @@ spec:
       default:
       - Include @recommended-conf
       # - SecRuleEngine On
-      - SecResponseBodyMimeType text/plain text/html text/xml application/json
       - SecAuditEngine RelevantOnly
       - Include @crs-setup-conf
       - Include @owasp_crs/*.conf
+      # False positive: allow mTLS client certificate from Cloudflare
+      - SecRuleUpdateTargetById 921140 "!REQUEST_HEADERS:x-forwarded-client-cert"
+      # False positive: allow application/octet-stream for gRPC endpoints
+      - SecRule REQUEST_URI "@rx ^/api/(control-stream|service-map-stream)$" "id:1000001,phase:1,pass,nolog,setvar:'tx.allowed_request_content_type=%{tx.allowed_request_content_type} |application/octet-stream|'"
+      # False positive: remove null byte and CR/LF checks for gRPC endpoints
+      - SecRule REQUEST_URI "@rx ^/api/(control-stream|service-map-stream)$" "id:1000002,phase:1,pass,nolog,ctl:ruleRemoveById=920270,ctl:ruleRemoveById=921150"
     metrics_labels:
       gateway: axolotl
