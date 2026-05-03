@@ -18,8 +18,12 @@ spec:
       # - SecRuleEngine On
       - SecAuditEngine RelevantOnly
       - Include @crs-setup-conf
-      # False positive: remove null byte check (920270), allow application/octet-stream (920420), and remove CR/LF check (921150) for Hubble's gRPC endpoints
-      - SecRule REQUEST_URI "@rx ^/api/(control-stream|service-map-stream)$" "id:1000002,phase:1,pass,nolog,ctl:ruleRemoveById=920270,ctl:ruleRemoveById=920420,ctl:ruleRemoveById=921150"
+      # False positive: allow application/octet-stream, remove null byte check (920270), and remove CR/LF check (921150) for Hubble's gRPC endpoints
+      - >
+        SecRule REQUEST_URI "@rx ^/api/(control-stream|service-map-stream)$" "id:1000001,phase:1,pass,nolog,
+          setvar:'tx.allowed_request_content_type=%{tx.allowed_request_content_type} |application/octet-stream|',
+          ctl:ruleRemoveById=920270,
+          ctl:ruleRemoveById=921150"
       - Include @owasp_crs/*.conf
       # False positive: allow mTLS client certificate from Cloudflare
       - SecRuleUpdateTargetById 921140 "!REQUEST_HEADERS:x-forwarded-client-cert"
