@@ -15,7 +15,7 @@ spec:
     directives_map:
       default:
       - Include @recommended-conf
-      - SecRuleEngine On
+      # - SecRuleEngine On
       - SecResponseBodyMimeType text/plain text/html text/xml application/json
       - SecAuditEngine RelevantOnly
       - Include @crs-setup-conf
