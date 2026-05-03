@@ -47,5 +47,5 @@ spec:
     #   hubble.axolotl.cloud: hubble
     #   office.axolotl.cloud: opencloud
     #   office.lan.axolotl.cloud: opencloud
-    metrics_labels:
+    metric_labels:
       gateway: axolotl
