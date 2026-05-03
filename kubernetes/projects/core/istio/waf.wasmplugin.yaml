@@ -18,10 +18,34 @@ spec:
       # - SecRuleEngine On
       - SecAuditEngine RelevantOnly
       - Include @crs-setup-conf
-      # False positive: allow application/octet-stream, remove null byte check (920270), and remove CR/LF check (921150) for Hubble's gRPC endpoints
-      - SecRule REQUEST_URI "@rx ^/api/(control-stream|service-map-stream)$" "id:1000002,phase:1,pass,nolog,setvar:'tx.allowed_request_content_type=|application/octet-stream|',ctl:ruleRemoveById=920270,ctl:ruleRemoveById=921150"
       - Include @owasp_crs/*.conf
       # False positive: allow mTLS client certificate from Cloudflare
       - SecRuleUpdateTargetById 921140 "!REQUEST_HEADERS:x-forwarded-client-cert"
+      hubble:
+      - Include @recommended-conf
+      # - SecRuleEngine On
+      - SecAuditEngine RelevantOnly
+      - Include @crs-setup-conf
+      # False positive (Hubble): allow application/octet-stream, remove null byte check (920270), and remove CR/LF check (921150) for gRPC endpoints
+      - SecRule REQUEST_URI "@rx ^/api/(control-stream|service-map-stream)$" "id:1000001,phase:1,pass,nolog,setvar:'tx.allowed_request_content_type=|application/octet-stream|',ctl:ruleRemoveById=920270,ctl:ruleRemoveById=921150"
+      - Include @owasp_crs/*.conf
+      # False positive: allow mTLS client certificate from Cloudflare
+      - SecRuleUpdateTargetById 921140 "!REQUEST_HEADERS:x-forwarded-client-cert"
+      opencloud:
+      - Include @recommended-conf
+      # - SecRuleEngine On
+      - SecAuditEngine RelevantOnly
+      - Include @crs-setup-conf
+      # False positive (OpenCloud): allow WebDAV PROPFIND requests to /remote.php/dav/
+      - SecRule REQUEST_URI "@beginsWith /remote.php/dav/" "id:1000002,phase:1,pass,nolog,ctl:ruleRemoveById=911100"
+      # False positive (OpenCloud): allow requests with parameters that start with `$` to /graph/ endpoints, which are falsely flagged as MongoDB injection
+      - SecRule REQUEST_URI "@beginsWith /graph/" "id:1000003,phase:1,pass,nolog,ctl:ruleRemoveById=942290"
+      - Include @owasp_crs/*.conf
+      # False positive: allow mTLS client certificate from Cloudflare
+      - SecRuleUpdateTargetById 921140 "!REQUEST_HEADERS:x-forwarded-client-cert"
+    per_authority_directives:
+      hubble.axolotl.cloud: hubble
+      office.axolotl.cloud: opencloud
+      office.lan.axolotl.cloud: opencloud
     metrics_labels:
       gateway: axolotl
