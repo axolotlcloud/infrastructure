@@ -1,0 +1,24 @@
+apiVersion: extensions.istio.io/v1alpha1
+kind: WasmPlugin
+metadata:
+  name: axolotl-waf
+  namespace: istio-ingress
+spec:
+  selector:
+    matchLabels:
+      gateway.networking.k8s.io/gateway-name: axolotl
+  url: oci://ghcr.io/corazawaf/coraza-proxy-wasm:0.6.0
+  imagePullPolicy: IfNotPresent
+  phase: AUTHN
+  pluginConfig:
+    default_directives: default
+    directives_map:
+      default:
+      - Include @recommended-conf
+      - SecRuleEngine On
+      - SecResponseBodyMimeType text/plain text/html text/xml application/json
+      - SecAuditEngine RelevantOnly
+      - Include @crs-setup-conf
+      - Include @owasp_crs/*.conf
+    metrics_labels:
+      gateway: axolotl
