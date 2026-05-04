@@ -22,6 +22,3 @@ spec:
           - tag_name: authority
             regex: "(_authority=([0-9a-z.:]+))"
           use_all_default_tags: true
-  workloadSelector:
-    labels:
-      gateway.networking.k8s.io/gateway-name: axolotl
