@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-- https://raw.githubusercontent.com/istio/istio/refs/tags/1.26.3/samples/addons/extras/prometheus-operator.yaml
+- https://raw.githubusercontent.com/istio/istio/refs/tags/1.29.2/samples/addons/extras/prometheus-operator.yaml
 - ./custom-bootstrap.configmap.yaml
 - ./gateway.yaml
 - ./lan.gateway.yaml
@@ -16,37 +16,27 @@ helmCharts:
   releaseName: istio-base
   repo: https://istio-release.storage.googleapis.com/charts
   valuesFile: base.values.yaml
-  version: 1.26.3
+  version: 1.29.2
   includeCRDs: true
 - name: istiod
   namespace: istio-system
   releaseName: istio-istiod
   repo: https://istio-release.storage.googleapis.com/charts
   valuesFile: istiod.values.yaml
-  version: 1.26.3
+  version: 1.29.2
   includeCRDs: true
 - name: cni
   namespace: istio-system
   releaseName: istio-cni
   repo: https://istio-release.storage.googleapis.com/charts
   valuesFile: cni.values.yaml
-  version: 1.26.3
+  version: 1.29.2
 - name: ztunnel
   namespace: istio-system
   releaseName: istio-ztunnel
   repo: https://istio-release.storage.googleapis.com/charts
   valuesFile: ztunnel.values.yaml
-  version: 1.26.3
-
-patches:
-- target:
-    group: admissionregistration.k8s.io
-    kind: ValidatingWebhookConfiguration
-    version: v1
-  patch: |-
-    - op: replace
-      path: /webhooks/0/failurePolicy
-      value: Fail
+  version: 1.29.2
 
 generatorOptions:
   disableNameSuffixHash: true

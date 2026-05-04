@@ -1,4 +1,5 @@
 global:
+
   # ImagePullSecrets for control plane ServiceAccount, list of secrets in the same namespace
   # to use for pulling any images in pods that reference this ServiceAccount.
   # Must be set for any cluster configured with private docker registry.
@@ -6,6 +7,14 @@ global:
 
   # Used to locate istiod.
   istioNamespace: istio-system
+
+  # resourceScope controls what resources will be processed by helm.
+  # This is useful when installing Istio on a cluster where some resources need to be owned by a cluster administrator and some can be owned by the mesh administrator.
+  # It can be one of:
+  # - all: all resources are processed
+  # - cluster: only cluster-scoped resources are processed
+  # - namespace: only namespace-scoped resources are processed
+  resourceScope: all
 base:
   # A list of CRDs to exclude. Requires `enableCRDTemplates` to be true.
   # Example: `excludedCRDs: ["envoyfilters.networking.istio.io"]`.
@@ -28,6 +37,6 @@ base:
   # For istioctl usage to disable istio config crds in base
   enableIstioConfigCRDs: true
 
-defaultRevision: "1-26-3"
+defaultRevision: "1-29-2"
 experimental:
   stableValidationPolicy: false
