@@ -7,6 +7,7 @@ resources:
 - ./lan.gateway.yaml
 - ./namespace.yaml
 - ./networkpolicy.yaml
+- ./stats.envoyfilter.yaml
 - ./waf.wasmplugin.yaml
 
 helmCharts:
