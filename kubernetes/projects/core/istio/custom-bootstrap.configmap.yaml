@@ -6,12 +6,13 @@ metadata:
 data:
   custom_bootstrap.json: |
     {
-      "statsConfig": {
-        "statsTags": [
-          {"tagName": "phase", "regex": "(_phase=([a-z_]+))"},
-          {"tagName": "ruleId", "regex": "(_ruleid=([0-9]+))"},
-          {"tagName": "gateway", "regex": "(_gateway=([0-9a-z.:]+))"},
-          {"tagName": "authority", "regex": "(_authority=([0-9a-z.:]+))"}
+      "stats_config": {
+        "use_all_default_tags": true,
+        "stats_tags": [
+          {"tag_name": "phase", "regex": "(_phase=([a-z_]+))"},
+          {"tag_name": "rule_id", "regex": "(_ruleid=([0-9]+))"},
+          {"tag_name": "gateway", "regex": "(_gateway=([0-9a-z.:]+))"},
+          {"tag_name": "authority", "regex": "(_authority=([0-9a-z.:]+))"}
         ]
       }
     }
