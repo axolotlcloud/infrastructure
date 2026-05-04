@@ -22,6 +22,8 @@ spec:
       - SecAction "id:900200,phase:1,pass,nolog,t:none,setvar:'tx.allowed_methods=GET HEAD POST OPTIONS PUT PATCH DELETE'"
       # False positive: Cloudflare mTLS certificate in XFCC header contains newlines (all domains)
       - SecRule REQUEST_HEADERS:x-forwarded-client-cert "@rx ." "id:1000001,phase:1,pass,nolog,ctl:ruleRemoveById=921140"
+      # False positive (Grafana): response body replaced
+      - SecRule REQUEST_HEADERS:Host "@streq grafana.axolotl.cloud" "id:1000010,phase:1,pass,nolog,ctl:responseBodyAccess=Off"
       # False positive (Grafana): PromQL queries falsely flagged as SQL injection
       - SecRule REQUEST_HEADERS:Host "@streq grafana.axolotl.cloud" "id:1000002,phase:1,pass,nolog,chain"
       - SecRule REQUEST_URI "@beginsWith /api/ds/query" "ctl:ruleRemoveById=942100"
