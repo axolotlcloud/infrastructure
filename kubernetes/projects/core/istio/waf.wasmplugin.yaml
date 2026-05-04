@@ -15,6 +15,7 @@ spec:
     directives_map:
       default:
       - Include @recommended-conf
+      - SecDebugLogLevel 9
       - SecRuleEngine On
       - SecAuditEngine RelevantOnly
       - Include @crs-setup-conf
