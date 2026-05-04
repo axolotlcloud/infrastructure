@@ -15,7 +15,7 @@ spec:
     directives_map:
       default:
       - Include @recommended-conf
-      # - SecRuleEngine On
+      - SecRuleEngine On
       - SecAuditEngine RelevantOnly
       - Include @crs-setup-conf
       # Add PUT, PATCH, DELETE to allowed methods globally
