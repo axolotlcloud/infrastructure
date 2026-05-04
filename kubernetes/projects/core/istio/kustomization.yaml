@@ -3,11 +3,11 @@ kind: Kustomization
 
 resources:
 - https://raw.githubusercontent.com/istio/istio/refs/tags/1.26.3/samples/addons/extras/prometheus-operator.yaml
+- ./custom-bootstrap.configmap.yaml
 - ./gateway.yaml
 - ./lan.gateway.yaml
 - ./namespace.yaml
 - ./networkpolicy.yaml
-- ./stats.envoyfilter.yaml
 - ./waf.wasmplugin.yaml
 
 helmCharts:

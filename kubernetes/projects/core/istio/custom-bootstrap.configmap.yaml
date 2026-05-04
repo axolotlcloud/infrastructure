@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: istio-custom-bootstrap-config
+  namespace: istio-ingress
+data:
+  custom_bootstrap.json: |
+    {
+      "statsConfig": {
+        "statsTags": [
+          {"tagName": "phase", "regex": "(_phase=([a-z_]+))"},
+          {"tagName": "ruleId", "regex": "(_ruleid=([0-9]+))"},
+          {"tagName": "gateway", "regex": "(_gateway=([0-9a-z.:]+))"},
+          {"tagName": "authority", "regex": "(_authority=([0-9a-z.:]+))"}
+        ]
+      }
+    }
