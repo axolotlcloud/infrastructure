@@ -3,7 +3,6 @@ kind: Kustomization
 
 resources:
 - https://raw.githubusercontent.com/istio/istio/refs/tags/1.29.2/samples/addons/extras/prometheus-operator.yaml
-- ./custom-bootstrap.configmap.yaml
 - ./gateway.yaml
 - ./lan.gateway.yaml
 - ./namespace.yaml
@@ -47,6 +46,29 @@ patches:
     - op: replace
       path: /webhooks/0/failurePolicy
       value: Fail
+- target:
+    group: monitoring.coreos.com
+    kind: PodMonitor
+    name: envoy-stats-monitor
+  patch: |
+    - op: add
+      path: /spec/podMetricsEndpoints/0/metricRelabelings
+      value:
+      - sourceLabels: [ __name__ ]
+        regex: 'waf_filter_tx_interruptions_ruleid_(\d+)_phase_.*'
+        targetLabel: rule_id
+        replacement: '$1'
+        action: replace
+      - sourceLabels: [ __name__ ]
+        regex: 'waf_filter_tx_interruptions_ruleid_\d+_phase_(.*)'
+        targetLabel: phase
+        replacement: '$1'
+        action: replace
+      - sourceLabels: [ __name__ ]
+        regex: 'waf_filter_tx_interruptions_ruleid_.*'
+        targetLabel: __name__
+        replacement: 'waf_filter_tx_interruptions'
+        action: replace
 
 generatorOptions:
   disableNameSuffixHash: true
