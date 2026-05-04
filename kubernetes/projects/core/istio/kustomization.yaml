@@ -60,8 +60,13 @@ patches:
         replacement: '$1'
         action: replace
       - sourceLabels: [ __name__ ]
-        regex: 'waf_filter_tx_interruptions_ruleid_\d+_phase_(.*)'
+        regex: 'waf_filter_tx_interruptions_ruleid_\d+_phase_(.+)_gateway_\w+$'
         targetLabel: phase
+        replacement: '$1'
+        action: replace
+      - sourceLabels: [ __name__ ]
+        regex: 'waf_filter_tx_interruptions_ruleid_\d+_phase_\w+_gateway_(\w+)$'
+        targetLabel: gateway
         replacement: '$1'
         action: replace
       - sourceLabels: [ __name__ ]
