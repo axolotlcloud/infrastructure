@@ -25,6 +25,9 @@ spec:
       # False positive (Grafana): PromQL queries falsely flagged as SQL injection
       - SecRule REQUEST_HEADERS:Host "@streq grafana.axolotl.cloud" "id:1000002,phase:1,pass,nolog,chain"
       - SecRule REQUEST_URI "@beginsWith /api/ds/query" "ctl:ruleRemoveById=942100"
+      # False positive (Grafana): LogQL named capture groups (?P<name>...) falsely flagged as PHP injection
+      - SecRule REQUEST_HEADERS:Host "@streq grafana.axolotl.cloud" "id:1000009,phase:1,pass,nolog,chain"
+      - SecRule REQUEST_URI "@rx ^/api/(ds/query|query-history)" "ctl:ruleRemoveById=933160"
       # False positive (Hubble): gRPC endpoints use binary protobuf (application/octet-stream)
       - SecRule REQUEST_HEADERS:Host "@streq hubble.axolotl.cloud" "id:1000003,phase:1,pass,nolog,chain"
       - SecRule REQUEST_URI "@rx ^/api/(control-stream|service-map-stream)$" "setvar:'tx.allowed_request_content_type=|application/octet-stream|',ctl:ruleRemoveById=920270,ctl:ruleRemoveById=921150"
