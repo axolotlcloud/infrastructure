@@ -15,9 +15,8 @@ spec:
     directives_map:
       default:
       - Include @recommended-conf
-      - SecDebugLogLevel 9
       - SecRuleEngine On
-      - SecAuditEngine RelevantOnly
+      - SecAuditEngine On
       - Include @crs-setup-conf
       # Add PUT, PATCH, DELETE to allowed methods globally
       - SecAction "id:900200,phase:1,pass,nolog,t:none,setvar:'tx.allowed_methods=GET HEAD POST OPTIONS PUT PATCH DELETE'"
