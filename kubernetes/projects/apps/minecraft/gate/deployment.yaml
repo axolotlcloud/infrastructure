@@ -4,6 +4,7 @@ metadata:
   name: gate
   namespace: minecraft
 spec:
+  replicas: 3
   selector:
     matchLabels:
       app: gate
