@@ -39,6 +39,9 @@ spec:
       # False positive (OpenCloud): `$` parameters falsely flagged as MongoDB injection
       - SecRule REQUEST_HEADERS:Host "@rx ^office(\.lan)?\.axolotl\.cloud$" "id:1000005,phase:1,pass,nolog,chain"
       - SecRule REQUEST_URI "@beginsWith /graph/" "ctl:ruleRemoveById=942290"
+      # False positive (OpenCloud): resumable uploads use application/offset+octet-stream
+      - SecRule REQUEST_HEADERS:Host "@rx ^office(\.lan)?\.axolotl\.cloud$" "id:1000013,phase:1,pass,nolog,chain"
+      - SecRule REQUEST_URI "@beginsWith /remote.php/dav/" "setvar:'tx.allowed_request_content_type=|application/x-www-form-urlencoded| |multipart/form-data| |text/xml| |application/xml| |application/soap+xml| |application/json| |application/offset+octet-stream|'"
       # False positive (Radarr/Sonarr): SignalR uses text/plain content type
       - SecRule REQUEST_HEADERS:Host "@rx ^(radarr|sonarr)\.axolotl\.cloud$" "id:1000006,phase:1,pass,nolog,chain"
       - SecRule REQUEST_URI "@beginsWith /signalr/" "setvar:'tx.allowed_request_content_type=|application/x-www-form-urlencoded| |multipart/form-data| |text/xml| |application/xml| |application/soap+xml| |application/json| |text/plain|'"
