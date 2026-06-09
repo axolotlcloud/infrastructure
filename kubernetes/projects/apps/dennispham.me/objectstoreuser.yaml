@@ -1,0 +1,11 @@
+apiVersion: ceph.rook.io/v1
+kind: CephObjectStoreUser
+metadata:
+  name: dennispham-me
+  namespace: dennispham-me
+spec:
+  store: axolotl-object-store
+  clusterNamespace: rook-ceph
+  displayName: dennispham.me
+  quotas:
+    maxBuckets: 1

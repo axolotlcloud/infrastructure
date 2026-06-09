@@ -4,6 +4,8 @@ resources:
 - ./namespace.yaml
 - ./backend
 - ./frontend
+- ./objectbucketclaim.yaml
+- ./objectstoreuser.yaml
 - ./postgres.yaml
 images:
 - name: ghcr.io/den4200/portfolio_backend

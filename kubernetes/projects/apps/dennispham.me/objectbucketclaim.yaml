@@ -1,0 +1,10 @@
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: dennispham-me-bucket
+  namespace: dennispham-me
+spec:
+  bucketName: dennispham-me
+  storageClassName: rook-ceph-bucket
+  additionalConfig:
+    bucketOwner: dennispham-me
