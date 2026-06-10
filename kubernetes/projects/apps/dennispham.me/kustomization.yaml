@@ -9,4 +9,4 @@ resources:
 - ./service.yaml
 images:
 - name: ghcr.io/den4200/dennispham.me
-  digest: sha256:27f58161dbe7599e97e950bc006980f984463dbe2884f0089a28239c68588867
+  digest: sha256:3544ece46f56c74aec138f2b0154f942a80c5864b1ca0702605377e4ec9d042a
