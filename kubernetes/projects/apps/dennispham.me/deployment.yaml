@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dennispham-me
+  namespace: dennispham-me
+spec:
+  selector:
+    matchLabels:
+      app: dennispham-me
+  template:
+    metadata:
+      labels:
+        app: dennispham-me
+    spec:
+      containers:
+      - name: dennispham-me
+        image: ghcr.io/den4200/dennispham.me
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: IMMICH_URL
+          value: "http://immich-server.immich.svc.cluster.local:2283"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 250Mi
+          limits:
+            memory: 250Mi
+        ports:
+        - name: http
+          containerPort: 4321

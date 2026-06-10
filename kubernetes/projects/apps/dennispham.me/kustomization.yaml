@@ -1,14 +1,12 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+- ./deployment.yaml
+- ./httproute.yaml
 - ./namespace.yaml
-- ./backend
-- ./frontend
 - ./objectbucketclaim.yaml
 - ./objectstoreuser.yaml
-- ./postgres.yaml
+- ./service.yaml
 images:
-- name: ghcr.io/den4200/portfolio_backend
-  digest: sha256:42b7921934b5a04e4beceb2ecefbeed0a8460fccc2c34dec5eb6073b1ba99b6a
-- name: ghcr.io/den4200/portfolio_frontend
-  digest: sha256:b089ec0be310e4d687bbdc3042ef6dbf046af0a5574c271cbfd287012cd59237
+- name: ghcr.io/den4200/dennispham.me
+  digest: sha256:68ad9989118738caef34ff404fb1501e79761693f2ae2237e3ed2929e7a54fd7
