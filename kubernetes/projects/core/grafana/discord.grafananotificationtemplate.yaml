@@ -9,45 +9,39 @@ spec:
       dashboards: grafana
   name: Discord
   template: |
-    {{ define "__discord_subject" }}[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ if gt (.Alerts.Resolved | len) 0 }}, RESOLVED:{{ .Alerts.Resolved | len }}{{ end }}{{ end }}] {{ .GroupLabels.SortedPairs.Values | join " " }} {{ if gt (len .CommonLabels) (len .GroupLabels) }}({{ with .CommonLabels.Remove .GroupLabels.Names }}{{ .Values | join " " }}{{ end }}){{ end }}{{ end }}
-
     {{ define "__discord_values_list" }}{{ if len .Values }}{{ $first := true }}{{ range $refID, $value := .Values -}}
     {{ if $first }}{{ $first = false }}{{ else }}, {{ end }}{{ $refID }}={{ $value }}{{ end -}}
     {{ else }}[no value]{{ end }}{{ end }}
 
-    {{ define "__discord_alert_list" }}
-    {{ range . -}}
-    Value: {{ template "__discord_values_list" . }}
-    {{ if len .Labels -}}
-    Labels:
-    {{ range .Labels.SortedPairs -}}
-    - {{ .Name }} = {{ .Value }}
-    {{ end -}}
-    {{ end -}}
-    {{ if len .Annotations -}}
-    Annotations:
+    {{ define "__discord_alert_item" -}}
     {{ range .Annotations.SortedPairs -}}
-    - {{ .Name }} = {{ .Value }}
+    {{ if eq .Name "summary" }}> {{ .Value }}
     {{ end -}}
     {{ end -}}
-    {{ if .GeneratorURL -}}
-    Source: {{ .GeneratorURL }}
+    {{ if len .Labels -}}
+    **Labels:** {{ range .Labels.SortedPairs }}`{{ .Name }}={{ .Value }}` {{ end }}
     {{ end -}}
-    {{ if .SilenceURL -}}
-    Silence: {{ .SilenceURL }}
-    {{ end -}}
-    {{ if .DashboardURL -}}
-    Dashboard: {{ .DashboardURL }}
-    {{ end -}}
-    {{ if .PanelURL -}}
-    Panel: {{ .PanelURL }}
-    {{ end }}
+    **Value:** `{{ template "__discord_values_list" . }}`
+    {{ if or .DashboardURL .PanelURL .SilenceURL .GeneratorURL -}}
+    {{ if .DashboardURL }}[Dashboard]({{ .DashboardURL }}){{ end }}{{ if .PanelURL }} · [Panel]({{ .PanelURL }}){{ end }}{{ if .SilenceURL }} · [Silence]({{ .SilenceURL }}){{ end }}{{ if .GeneratorURL }} · [Source]({{ .GeneratorURL }}){{ end }}
     {{ end -}}
     {{ end -}}
 
-    {{ define "discord.title" }}{{ template "__discord_subject" . }}{{ end }}
+    {{ define "__discord_alert_list" -}}
+    {{ range . -}}
+    {{ template "__discord_alert_item" . }}
+    {{ end -}}
+    {{ end -}}
+
+    {{ define "discord.title" -}}
+    {{ if eq .Status "firing" }}🔴{{ else }}🟢{{ end }} {{ .GroupLabels.SortedPairs.Values | join " · " }}{{ if gt (len .CommonLabels) (len .GroupLabels) }} ({{ with .CommonLabels.Remove .GroupLabels.Names }}{{ .Values | join " · " }}{{ end }}){{ end }}
+    {{- end }}
 
     {{ define "discord.message" -}}
-    {{ if gt (len .Alerts.Firing) 0 }}# Firing{{ template "__discord_alert_list" .Alerts.Firing }}{{ end -}}
-    {{ if gt (len .Alerts.Resolved) 0 }}# Resolved{{ template "__discord_alert_list" .Alerts.Resolved }}{{ end -}}
+    {{ if gt (len .Alerts.Firing) 0 -}}
+    **🔥 Firing ({{ .Alerts.Firing | len }})**
+    {{ template "__discord_alert_list" .Alerts.Firing }}{{ end -}}
+    {{ if gt (len .Alerts.Resolved) 0 -}}
+    **✅ Resolved ({{ .Alerts.Resolved | len }})**
+    {{ template "__discord_alert_list" .Alerts.Resolved }}{{ end -}}
     {{ end -}}
