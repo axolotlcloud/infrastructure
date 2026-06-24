@@ -5,6 +5,7 @@ resources:
 - ./dashboards
 - ./entra
 - ./discord.grafanacontactpoint.yaml
+- ./discord.grafananotificationtemplate.yaml
 - ./discord.sealedsecret.yaml
 - ./grafana.yaml
 - ./httproute.yaml

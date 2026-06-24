@@ -13,10 +13,12 @@ spec:
   - type: discord
     settings:
       avatar_url: https://github.com/grafana.png
+      title: >
+        {{ template "discord.title" . }}
       message: |
         <@306870406697189378>
 
-        {{ template "default.message" . }}
+        {{ template "discord.message" . }}
     valuesFrom:
     - targetPath: url
       valueFrom:
