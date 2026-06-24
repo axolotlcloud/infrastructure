@@ -4,6 +4,8 @@ kind: Kustomization
 resources:
 - ./dashboards
 - ./entra
+- ./discord.grafanacontactpoint.yaml
+- ./discord.sealedsecret.yaml
 - ./grafana.yaml
 - ./httproute.yaml
 - ./postgres.yaml
