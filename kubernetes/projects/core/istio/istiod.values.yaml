@@ -36,6 +36,7 @@ extraContainerArgs: []
 
 env:
   PILOT_ENABLE_ALPHA_GATEWAY_API: "true"
+  ENABLE_WILDCARD_HOST_SERVICE_ENTRIES_FOR_TLS: "true"
 
 envVarFrom: []
 
