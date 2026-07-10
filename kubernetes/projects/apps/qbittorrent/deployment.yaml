@@ -4,6 +4,8 @@ metadata:
   name: qbittorrent
   namespace: jellyfin
 spec:
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: qbittorrent
