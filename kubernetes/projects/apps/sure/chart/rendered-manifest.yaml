@@ -87,11 +87,14 @@ spec:
             secretKeyRef:
               key: uri
               name: postgres-app
+        - name: OIDC_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: attribute.value
+              name: sure-oidc-secret
         envFrom:
         - configMapRef:
             name: sure-oidc-config
-        - secretRef:
-            name: sure-oidc-secret
         - secretRef:
             name: sure-redis-secret
         image: ghcr.io/we-promise/sure:0.7.2
@@ -185,6 +188,11 @@ spec:
             secretKeyRef:
               key: uri
               name: postgres-app
+        - name: OIDC_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: attribute.value
+              name: sure-oidc-secret
         image: ghcr.io/we-promise/sure:0.7.2
         imagePullPolicy: IfNotPresent
         name: db-migrate
@@ -279,11 +287,14 @@ spec:
             secretKeyRef:
               key: uri
               name: postgres-app
+        - name: OIDC_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: attribute.value
+              name: sure-oidc-secret
         envFrom:
         - configMapRef:
             name: sure-oidc-config
-        - secretRef:
-            name: sure-oidc-secret
         - secretRef:
             name: sure-redis-secret
         image: ghcr.io/we-promise/sure:0.7.2
@@ -378,11 +389,14 @@ spec:
             secretKeyRef:
               key: uri
               name: postgres-app
+        - name: OIDC_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: attribute.value
+              name: sure-oidc-secret
         envFrom:
         - configMapRef:
             name: sure-oidc-config
-        - secretRef:
-            name: sure-oidc-secret
         - secretRef:
             name: sure-redis-secret
         image: ghcr.io/we-promise/sure:0.7.2

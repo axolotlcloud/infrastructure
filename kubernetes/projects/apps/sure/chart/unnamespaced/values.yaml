@@ -27,12 +27,15 @@ rails:
       secretKeyRef:
         name: postgres-app
         key: uri
+  - name: OIDC_CLIENT_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: sure-oidc-secret
+        key: attribute.value
   # Extra envFrom sources applied to all workloads
   extraEnvFrom:
   - configMapRef:
       name: sure-oidc-config
-  - secretRef:
-      name: sure-oidc-secret
   - secretRef:
       name: sure-redis-secret
   # Control whether encryption env vars are injected into workloads
