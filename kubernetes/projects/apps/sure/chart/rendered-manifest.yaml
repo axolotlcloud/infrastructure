@@ -92,6 +92,10 @@ spec:
             secretKeyRef:
               key: attribute.value
               name: sure-oidc-secret
+        - name: OIDC_REDIRECT_URI
+          value: https://finance.axolotl.cloud/auth/openid_connect/callback
+        - name: OIDC_BUTTON_LABEL
+          value: Microsoft
         envFrom:
         - configMapRef:
             name: sure-oidc-config
@@ -193,6 +197,10 @@ spec:
             secretKeyRef:
               key: attribute.value
               name: sure-oidc-secret
+        - name: OIDC_REDIRECT_URI
+          value: https://finance.axolotl.cloud/auth/openid_connect/callback
+        - name: OIDC_BUTTON_LABEL
+          value: Microsoft
         image: ghcr.io/we-promise/sure:0.7.2
         imagePullPolicy: IfNotPresent
         name: db-migrate
@@ -292,6 +300,10 @@ spec:
             secretKeyRef:
               key: attribute.value
               name: sure-oidc-secret
+        - name: OIDC_REDIRECT_URI
+          value: https://finance.axolotl.cloud/auth/openid_connect/callback
+        - name: OIDC_BUTTON_LABEL
+          value: Microsoft
         envFrom:
         - configMapRef:
             name: sure-oidc-config
@@ -394,6 +406,10 @@ spec:
             secretKeyRef:
               key: attribute.value
               name: sure-oidc-secret
+        - name: OIDC_REDIRECT_URI
+          value: https://finance.axolotl.cloud/auth/openid_connect/callback
+        - name: OIDC_BUTTON_LABEL
+          value: Microsoft
         envFrom:
         - configMapRef:
             name: sure-oidc-config

@@ -32,6 +32,10 @@ rails:
       secretKeyRef:
         name: sure-oidc-secret
         key: attribute.value
+  - name: OIDC_REDIRECT_URI
+    value: https://finance.axolotl.cloud/auth/openid_connect/callback
+  - name: OIDC_BUTTON_LABEL
+    value: Microsoft
   # Extra envFrom sources applied to all workloads
   extraEnvFrom:
   - configMapRef:
