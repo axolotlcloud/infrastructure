@@ -22,8 +22,11 @@ rails:
   extraEnv:
     AUTH_LOCAL_ADMIN_OVERRIDE_ENABLED: "false"
     AUTH_LOCAL_LOGIN_ENABLED: "false"
-    OIDC_BUTTON_LABEL: Microsoft
+    AUTH_JIT_MODE: create_and_link # or link_only
+    OIDC_BUTTON_LABEL: Sign in with Microsoft
     OIDC_REDIRECT_URI: https://finance.axolotl.cloud/auth/openid_connect/callback
+    WEBAUTHN_RP_ID: finance.axolotl.cloud
+    WEBAUTHN_ALLOWED_ORIGINS: https://finance.axolotl.cloud
   # Extra environment variables with full EnvVar objects (supports valueFrom/secretKeyRef)
   extraEnvVars:
   - name: DATABASE_URL

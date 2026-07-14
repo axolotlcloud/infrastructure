@@ -82,14 +82,20 @@ spec:
           value: open
         - name: SELF_HOSTED
           value: "true"
+        - name: AUTH_JIT_MODE
+          value: create_and_link
         - name: AUTH_LOCAL_ADMIN_OVERRIDE_ENABLED
           value: "false"
         - name: AUTH_LOCAL_LOGIN_ENABLED
           value: "false"
         - name: OIDC_BUTTON_LABEL
-          value: Microsoft
+          value: Sign in with Microsoft
         - name: OIDC_REDIRECT_URI
           value: https://finance.axolotl.cloud/auth/openid_connect/callback
+        - name: WEBAUTHN_ALLOWED_ORIGINS
+          value: https://finance.axolotl.cloud
+        - name: WEBAUTHN_RP_ID
+          value: finance.axolotl.cloud
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
@@ -191,14 +197,20 @@ spec:
           value: open
         - name: SELF_HOSTED
           value: "true"
+        - name: AUTH_JIT_MODE
+          value: create_and_link
         - name: AUTH_LOCAL_ADMIN_OVERRIDE_ENABLED
           value: "false"
         - name: AUTH_LOCAL_LOGIN_ENABLED
           value: "false"
         - name: OIDC_BUTTON_LABEL
-          value: Microsoft
+          value: Sign in with Microsoft
         - name: OIDC_REDIRECT_URI
           value: https://finance.axolotl.cloud/auth/openid_connect/callback
+        - name: WEBAUTHN_ALLOWED_ORIGINS
+          value: https://finance.axolotl.cloud
+        - name: WEBAUTHN_RP_ID
+          value: finance.axolotl.cloud
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
@@ -298,14 +310,20 @@ spec:
           value: open
         - name: SELF_HOSTED
           value: "true"
+        - name: AUTH_JIT_MODE
+          value: create_and_link
         - name: AUTH_LOCAL_ADMIN_OVERRIDE_ENABLED
           value: "false"
         - name: AUTH_LOCAL_LOGIN_ENABLED
           value: "false"
         - name: OIDC_BUTTON_LABEL
-          value: Microsoft
+          value: Sign in with Microsoft
         - name: OIDC_REDIRECT_URI
           value: https://finance.axolotl.cloud/auth/openid_connect/callback
+        - name: WEBAUTHN_ALLOWED_ORIGINS
+          value: https://finance.axolotl.cloud
+        - name: WEBAUTHN_RP_ID
+          value: finance.axolotl.cloud
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
@@ -408,14 +426,20 @@ spec:
           value: open
         - name: SELF_HOSTED
           value: "true"
+        - name: AUTH_JIT_MODE
+          value: create_and_link
         - name: AUTH_LOCAL_ADMIN_OVERRIDE_ENABLED
           value: "false"
         - name: AUTH_LOCAL_LOGIN_ENABLED
           value: "false"
         - name: OIDC_BUTTON_LABEL
-          value: Microsoft
+          value: Sign in with Microsoft
         - name: OIDC_REDIRECT_URI
           value: https://finance.axolotl.cloud/auth/openid_connect/callback
+        - name: WEBAUTHN_ALLOWED_ORIGINS
+          value: https://finance.axolotl.cloud
+        - name: WEBAUTHN_RP_ID
+          value: finance.axolotl.cloud
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
