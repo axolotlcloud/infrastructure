@@ -82,6 +82,14 @@ spec:
           value: open
         - name: SELF_HOSTED
           value: "true"
+        - name: AUTH_LOCAL_ADMIN_OVERRIDE_ENABLED
+          value: "false"
+        - name: AUTH_LOCAL_LOGIN_ENABLED
+          value: "false"
+        - name: OIDC_BUTTON_LABEL
+          value: Microsoft
+        - name: OIDC_REDIRECT_URI
+          value: https://finance.axolotl.cloud/auth/openid_connect/callback
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
@@ -92,10 +100,6 @@ spec:
             secretKeyRef:
               key: attribute.value
               name: sure-oidc-secret
-        - name: OIDC_REDIRECT_URI
-          value: https://finance.axolotl.cloud/auth/openid_connect/callback
-        - name: OIDC_BUTTON_LABEL
-          value: Microsoft
         envFrom:
         - configMapRef:
             name: sure-oidc-config
@@ -187,6 +191,14 @@ spec:
           value: open
         - name: SELF_HOSTED
           value: "true"
+        - name: AUTH_LOCAL_ADMIN_OVERRIDE_ENABLED
+          value: "false"
+        - name: AUTH_LOCAL_LOGIN_ENABLED
+          value: "false"
+        - name: OIDC_BUTTON_LABEL
+          value: Microsoft
+        - name: OIDC_REDIRECT_URI
+          value: https://finance.axolotl.cloud/auth/openid_connect/callback
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
@@ -197,10 +209,6 @@ spec:
             secretKeyRef:
               key: attribute.value
               name: sure-oidc-secret
-        - name: OIDC_REDIRECT_URI
-          value: https://finance.axolotl.cloud/auth/openid_connect/callback
-        - name: OIDC_BUTTON_LABEL
-          value: Microsoft
         image: ghcr.io/we-promise/sure:0.7.2
         imagePullPolicy: IfNotPresent
         name: db-migrate
@@ -290,6 +298,14 @@ spec:
           value: open
         - name: SELF_HOSTED
           value: "true"
+        - name: AUTH_LOCAL_ADMIN_OVERRIDE_ENABLED
+          value: "false"
+        - name: AUTH_LOCAL_LOGIN_ENABLED
+          value: "false"
+        - name: OIDC_BUTTON_LABEL
+          value: Microsoft
+        - name: OIDC_REDIRECT_URI
+          value: https://finance.axolotl.cloud/auth/openid_connect/callback
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
@@ -300,10 +316,6 @@ spec:
             secretKeyRef:
               key: attribute.value
               name: sure-oidc-secret
-        - name: OIDC_REDIRECT_URI
-          value: https://finance.axolotl.cloud/auth/openid_connect/callback
-        - name: OIDC_BUTTON_LABEL
-          value: Microsoft
         envFrom:
         - configMapRef:
             name: sure-oidc-config
@@ -396,6 +408,14 @@ spec:
           value: open
         - name: SELF_HOSTED
           value: "true"
+        - name: AUTH_LOCAL_ADMIN_OVERRIDE_ENABLED
+          value: "false"
+        - name: AUTH_LOCAL_LOGIN_ENABLED
+          value: "false"
+        - name: OIDC_BUTTON_LABEL
+          value: Microsoft
+        - name: OIDC_REDIRECT_URI
+          value: https://finance.axolotl.cloud/auth/openid_connect/callback
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
@@ -406,10 +426,6 @@ spec:
             secretKeyRef:
               key: attribute.value
               name: sure-oidc-secret
-        - name: OIDC_REDIRECT_URI
-          value: https://finance.axolotl.cloud/auth/openid_connect/callback
-        - name: OIDC_BUTTON_LABEL
-          value: Microsoft
         envFrom:
         - configMapRef:
             name: sure-oidc-config

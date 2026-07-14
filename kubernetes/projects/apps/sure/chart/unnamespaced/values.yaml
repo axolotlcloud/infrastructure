@@ -19,7 +19,11 @@ image:
 rails:
   env: production
   # Extra environment variables (non-sensitive). Key/values become env vars.
-  extraEnv: {}
+  extraEnv:
+    AUTH_LOCAL_ADMIN_OVERRIDE_ENABLED: "false"
+    AUTH_LOCAL_LOGIN_ENABLED: "false"
+    OIDC_BUTTON_LABEL: Microsoft
+    OIDC_REDIRECT_URI: https://finance.axolotl.cloud/auth/openid_connect/callback
   # Extra environment variables with full EnvVar objects (supports valueFrom/secretKeyRef)
   extraEnvVars:
   - name: DATABASE_URL
@@ -32,10 +36,6 @@ rails:
       secretKeyRef:
         name: sure-oidc-secret
         key: attribute.value
-  - name: OIDC_REDIRECT_URI
-    value: https://finance.axolotl.cloud/auth/openid_connect/callback
-  - name: OIDC_BUTTON_LABEL
-    value: Microsoft
   # Extra envFrom sources applied to all workloads
   extraEnvFrom:
   - configMapRef:
