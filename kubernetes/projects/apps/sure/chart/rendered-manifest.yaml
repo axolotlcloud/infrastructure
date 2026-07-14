@@ -82,6 +82,11 @@ spec:
           value: open
         - name: SELF_HOSTED
           value: "true"
+        - envFrom:
+            secretKeyRef:
+              key: uri
+              name: postgres-app
+          name: DATABASE_URL
         envFrom:
         - configMapRef:
             name: sure-oidc-config
@@ -175,6 +180,11 @@ spec:
           value: open
         - name: SELF_HOSTED
           value: "true"
+        - envFrom:
+            secretKeyRef:
+              key: uri
+              name: postgres-app
+          name: DATABASE_URL
         image: ghcr.io/we-promise/sure:0.7.2
         imagePullPolicy: IfNotPresent
         name: db-migrate
@@ -264,6 +274,11 @@ spec:
           value: open
         - name: SELF_HOSTED
           value: "true"
+        - envFrom:
+            secretKeyRef:
+              key: uri
+              name: postgres-app
+          name: DATABASE_URL
         envFrom:
         - configMapRef:
             name: sure-oidc-config
@@ -358,6 +373,11 @@ spec:
           value: open
         - name: SELF_HOSTED
           value: "true"
+        - envFrom:
+            secretKeyRef:
+              key: uri
+              name: postgres-app
+          name: DATABASE_URL
         envFrom:
         - configMapRef:
             name: sure-oidc-config

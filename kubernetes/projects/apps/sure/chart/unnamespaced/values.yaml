@@ -21,7 +21,12 @@ rails:
   # Extra environment variables (non-sensitive). Key/values become env vars.
   extraEnv: {}
   # Extra environment variables with full EnvVar objects (supports valueFrom/secretKeyRef)
-  extraEnvVars: []
+  extraEnvVars:
+  - name: DATABASE_URL
+    envFrom:
+      secretKeyRef:
+        name: postgres-app
+        key: uri
   # Extra envFrom sources applied to all workloads
   extraEnvFrom:
   - configMapRef:
