@@ -23,7 +23,7 @@ rails:
   # Extra environment variables with full EnvVar objects (supports valueFrom/secretKeyRef)
   extraEnvVars:
   - name: DATABASE_URL
-    envFrom:
+    valueFrom:
       secretKeyRef:
         name: postgres-app
         key: uri
