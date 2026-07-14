@@ -88,6 +88,12 @@ spec:
           value: "false"
         - name: AUTH_LOCAL_LOGIN_ENABLED
           value: "false"
+        - name: GENERIC_S3_BUCKET
+          value: axolotl-sure
+        - name: GENERIC_S3_FORCE_PATH_STYLE
+          value: "true"
+        - name: GENERIC_S3_REGION
+          value: us-east-1
         - name: OIDC_BUTTON_LABEL
           value: Sign in with Microsoft
         - name: OIDC_REDIRECT_URI
@@ -106,6 +112,21 @@ spec:
             secretKeyRef:
               key: attribute.value
               name: sure-oidc-secret
+        - name: GENERIC_S3_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              key: AccessKey
+              name: rook-ceph-object-user-axolotl-private-object-store-axolotl-sure
+        - name: GENERIC_S3_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              key: SecretKey
+              name: rook-ceph-object-user-axolotl-private-object-store-axolotl-sure
+        - name: GENERIC_S3_ENDPOINT
+          valueFrom:
+            secretKeyRef:
+              key: Endpoint
+              name: rook-ceph-object-user-axolotl-private-object-store-axolotl-sure
         envFrom:
         - configMapRef:
             name: sure-oidc-config
@@ -203,6 +224,12 @@ spec:
           value: "false"
         - name: AUTH_LOCAL_LOGIN_ENABLED
           value: "false"
+        - name: GENERIC_S3_BUCKET
+          value: axolotl-sure
+        - name: GENERIC_S3_FORCE_PATH_STYLE
+          value: "true"
+        - name: GENERIC_S3_REGION
+          value: us-east-1
         - name: OIDC_BUTTON_LABEL
           value: Sign in with Microsoft
         - name: OIDC_REDIRECT_URI
@@ -221,6 +248,21 @@ spec:
             secretKeyRef:
               key: attribute.value
               name: sure-oidc-secret
+        - name: GENERIC_S3_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              key: AccessKey
+              name: rook-ceph-object-user-axolotl-private-object-store-axolotl-sure
+        - name: GENERIC_S3_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              key: SecretKey
+              name: rook-ceph-object-user-axolotl-private-object-store-axolotl-sure
+        - name: GENERIC_S3_ENDPOINT
+          valueFrom:
+            secretKeyRef:
+              key: Endpoint
+              name: rook-ceph-object-user-axolotl-private-object-store-axolotl-sure
         image: ghcr.io/we-promise/sure:0.7.2
         imagePullPolicy: IfNotPresent
         name: db-migrate
@@ -316,6 +358,12 @@ spec:
           value: "false"
         - name: AUTH_LOCAL_LOGIN_ENABLED
           value: "false"
+        - name: GENERIC_S3_BUCKET
+          value: axolotl-sure
+        - name: GENERIC_S3_FORCE_PATH_STYLE
+          value: "true"
+        - name: GENERIC_S3_REGION
+          value: us-east-1
         - name: OIDC_BUTTON_LABEL
           value: Sign in with Microsoft
         - name: OIDC_REDIRECT_URI
@@ -334,6 +382,21 @@ spec:
             secretKeyRef:
               key: attribute.value
               name: sure-oidc-secret
+        - name: GENERIC_S3_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              key: AccessKey
+              name: rook-ceph-object-user-axolotl-private-object-store-axolotl-sure
+        - name: GENERIC_S3_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              key: SecretKey
+              name: rook-ceph-object-user-axolotl-private-object-store-axolotl-sure
+        - name: GENERIC_S3_ENDPOINT
+          valueFrom:
+            secretKeyRef:
+              key: Endpoint
+              name: rook-ceph-object-user-axolotl-private-object-store-axolotl-sure
         envFrom:
         - configMapRef:
             name: sure-oidc-config
@@ -432,6 +495,12 @@ spec:
           value: "false"
         - name: AUTH_LOCAL_LOGIN_ENABLED
           value: "false"
+        - name: GENERIC_S3_BUCKET
+          value: axolotl-sure
+        - name: GENERIC_S3_FORCE_PATH_STYLE
+          value: "true"
+        - name: GENERIC_S3_REGION
+          value: us-east-1
         - name: OIDC_BUTTON_LABEL
           value: Sign in with Microsoft
         - name: OIDC_REDIRECT_URI
@@ -450,6 +519,21 @@ spec:
             secretKeyRef:
               key: attribute.value
               name: sure-oidc-secret
+        - name: GENERIC_S3_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              key: AccessKey
+              name: rook-ceph-object-user-axolotl-private-object-store-axolotl-sure
+        - name: GENERIC_S3_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              key: SecretKey
+              name: rook-ceph-object-user-axolotl-private-object-store-axolotl-sure
+        - name: GENERIC_S3_ENDPOINT
+          valueFrom:
+            secretKeyRef:
+              key: Endpoint
+              name: rook-ceph-object-user-axolotl-private-object-store-axolotl-sure
         envFrom:
         - configMapRef:
             name: sure-oidc-config

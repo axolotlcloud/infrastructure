@@ -23,6 +23,9 @@ rails:
     AUTH_LOCAL_ADMIN_OVERRIDE_ENABLED: "false"
     AUTH_LOCAL_LOGIN_ENABLED: "false"
     AUTH_JIT_MODE: create_and_link # or link_only
+    GENERIC_S3_REGION: us-east-1
+    GENERIC_S3_BUCKET: axolotl-sure
+    GENERIC_S3_FORCE_PATH_STYLE: "true"
     OIDC_BUTTON_LABEL: Sign in with Microsoft
     OIDC_REDIRECT_URI: https://finance.axolotl.cloud/auth/openid_connect/callback
     WEBAUTHN_RP_ID: finance.axolotl.cloud
@@ -39,6 +42,21 @@ rails:
       secretKeyRef:
         name: sure-oidc-secret
         key: attribute.value
+  - name: GENERIC_S3_ACCESS_KEY_ID
+    valueFrom:
+      secretKeyRef:
+        name: rook-ceph-object-user-axolotl-private-object-store-axolotl-sure
+        key: AccessKey
+  - name: GENERIC_S3_SECRET_ACCESS_KEY
+    valueFrom:
+      secretKeyRef:
+        name: rook-ceph-object-user-axolotl-private-object-store-axolotl-sure
+        key: SecretKey
+  - name: GENERIC_S3_ENDPOINT
+    valueFrom:
+      secretKeyRef:
+        name: rook-ceph-object-user-axolotl-private-object-store-axolotl-sure
+        key: Endpoint
   # Extra envFrom sources applied to all workloads
   extraEnvFrom:
   - configMapRef:

@@ -6,6 +6,8 @@ resources:
 - ./entra
 - ./httproute.yaml
 - ./namespace.yaml
+- ./objectbucketclaim.yaml
+- ./objectstoreuser.yaml
 - ./postgres.yaml
 - ./redis.externalsecret.yaml
 - ./redis.sealedsecret.yaml

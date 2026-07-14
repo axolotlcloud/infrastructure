@@ -1,0 +1,10 @@
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: sure-bucket
+  namespace: sure
+spec:
+  bucketName: axolotl-sure
+  storageClassName: rook-ceph-bucket-private
+  additionalConfig:
+    bucketOwner: axolotl-sure
