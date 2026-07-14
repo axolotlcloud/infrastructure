@@ -1,0 +1,9 @@
+apiVersion: serviceprincipals.azuread.upbound.io/v1beta2
+kind: Principal
+metadata:
+  name: sure
+spec:
+  forProvider:
+    clientIdRef:
+      name: sure
+    description: Sure

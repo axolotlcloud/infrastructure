@@ -1,0 +1,17 @@
+apiVersion: applications.azuread.upbound.io/v1beta2
+kind: Application
+metadata:
+  name: sure
+spec:
+  forProvider:
+    displayName: Axolotl Cloud - Sure
+    requiredResourceAccess:
+    - resourceAppId: 00000003-0000-0000-c000-000000000000 # Microsoft Graph
+      resourceAccess:
+      - id: e1fe6dd8-ba31-4d61-89e7-88639da4683d # User.Read
+        type: Scope
+    web:
+      redirectUris:
+      - https://finance.axolotl.cloud/auth/openid_connect/callback
+  providerConfigRef:
+    name: default

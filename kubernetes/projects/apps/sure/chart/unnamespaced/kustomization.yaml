@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+helmCharts:
+- releaseName: sure
+  namespace: sure
+  name: sure
+  repo: https://we-promise.github.io/sure
+  version: 0.7.2
+  valuesFile: values.yaml
+
+patches:
+- patch: |
+    $patch: delete
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: sure-test-connection

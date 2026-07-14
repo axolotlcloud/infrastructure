@@ -1,0 +1,7 @@
+apiVersion: azuread.upbound.io/v1alpha1
+kind: StoreConfig
+metadata:
+  name: sure-store-config
+spec:
+  defaultScope: sure
+  type: Kubernetes

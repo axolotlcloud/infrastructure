@@ -1,0 +1,8 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Had to render manifest in order to apply namespace, since the Helm chart DOES NOT apply it...
+namespace: sure
+
+resources:
+- ./rendered-manifest.yaml

@@ -1,0 +1,23 @@
+apiVersion: redis.redis.opstreelabs.in/v1beta2
+kind: Redis
+metadata:
+  name: redis
+  namespace: sure
+spec:
+  kubernetesConfig:
+    image: quay.io/opstree/redis:v8.2.0
+    imagePullPolicy: IfNotPresent
+    redisSecret:
+      name: redis-secret
+      key: password
+  storage:
+    volumeClaimTemplate:
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 4Gi
+  podSecurityContext:
+    runAsUser: 1000
+    fsGroup: 1000

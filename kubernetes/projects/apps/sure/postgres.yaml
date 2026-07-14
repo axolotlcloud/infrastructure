@@ -1,0 +1,10 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgres
+  namespace: sure
+spec:
+  instances: 1
+  storage:
+    size: 16Gi
+  imageName: ghcr.io/tensorchord/cloudnative-vectorchord:17-0.4.3

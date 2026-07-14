@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- ./entra
+- ./httproute.yaml
+- ./namespace.yaml
+- ./postgres.yaml
+- ./redis.externalsecret.yaml
+- ./redis.sealedsecret.yaml
+- ./redis.yaml
+- ./sealedsecret.yaml
+- ./secretstore.role.yaml
+- ./secretstore.rolebinding.yaml
+- ./secretstore.serviceaccount.yaml
+- ./secretstore.yaml
