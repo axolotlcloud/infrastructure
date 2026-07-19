@@ -1,0 +1,7 @@
+apiVersion: azuread.upbound.io/v1alpha1
+kind: StoreConfig
+metadata:
+  name: immich-store-config
+spec:
+  defaultScope: immich
+  type: Kubernetes

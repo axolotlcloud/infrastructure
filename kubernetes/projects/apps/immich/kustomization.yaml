@@ -3,12 +3,15 @@ kind: Kustomization
 
 namespace: immich
 resources:
+- ./entra
+- ./externalsecret.yaml
 - ./httproute.yaml
 - ./namespace.yaml
 - ./postgres.yaml
 - ./pvc.yaml
 - ./redis.yaml
-- ./sealedsecret.yaml
+- ./secretstore.rbac.yaml
+- ./secretstore.yaml
 
 replicas:
 - name: immich-machine-learning

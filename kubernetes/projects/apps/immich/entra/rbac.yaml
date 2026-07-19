@@ -1,0 +1,84 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: kyverno:immich-principal-reader
+rules:
+- apiGroups:
+  - serviceprincipals.azuread.upbound.io
+  resources:
+  - principals
+  verbs:
+  - list
+  - get
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: kyverno:immich-principal-reader
+subjects:
+- kind: ServiceAccount
+  name: kyverno-background-controller
+  namespace: kyverno
+roleRef:
+  kind: ClusterRole
+  name: kyverno:immich-principal-reader
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: kyverno:immich-secret-writer
+  namespace: immich
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: kyverno:immich-secret-writer
+  namespace: immich
+subjects:
+- kind: ServiceAccount
+  name: kyverno-background-controller
+  namespace: kyverno
+roleRef:
+  kind: Role
+  name: kyverno:immich-secret-writer
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: kyverno:immich-secret-reader
+  namespace: immich
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - list
+  - get
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: kyverno:immich-secret-reader
+  namespace: immich
+subjects:
+- kind: ServiceAccount
+  name: kyverno-admission-controller
+  namespace: kyverno
+roleRef:
+  kind: Role
+  name: kyverno:immich-secret-reader
+  apiGroup: rbac.authorization.k8s.io

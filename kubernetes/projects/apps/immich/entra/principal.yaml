@@ -1,0 +1,9 @@
+apiVersion: serviceprincipals.azuread.upbound.io/v1beta2
+kind: Principal
+metadata:
+  name: immich
+spec:
+  forProvider:
+    clientIdRef:
+      name: immich
+    description: Immich

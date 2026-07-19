@@ -1,0 +1,26 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: immich
+spec:
+  rules:
+  - name: generate-oidc-config
+    match:
+      any:
+      - resources:
+          kinds:
+          - serviceprincipals.azuread.upbound.io/v1beta2/Principal
+          names:
+          - immich
+    generate:
+      generateExisting: true
+      synchronize: true
+      apiVersion: v1
+      kind: Secret
+      name: immich-oidc-config-secret
+      namespace: immich
+      data:
+        type: Opaque
+        stringData:
+          clientId: "{{ request.object.status.atProvider.applicationId }}"
+          issuerUrl: https://login.microsoftonline.com/{{ request.object.status.atProvider.applicationTenantId }}/v2.0
