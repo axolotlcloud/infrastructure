@@ -10,7 +10,6 @@ resources:
 - ./grafanaadmin.approle.yaml
 - ./password.yaml
 - ./principal.yaml
-- ./role.yaml
-- ./rolebinding.yaml
+- ./rbac.yaml
 - ./storeconfig.yaml
 - ./viewer.approle.yaml

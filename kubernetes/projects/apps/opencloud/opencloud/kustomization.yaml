@@ -10,9 +10,7 @@ resources:
 - ./opencloud-config.sealedsecret.yaml
 - ./pvc.yaml
 - ./s3.externalsecret.yaml
-- ./secretstore.role.yaml
-- ./secretstore.rolebinding.yaml
-- ./secretstore.serviceaccount.yaml
+- ./secretstore.rbac.yaml
 - ./secretstore.yaml
 - ./service.yaml
 - ./smtp.sealedsecret.yaml

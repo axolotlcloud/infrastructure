@@ -13,7 +13,5 @@ resources:
 - ./redis.sealedsecret.yaml
 - ./redis.yaml
 - ./sealedsecret.yaml
-- ./secretstore.role.yaml
-- ./secretstore.rolebinding.yaml
-- ./secretstore.serviceaccount.yaml
+- ./secretstore.rbac.yaml
 - ./secretstore.yaml

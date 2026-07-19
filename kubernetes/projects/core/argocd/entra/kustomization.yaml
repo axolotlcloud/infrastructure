@@ -7,6 +7,5 @@ resources:
 - ./application.yaml
 - ./clusterpolicy.yaml
 - ./password.yaml
-- ./role.yaml
-- ./rolebinding.yaml
+- ./rbac.yaml
 - ./storeconfig.yaml

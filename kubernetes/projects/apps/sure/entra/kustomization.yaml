@@ -4,8 +4,7 @@ kind: Kustomization
 resources:
 - ./application.yaml
 - ./clusterpolicy.yaml
-- ./clusterrole.yaml
-- ./clusterrolebinding.yaml
 - ./password.yaml
 - ./principal.yaml
+- ./rbac.yaml
 - ./storeconfig.yaml
