@@ -18,12 +18,8 @@ Welcome to the documentation for Axolotl Cloud infrastructure! We primarily oper
 | axolotl.cloud   | https://axolotl.cloud             | The landing page for Axolotl Cloud    |
 | dennispham.me   | https://dennispham.me             | Dennis' personal website              |
 | Immich          | https://photos.axolotl.cloud      | Photo and video storage               |
-| Jellyfin        | https://watch.axolotl.cloud       | Watch movies and TV shows             |
-| Jellyseerr      | https://request.axolotl.cloud     | Request movies and TV shows           |
+| Jellyfin        | https://watch.axolotl.cloud       | Media streaming and management        |
 | OpenCloud       | https://office.axolotl.cloud      | File sharing & collaboration platform |
-| qBittorrent     | https://qbittorrent.axolotl.cloud | Torrent client                        |
-| Radarr          | https://radarr.axolotl.cloud      | Movie management                      |
-| Sonarr          | https://sonarr.axolotl.cloud      | TV show management                    |
 | Sure            | https://finance.axolotl.cloud     | Personal finance platform             |
 | WhoAmI          | https://whoami.axolotl.cloud      | HTTP debugging service                |
 
