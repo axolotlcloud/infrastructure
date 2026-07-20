@@ -58,6 +58,7 @@ nav = [
     "kubernetes/overview.md",
     "kubernetes/networking.md",
     "kubernetes/storage.md",
+    "kubernetes/databases.md",
     "kubernetes/gitops.md",
     "kubernetes/observability.md",
   ]},
