@@ -10,6 +10,10 @@ GitOps is the practice of using Git as the single source of truth for declarativ
 
 We run the high availability install of Argo CD and bootstrap it with a single [`ApplicationSet`](https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/). It scans the project directories in our repository and creates an Argo CD application for each directory it finds, with automatic synchronization enabled. To deploy something new to the cluster, we simply commit a new directory.
 
+Here is an example of a simple application deployed with Argo CD:
+
+![Argo CD application](../assets/argo-cd-dennispham-me.png)
+
 ## Manifests
 
 All of our manifests are composed with [Kustomize](https://kustomize.io/). Any upstream Helm charts are rendered inline with Kustomize, so chart versions and values are stored in Git along with the rest of our resources. We also built a custom Kustomize generator that is a containerized [KRM function](https://kubectl.docs.kubernetes.io/guides/extending_kustomize/containerized_krm_functions/) which renders [Jsonnet](https://jsonnet.org/) configuration. We use it with [kube-prometheus](https://github.com/prometheus-operator/kube-prometheus) to generate our monitoring stack[^1].
