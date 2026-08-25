@@ -1,0 +1,11 @@
+apiVersion: ceph.rook.io/v1
+kind: CephObjectStoreUser
+metadata:
+  name: bramdb
+  namespace: bramdb
+spec:
+  store: axolotl-object-store
+  clusterNamespace: rook-ceph
+  displayName: bramdb
+  quotas:
+    maxBuckets: 1

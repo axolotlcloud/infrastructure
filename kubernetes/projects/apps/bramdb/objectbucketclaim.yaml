@@ -1,0 +1,10 @@
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: bramdb-bucket
+  namespace: bramdb
+spec:
+  bucketName: bramdb
+  storageClassName: rook-ceph-bucket
+  additionalConfig:
+    bucketOwner: bramdb
