@@ -15,5 +15,8 @@ spec:
       - https://photos.axolotl.cloud/api/oauth/mobile-redirect
       - https://photos.axolotl.cloud/user-settings
       - https://photos.axolotl.cloud/auth/login
+      - https://photos.lan.axolotl.cloud/api/oauth/mobile-redirect
+      - https://photos.lan.axolotl.cloud/user-settings
+      - https://photos.lan.axolotl.cloud/auth/login
   providerConfigRef:
     name: default
