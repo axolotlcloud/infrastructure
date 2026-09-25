@@ -27,5 +27,5 @@ images:
   digest: sha256:d6615511532e6ad566f2a6a8c2d85bee3867b725e0bef72c7c8f5fe218b16cb4
   newTag: latest
 - name: ghcr.io/yonder-sh/yonder-collab
-  digest: sha256:1b57494bbac7ce68b97be7fd47d39beacd9b42a1e88711a6536123a4b9f6ee85
+  digest: sha256:ab113f3b1baaab3cee226121b72e09188e02651ac9e65e1fb7d0c8e06e2b1cc7
   newTag: latest
