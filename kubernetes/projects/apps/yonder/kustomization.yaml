@@ -8,6 +8,7 @@ resources:
 - ./backup.objectbucketclaim.yaml
 - ./backup.objectstoreuser.yaml
 - ./configmap.yaml
+- ./imageupdater.yaml
 - ./media.objectbucketclaim.yaml
 - ./media.objectstoreuser.yaml
 - ./namespace.yaml

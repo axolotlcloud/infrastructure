@@ -1,0 +1,22 @@
+apiVersion: argocd-image-updater.argoproj.io/v1alpha1
+kind: ImageUpdater
+metadata:
+  name: yonder
+  namespace: argocd
+spec:
+  writeBackConfig:
+    method: git
+    gitConfig:
+      branch: main
+      writeBackTarget: kustomization
+  applicationRefs:
+  - namePattern: yonder
+    images:
+    - alias: app
+      imageName: ghcr.io/yonder-sh/yonder:latest
+      commonUpdateSettings:
+        updateStrategy: digest
+    - alias: collab
+      imageName: ghcr.io/yonder-sh/yonder-collab:latest
+      commonUpdateSettings:
+        updateStrategy: digest
