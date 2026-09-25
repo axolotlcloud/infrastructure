@@ -1,0 +1,27 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgres
+  namespace: yonder
+spec:
+  instances: 1
+  storage:
+    size: 10Gi
+  # Base backups + continuous WAL archiving to the private Ceph RGW store
+  # (in-tree Barman Cloud; the Barman Cloud Plugin is not installed).
+  backup:
+    retentionPolicy: "14d"
+    barmanObjectStore:
+      destinationPath: s3://yonder-backups/
+      endpointURL: http://rook-ceph-rgw-axolotl-private-object-store.rook-ceph.svc:80
+      s3Credentials:
+        accessKeyId:
+          name: rook-ceph-object-user-axolotl-private-object-store-yonder-backups
+          key: AccessKey
+        secretAccessKey:
+          name: rook-ceph-object-user-axolotl-private-object-store-yonder-backups
+          key: SecretKey
+      wal:
+        compression: gzip
+      data:
+        compression: gzip

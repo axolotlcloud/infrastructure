@@ -1,0 +1,11 @@
+apiVersion: ceph.rook.io/v1
+kind: CephObjectStoreUser
+metadata:
+  name: yonder-backups
+  namespace: yonder
+spec:
+  store: axolotl-private-object-store
+  clusterNamespace: rook-ceph
+  displayName: Yonder - Backups
+  quotas:
+    maxBuckets: 1

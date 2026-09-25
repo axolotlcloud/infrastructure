@@ -1,0 +1,27 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: yonder
+  namespace: yonder
+spec:
+  parentRefs:
+  - name: axolotl
+    namespace: istio-ingress
+  hostnames:
+  - yonder.sh
+  rules:
+  # The realtime websocket (the /collab prefix is kept).
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /collab
+    backendRefs:
+    - name: collab
+      port: 80
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /
+    backendRefs:
+    - name: web
+      port: 80

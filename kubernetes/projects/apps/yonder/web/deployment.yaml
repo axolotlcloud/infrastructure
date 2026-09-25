@@ -1,0 +1,143 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  namespace: yonder
+spec:
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      initContainers:
+      # One-shots before the app starts, from the same image and env.
+      - name: migrate
+        image: ghcr.io/yonder-sh/yonder
+        command:
+        - node
+        args:
+        - .output/scripts/migrate.mjs
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: postgres-app
+              key: uri
+        envFrom:
+        - configMapRef:
+            name: yonder-config
+        - secretRef:
+            name: yonder-secret
+        - secretRef:
+            name: yonder-redis-secret
+        - secretRef:
+            name: yonder-s3-secret
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: [ "ALL" ]
+          runAsNonRoot: true
+          runAsUser: 1000
+          runAsGroup: 1000
+          seccompProfile:
+            type: RuntimeDefault
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+          limits:
+            memory: 512Mi
+      # CORS, lifecycle and versioning on the media bucket (idempotent).
+      - name: setup-bucket
+        image: ghcr.io/yonder-sh/yonder
+        command:
+        - node
+        args:
+        - .output/scripts/setup-bucket.mjs
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: postgres-app
+              key: uri
+        envFrom:
+        - configMapRef:
+            name: yonder-config
+        - secretRef:
+            name: yonder-secret
+        - secretRef:
+            name: yonder-redis-secret
+        - secretRef:
+            name: yonder-s3-secret
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: [ "ALL" ]
+          runAsNonRoot: true
+          runAsUser: 1000
+          runAsGroup: 1000
+          seccompProfile:
+            type: RuntimeDefault
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+          limits:
+            memory: 512Mi
+      containers:
+      - name: web
+        image: ghcr.io/yonder-sh/yonder
+        command:
+        - node
+        args:
+        - .output/server/index.mjs
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: postgres-app
+              key: uri
+        envFrom:
+        - configMapRef:
+            name: yonder-config
+        - secretRef:
+            name: yonder-secret
+        - secretRef:
+            name: yonder-redis-secret
+        - secretRef:
+            name: yonder-s3-secret
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: [ "ALL" ]
+          runAsNonRoot: true
+          runAsUser: 1000
+          runAsGroup: 1000
+          seccompProfile:
+            type: RuntimeDefault
+        ports:
+        - name: http
+          containerPort: 3000
+        readinessProbe:
+          httpGet:
+            path: /api/health
+            port: http
+          initialDelaySeconds: 3
+          periodSeconds: 5
+          failureThreshold: 3
+        livenessProbe:
+          httpGet:
+            path: /api/health
+            port: http
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          failureThreshold: 6
+        resources:
+          requests:
+            cpu: 200m
+            memory: 512Mi
+          limits:
+            memory: 1Gi

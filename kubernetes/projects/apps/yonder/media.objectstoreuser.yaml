@@ -1,0 +1,11 @@
+apiVersion: ceph.rook.io/v1
+kind: CephObjectStoreUser
+metadata:
+  name: yonder-media
+  namespace: yonder
+spec:
+  store: axolotl-object-store
+  clusterNamespace: rook-ceph
+  displayName: Yonder - Media
+  quotas:
+    maxBuckets: 1

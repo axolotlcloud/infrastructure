@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: yonder-config
+  namespace: yonder
+data:
+  NODE_ENV: production
+  APP_URL: https://yonder.sh
+  BETTER_AUTH_URL: https://yonder.sh
+  EMAIL_FROM: Yonder <noreply@yonder.sh>
+  # Contact for the Photon and OSRM usage policies.
+  OSM_CONTACT: support@yonder.sh
+  # Per-user upload quota (GB).
+  STORAGE_QUOTA_DEFAULT_GB: "5"
+  # Public. Turnstile is on when this and TURNSTILE_SECRET_KEY are both set.
+  TURNSTILE_SITE_KEY: "0x4AAAAAAFC2-EetvW9EZNfW"
+  # The gateway only accepts Cloudflare, so its client-IP header can be trusted.
+  TRUST_CF_CONNECTING_IP: "1"
+  REDIS_PREFIX: yonder
+  # In-cluster for the server; browsers get presigned URLs for the public endpoint.
+  S3_ENDPOINT: http://rook-ceph-rgw-axolotl-object-store.rook-ceph.svc:80
+  S3_PUBLIC_ENDPOINT: https://s3.axolotl.cloud
+  S3_BUCKET: yonder-media
+  S3_REGION: us-east-1
+  S3_FORCE_PATH_STYLE: "true"

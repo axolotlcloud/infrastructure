@@ -1,0 +1,10 @@
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: yonder-backups-bucket
+  namespace: yonder
+spec:
+  bucketName: yonder-backups
+  storageClassName: rook-ceph-bucket-private
+  additionalConfig:
+    bucketOwner: yonder-backups

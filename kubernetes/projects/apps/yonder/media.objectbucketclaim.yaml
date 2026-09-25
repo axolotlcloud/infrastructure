@@ -1,0 +1,12 @@
+# Public store, but no bucket policy: objects are only reachable through
+# presigned URLs. The web initContainer sets CORS, lifecycle and versioning.
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: yonder-media-bucket
+  namespace: yonder
+spec:
+  bucketName: yonder-media
+  storageClassName: rook-ceph-bucket
+  additionalConfig:
+    bucketOwner: yonder-media

@@ -1,0 +1,14 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: postgres-nightly
+  namespace: yonder
+spec:
+  # Six fields (seconds first): every day at 03:00 UTC.
+  schedule: "0 0 3 * * *"
+  # Also take one right away, so point-in-time recovery works from day one.
+  immediate: true
+  backupOwnerReference: self
+  method: barmanObjectStore
+  cluster:
+    name: postgres

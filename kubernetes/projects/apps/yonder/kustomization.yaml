@@ -1,0 +1,28 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- ./collab
+- ./web
+- ./worker
+- ./backup.objectbucketclaim.yaml
+- ./backup.objectstoreuser.yaml
+- ./configmap.yaml
+- ./media.objectbucketclaim.yaml
+- ./media.objectstoreuser.yaml
+- ./namespace.yaml
+- ./postgres.scheduledbackup.yaml
+- ./postgres.yaml
+- ./redis.externalsecret.yaml
+- ./redis.sealedsecret.yaml
+- ./redis.yaml
+- ./s3.externalsecret.yaml
+- ./sealedsecret.yaml
+- ./secretstore.rbac.yaml
+- ./secretstore.yaml
+
+images:
+- name: ghcr.io/yonder-sh/yonder
+  digest: sha256:e81f1501fa836fca817700d2d6c61fb139892a5950f6237f3bab8339652b9d1b
+- name: ghcr.io/yonder-sh/yonder-collab
+  digest: sha256:ebf40293c926967b0a8e8bc5a7c3d6f711af56a2cca9c217c8bce07e71533f5b

@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker
+  namespace: yonder
+spec:
+  selector:
+    matchLabels:
+      app: worker
+  template:
+    metadata:
+      labels:
+        app: worker
+    spec:
+      # The worker gives active jobs 30s to finish on SIGTERM before it exits.
+      terminationGracePeriodSeconds: 40
+      containers:
+      # BullMQ worker: the collab image (ffmpeg and pdftoppm are in it).
+      - name: worker
+        image: ghcr.io/yonder-sh/yonder-collab
+        command:
+        - node
+        args:
+        - .output/collab/worker.mjs
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: postgres-app
+              key: uri
+        envFrom:
+        - configMapRef:
+            name: yonder-config
+        - secretRef:
+            name: yonder-secret
+        - secretRef:
+            name: yonder-redis-secret
+        - secretRef:
+            name: yonder-s3-secret
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: [ "ALL" ]
+          runAsNonRoot: true
+          runAsUser: 1000
+          runAsGroup: 1000
+          seccompProfile:
+            type: RuntimeDefault
+        resources:
+          requests:
+            cpu: 250m
+            memory: 512Mi
+          limits:
+            memory: 2Gi
