@@ -86,3 +86,29 @@ spec:
       - name: dennispham-me-tls
       options:
         gateway.istio.io/tls-terminate-mode: MUTUAL
+  - name: yonder-sh
+    hostname: yonder.sh
+    port: 443
+    protocol: HTTPS
+    allowedRoutes:
+      namespaces:
+        from: All
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - name: yonder-sh-tls
+      options:
+        gateway.istio.io/tls-terminate-mode: MUTUAL
+  - name: wildcard-yonder-sh
+    hostname: "*.yonder.sh"
+    port: 443
+    protocol: HTTPS
+    allowedRoutes:
+      namespaces:
+        from: All
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - name: yonder-sh-tls
+      options:
+        gateway.istio.io/tls-terminate-mode: MUTUAL

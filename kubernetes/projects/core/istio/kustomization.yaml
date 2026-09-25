@@ -95,3 +95,7 @@ secretGenerator:
   namespace: istio-ingress
   files:
   - cacert=cloudflare.pem
+- name: yonder-sh-tls-cacert
+  namespace: istio-ingress
+  files:
+  - cacert=cloudflare.pem
