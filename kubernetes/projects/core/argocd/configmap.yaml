@@ -185,8 +185,9 @@ metadata:
   name: argocd-image-updater-config
 data:
   git.commit-message-template: |
-    Build: automated update of {{ .AppName }}.
+    k8s({{ .AppName }}): update images
 
     {{ range .AppChanges -}}
-    - Updates {{ .Image }} from '{{ .OldTag }}' to '{{ .NewTag }}'
+    - {{ .Image }}: {{ .OldTag }} -> {{ .NewTag }}
+    {{- with index .Labels "org.opencontainers.image.revision" }} ({{ index $.Labels "org.opencontainers.image.source" }}/commit/{{ . }}){{ end }}
     {{ end -}}
