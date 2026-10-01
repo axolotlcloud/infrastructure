@@ -17,6 +17,8 @@ data:
   # Push notifications
   VAPID_PUBLIC_KEY: BCyxD-ApGR_mx29SRaCpwRzg4hVV79TDT-uLKjRpsqQMBF7s7ykQSIgi5nStnWpR-AIQCAXBZgz1WHBrZ01-dm4
   VAPID_SUBJECT: mailto:support@yonder.sh
+  # iOS Shortcut URL for saving media to Yonder from share sheet
+  SHORTCUT_ICLOUD_URL: https://www.icloud.com/shortcuts/3ee7fe4e06764374a794f067a49b7325
   # The gateway only accepts Cloudflare, so its client-IP header can be trusted.
   TRUST_CF_CONNECTING_IP: "1"
   REDIS_PREFIX: yonder
