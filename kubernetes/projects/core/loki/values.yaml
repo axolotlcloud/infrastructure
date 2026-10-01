@@ -570,7 +570,9 @@ loki:
       max_per_second: 20
       up_to: 3
   # --  Optional compactor configuration
-  compactor: {}
+  compactor:
+    retention_enabled: true
+    delete_request_store: s3
   # --  Optional compactor grpc client configuration
   compactor_grpc_client: {}
   # --  Optional pattern ingester configuration
