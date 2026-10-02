@@ -61,17 +61,12 @@ spec:
     # The affinity rules to apply to the rgw deployment.
     placement:
       podAntiAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution:
-        - weight: 100
-          podAffinityTerm:
-            labelSelector:
-              matchExpressions:
-              - key: app
-                operator: In
-                values:
-                - rook-ceph-rgw
-            # topologyKey: */zone can be used to spread RGW across different AZ
-            topologyKey: kubernetes.io/hostname
+        requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchLabels:
+              rook_object_store: axolotl-object-store
+          # topologyKey: */zone can be used to spread RGW across different AZ
+          topologyKey: kubernetes.io/hostname
     # A key/value list of annotations
     #  nodeAffinity:
     #    requiredDuringSchedulingIgnoredDuringExecution:
