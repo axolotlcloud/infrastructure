@@ -24,8 +24,8 @@ resources:
 
 images:
 - name: ghcr.io/yonder-sh/yonder
-  digest: sha256:26f3b95d148cad3101f1173b753160f4dccd4373f23251739e996a5b8313a9b0
+  digest: sha256:994c162f1f0df62432c0d48a56322417019ef0c6412df76f81836c09ae9e3fca
   newTag: latest
 - name: ghcr.io/yonder-sh/yonder-collab
-  digest: sha256:52c8d8a78ac5b0184f64109d61367c0857df4faf1fa97e3493a4773d3ed362ac
+  digest: sha256:6d82bc6d02367045514b1cb1b06e114d21de4550289e5b79278096b18f97dbab
   newTag: latest
