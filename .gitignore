@@ -6,3 +6,6 @@ site/
 
 # Python virtual environment
 .venv/
+
+# Dotenv
+.env

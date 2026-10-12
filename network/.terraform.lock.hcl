@@ -5,7 +5,20 @@ provider "registry.opentofu.org/terraform-routeros/routeros" {
   version     = "1.86.2"
   constraints = "1.86.2"
   hashes = [
+    "h1:1ET8AXtsgh6yUUOSnbGHfP2OOhYdulg+DQaTnZWy4KU=",
+    "h1:30hh4mFiaUDuT8DIgAGkOmDrSdl03m02y2grXg2RVgc=",
+    "h1:7TqhHs8NTSG1H8lpPwj8RcpyLgz+ccuHYiFxY/J3E+s=",
+    "h1:Kfjz9UKqIgvEheTdGbW5WDdgFUCxz5Uc+Al3T3I6K+0=",
+    "h1:MJ3I8EKJfJo0IqW9SGSnHipKOj1S5rFUP07peX6gKgk=",
+    "h1:Qj3xi1YlDQUNibpW70HwgOg/HwyvH61R32wY/+R48RI=",
+    "h1:Sb4fnMG2m33fDMrtTxzRab8j70KKs+Pe+pRtO2gi6i0=",
+    "h1:e45PMLplcBe8KQBaEfo0G2Q7Cm4tkcsi3tHWA32CdK8=",
+    "h1:exXWrF+TjyC5socfJFw6r8aTk4e8mi7DeTMUnu3hIgM=",
+    "h1:fjJOXaGgISjcsWbpvZUUrExasdDN+ywB+YBSUCzGpJI=",
     "h1:mxXD6jiiPGL0D35F5QsbKiDIr74TygNXIZhd13fSzSo=",
+    "h1:pbesAjO5/eavlCVYqTcEex1aqbeQ4nePBsVY+Dut344=",
+    "h1:ympciXzdVEUMT0qfuy0/l7cHvTPqApDyFeNA14a3/vo=",
+    "h1:ynRWe+9lmOAZNoa2OkOpbzs28BJksAK7NV9gPfYt3PM=",
     "zh:05394418561f09182367fefd760fd7e3a0b449097daca99cc9a087e203d37bcf",
     "zh:237dfa6631d63f36a42ac217f16c7d967f7bdb9455381de5e7c0ec510ac649e9",
     "zh:35eb3a9b24961e6bcc087bcc457b1a4afe5c76b641f1845d25efbc5e2fd0aef6",

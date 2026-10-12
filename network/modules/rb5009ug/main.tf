@@ -512,6 +512,37 @@ resource "routeros_ip_address" "warp" {
   interface = routeros_interface_wireguard.warp.name
 }
 
+# Clamp TCP MSS to fit the WARP MTU (1420 - 40 = 1380) for connections in either
+# direction. Path MTU discovery doesn't work for LoadBalancer IPs: Cilium never
+# delivers the ICMP "fragmentation needed" sent to the VIP to the backend pod
+# (it loops between router and node until TTL expires), so without this the
+# ingress gateways send 1500-byte packets that get dropped at the WARP interface
+# and TLS handshakes from Cloudflare One clients hang.
+# https://github.com/cilium/cilium/issues/34380
+resource "routeros_ip_firewall_mangle" "warp-mss-in" {
+  action       = "change-mss"
+  chain        = "forward"
+  protocol     = "tcp"
+  tcp_flags    = "syn"
+  tcp_mss      = "1381-65535"
+  new_mss      = "1380"
+  in_interface = routeros_interface_wireguard.warp.name
+  passthrough  = true
+  comment      = "clamp MSS to WARP MTU (1420 - 40)"
+}
+
+resource "routeros_ip_firewall_mangle" "warp-mss-out" {
+  action        = "change-mss"
+  chain         = "forward"
+  protocol      = "tcp"
+  tcp_flags     = "syn"
+  tcp_mss       = "1381-65535"
+  new_mss       = "1380"
+  out_interface = routeros_interface_wireguard.warp.name
+  passthrough   = true
+  comment       = "clamp MSS to WARP MTU (1420 - 40)"
+}
+
 resource "routeros_ip_cloud" "set" {
   ddns_enabled         = "yes"
   ddns_update_interval = "1m"
