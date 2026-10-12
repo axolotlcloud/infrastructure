@@ -4,8 +4,8 @@ kind: Kustomization
 resources:
 - https://raw.githubusercontent.com/istio/istio/refs/tags/1.29.2/samples/addons/extras/prometheus-operator.yaml
 - ./gateway.yaml
-- ./lan.gateway.yaml
-- ./lan.gatewayclass.yaml
+- ./internal.gateway.yaml
+- ./internal.gatewayclass.yaml
 - ./namespace.yaml
 - ./networkpolicy.yaml
 # - ./waf.wasmplugin.yaml

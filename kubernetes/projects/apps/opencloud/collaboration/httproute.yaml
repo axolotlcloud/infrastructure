@@ -7,7 +7,7 @@ spec:
   parentRefs:
   - name: axolotl
     namespace: istio-ingress
-  - name: axolotl-lan
+  - name: axolotl-internal
     namespace: istio-ingress
   hostnames:
   - office-wopiserver.axolotl.cloud

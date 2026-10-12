@@ -1,11 +1,11 @@
-nameOverride: coredns-lan
-fullnameOverride: coredns-lan
+nameOverride: coredns-internal
+fullnameOverride: coredns-internal
 
 image:
   tag: 1.8.2
 
 # Internal (split-horizon) DNS for axolotl.cloud. Routes attached to an
-# istio-lan gateway resolve to that gateway's LAN IP; everything else falls
+# istio-internal gateway resolve to that gateway's LAN IP; everything else falls
 # through to public DNS. AAAA/HTTPS for known names return NODATA, so clients
 # don't get Cloudflare's IPv6/ECH answers for internal names.
 domain: axolotl.cloud
@@ -15,7 +15,7 @@ ttl: 60
 watchedResources: [ "HTTPRoute" ]
 
 filters:
-  gatewayClasses: [ "istio-lan" ]
+  gatewayClasses: [ "istio-internal" ]
 
 fallthrough:
   enabled: true
@@ -51,7 +51,7 @@ topologySpreadConstraints:
   whenUnsatisfiable: DoNotSchedule
   labelSelector:
     matchLabels:
-      app.kubernetes.io/name: coredns-lan
+      app.kubernetes.io/name: coredns-internal
 
 resources:
   requests:

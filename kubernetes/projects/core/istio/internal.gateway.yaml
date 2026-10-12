@@ -1,12 +1,12 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
-  name: axolotl-lan
+  name: axolotl-internal
   namespace: istio-ingress
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
 spec:
-  gatewayClassName: istio-lan
+  gatewayClassName: istio-internal
   addresses:
   - type: IPAddress
     value: 10.0.11.1

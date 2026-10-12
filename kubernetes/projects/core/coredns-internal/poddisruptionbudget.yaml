@@ -1,10 +1,10 @@
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: coredns-lan
-  namespace: coredns-lan
+  name: coredns-internal
+  namespace: coredns-internal
 spec:
   maxUnavailable: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: coredns-lan
+      app.kubernetes.io/name: coredns-internal
