@@ -6,7 +6,10 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
 spec:
-  gatewayClassName: istio
+  gatewayClassName: istio-lan
+  addresses:
+  - type: IPAddress
+    value: 10.0.11.1
   listeners:
   - name: axolotl-cloud
     hostname: axolotl.cloud
