@@ -81,10 +81,6 @@ generatorOptions:
   disableNameSuffixHash: true
 
 secretGenerator:
-- name: aniplix-xyz-tls-cacert
-  namespace: istio-ingress
-  files:
-  - cacert=cloudflare.pem
 - name: audreyasked-com-tls-cacert
   namespace: istio-ingress
   files:
