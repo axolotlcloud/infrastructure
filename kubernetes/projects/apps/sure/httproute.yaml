@@ -7,6 +7,8 @@ spec:
   parentRefs:
   - name: axolotl
     namespace: istio-ingress
+  - name: axolotl-internal
+    namespace: istio-ingress
   hostnames:
   - finance.axolotl.cloud
   rules:
