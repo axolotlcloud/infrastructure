@@ -263,29 +263,6 @@ resource "routeros_ip_dhcp_server" "oobm" {
   name         = "DHCP_OOBM"
 }
 
-resource "routeros_interface_6to4" "sit1" {
-  name           = "sit1"
-  local_address  = local.wan_ip_address
-  remote_address = "209.51.161.14"
-  mtu            = "1280"
-  comment        = "Hurricane Electric IPv6 Tunnel Broker"
-}
-
-resource "routeros_ipv6_route" "sit1_default" {
-  dst_address  = "2000::/3"
-  gateway      = "2001:470:1f06:68::1"
-  distance     = 1
-  scope        = 30
-  target_scope = 10
-}
-
-resource "routeros_ipv6_address" "sit1" {
-  address   = "2001:470:1f06:68::2/64"
-  interface = routeros_interface_6to4.sit1.name
-  advertise = false
-  eui_64    = false
-}
-   
 resource "routeros_ip_firewall_nat" "wan-srcnat-masq" {
   action        = "masquerade"
   chain         = "srcnat"
