@@ -11,6 +11,12 @@ spec:
   - type: IPAddress
     value: 10.0.11.1
   listeners:
+  - name: http
+    port: 80
+    protocol: HTTP
+    allowedRoutes:
+      namespaces:
+        from: Same
   - name: axolotl-cloud
     hostname: axolotl.cloud
     port: 443

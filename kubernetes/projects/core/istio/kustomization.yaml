@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
 - https://raw.githubusercontent.com/istio/istio/refs/tags/1.29.2/samples/addons/extras/prometheus-operator.yaml
 - ./gateway.yaml
+- ./https-redirect.httproute.yaml
 - ./internal.gateway.yaml
 - ./internal.gatewayclass.yaml
 - ./namespace.yaml
