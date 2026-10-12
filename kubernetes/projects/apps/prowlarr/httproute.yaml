@@ -5,7 +5,7 @@ metadata:
   namespace: prowlarr
 spec:
   parentRefs:
-  - name: axolotl
+  - name: axolotl-internal
     namespace: istio-ingress
   hostnames:
   - prowlarr.axolotl.cloud

@@ -5,7 +5,7 @@ metadata:
   namespace: jellyfin
 spec:
   parentRefs:
-  - name: axolotl
+  - name: axolotl-internal
     namespace: istio-ingress
   hostnames:
   - qbittorrent.axolotl.cloud
