@@ -80,37 +80,16 @@ resource "routeros_ip_dns_record" "gateway_lan_axolotl_cloud_A" {
   ttl     = "30s"
 }
 
-resource "routeros_ip_dns_record" "argocd_lan_axolotl_cloud_CNAME" {
+resource "routeros_ip_dns_record" "office_lan_axolotl_cloud_CNAME" {
   type  = "CNAME"
-  name  = "argocd.lan.axolotl.cloud"
+  name  = "office.lan.axolotl.cloud"
   cname = "gateway.lan.axolotl.cloud"
   ttl   = "30s"
 }
 
-resource "routeros_ip_dns_record" "ceph_lan_axolotl_cloud_CNAME" {
+resource "routeros_ip_dns_record" "photos_lan_axolotl_cloud_CNAME" {
   type  = "CNAME"
-  name  = "ceph.lan.axolotl.cloud"
-  cname = "gateway.lan.axolotl.cloud"
-  ttl   = "30s"
-}
-
-resource "routeros_ip_dns_record" "grafana_lan_axolotl_cloud_CNAME" {
-  type  = "CNAME"
-  name  = "grafana.lan.axolotl.cloud"
-  cname = "gateway.lan.axolotl.cloud"
-  ttl   = "30s"
-}
-
-resource "routeros_ip_dns_record" "hubble_lan_axolotl_cloud_CNAME" {
-  type  = "CNAME"
-  name  = "hubble.lan.axolotl.cloud"
-  cname = "gateway.lan.axolotl.cloud"
-  ttl   = "30s"
-}
-
-resource "routeros_ip_dns_record" "s3_lan_axolotl_cloud_CNAME" {
-  type  = "CNAME"
-  name  = "s3.lan.axolotl.cloud"
+  name  = "photos.lan.axolotl.cloud"
   cname = "gateway.lan.axolotl.cloud"
   ttl   = "30s"
 }
