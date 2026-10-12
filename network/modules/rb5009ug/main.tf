@@ -254,7 +254,7 @@ resource "routeros_ip_firewall_nat" "wan-dstnat-443-tcp" {
   in_interface = routeros_ip_address.wan.interface
   port         = "443"
   protocol     = "tcp"
-  to_addresses = "10.0.11.0"
+  to_addresses = "10.0.11.20"
 }
 
 resource "routeros_ip_firewall_filter" "rule-0010" {
