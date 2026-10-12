@@ -7,9 +7,10 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
 spec:
   gatewayClassName: istio-internal
-  addresses:
-  - type: IPAddress
-    value: 10.0.11.1
+  infrastructure:
+    annotations:
+      # Renumbering: old,new. Drop 10.0.11.1 once nothing uses it.
+      lbipam.cilium.io/ips: 10.0.11.1,10.0.11.10
   listeners:
   - name: http
     port: 80

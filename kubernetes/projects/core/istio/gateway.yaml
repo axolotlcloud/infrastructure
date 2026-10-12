@@ -7,6 +7,10 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
 spec:
   gatewayClassName: istio
+  infrastructure:
+    annotations:
+      # Renumbering: old,new. Drop 10.0.11.0 once the router forwards to 10.0.11.20.
+      lbipam.cilium.io/ips: 10.0.11.0,10.0.11.20
   listeners:
   - name: audreyasked-com
     hostname: audreyasked.com
