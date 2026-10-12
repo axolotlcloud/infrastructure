@@ -1,0 +1,72 @@
+nameOverride: coredns-lan
+fullnameOverride: coredns-lan
+
+image:
+  tag: 1.8.2
+
+# Internal (split-horizon) DNS for axolotl.cloud. Routes attached to an
+# istio-lan gateway resolve to that gateway's LAN IP; everything else falls
+# through to public DNS. AAAA/HTTPS for known names return NODATA, so clients
+# don't get Cloudflare's IPv6/ECH answers for internal names.
+domain: axolotl.cloud
+
+ttl: 60
+
+watchedResources: [ "HTTPRoute" ]
+
+filters:
+  gatewayClasses: [ "istio-lan" ]
+
+fallthrough:
+  enabled: true
+
+extraZonePlugins:
+- name: log
+- name: errors
+- name: health
+  configBlock: |-
+    lameduck 5s
+- name: ready
+- name: prometheus
+  parameters: 0.0.0.0:9153
+# Forward straight to public resolvers, not /etc/resolv.conf: the router
+# forwards axolotl.cloud here, so going back through it would loop.
+- name: forward
+  parameters: . 1.1.1.1 1.0.0.1
+- name: loop
+- name: reload
+- name: loadbalance
+
+service:
+  type: LoadBalancer
+  annotations:
+    lbipam.cilium.io/ips: 10.0.11.53
+  useTcp: true
+
+replicaCount: 3
+
+topologySpreadConstraints:
+- maxSkew: 1
+  topologyKey: kubernetes.io/hostname
+  whenUnsatisfiable: DoNotSchedule
+  labelSelector:
+    matchLabels:
+      app.kubernetes.io/name: coredns-lan
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 32Mi
+  limits:
+    memory: 128Mi
+
+podSecurityContext:
+  runAsNonRoot: true
+  seccompProfile:
+    type: RuntimeDefault
+
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  capabilities:
+    drop: [ "ALL" ]
