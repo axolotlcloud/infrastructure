@@ -73,32 +73,11 @@ resource "routeros_ip_dns_record" "k8s_lan_axolotl_cloud_A_2" {
   ttl     = "30s"
 }
 
-resource "routeros_ip_dns_record" "gateway_lan_axolotl_cloud_A" {
-  type    = "A"
-  name    = "gateway.lan.axolotl.cloud"
-  address = "10.0.11.1"
-  ttl     = "30s"
-}
-
-resource "routeros_ip_dns_record" "office_lan_axolotl_cloud_CNAME" {
-  type  = "CNAME"
-  name  = "office.lan.axolotl.cloud"
-  cname = "gateway.lan.axolotl.cloud"
-  ttl   = "30s"
-}
-
-resource "routeros_ip_dns_record" "photos_lan_axolotl_cloud_CNAME" {
-  type  = "CNAME"
-  name  = "photos.lan.axolotl.cloud"
-  cname = "gateway.lan.axolotl.cloud"
-  ttl   = "30s"
-}
-
-resource "routeros_ip_dns_record" "whoami_lan_axolotl_cloud_CNAME" {
-  type  = "CNAME"
-  name  = "whoami.lan.axolotl.cloud"
-  cname = "gateway.lan.axolotl.cloud"
-  ttl   = "30s"
+# Split-horizon DNS
+resource "routeros_ip_dns_record" "axolotl_cloud_FWD" {
+  type       = "FWD"
+  regexp     = "^[^.]+\\.axolotl\\.cloud$"
+  forward_to = "10.0.11.53"
 }
 
 resource "routeros_interface_bridge" "bridge1" {
