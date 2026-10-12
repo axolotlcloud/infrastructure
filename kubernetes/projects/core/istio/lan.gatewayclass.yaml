@@ -4,4 +4,4 @@ metadata:
   name: istio-lan
 spec:
   controllerName: istio.io/gateway-controller
-  description: Internal-facing Istio gateways with automatic internal DNS records in coredns-lan
+  description: Internal Istio gateways with automatic DNS in coredns-lan
