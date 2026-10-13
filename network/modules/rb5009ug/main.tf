@@ -422,60 +422,43 @@ resource "routeros_routing_bgp_connection" "axolotl-2" {
   }
 }
 
-resource "routeros_interface_wireguard" "warp" {
-  name        = "WARP"
-  mtu         = "1420"
-  listen_port = "13231"
-  private_key = var.warp_private_key
+resource "routeros_container_config" "config" {
+  registry_url = "https://registry-1.docker.io"
+  tmpdir       = "usb1-part1/tmp"
 }
 
-resource "routeros_interface_wireguard_peer" "cloudflare-pop" {
-  name       = "cloudflare-pop"
-  interface  = routeros_interface_wireguard.warp.name
-  public_key = var.warp_public_key
-  allowed_address = [
-    "0.0.0.0/0",
-    "::/0",
+resource "routeros_interface_veth" "cloudflared" {
+  name    = "veth-cloudflared"
+  address = "172.31.255.2/30"
+  gateway = "172.31.255.1"
+}
+
+resource "routeros_ip_address" "cloudflared" {
+  address   = "172.31.255.1/30"
+  interface = routeros_interface_veth.cloudflared.name
+}
+
+resource "routeros_container_envs" "cloudflared-token" {
+  name  = "cloudflared"
+  key   = "TUNNEL_TOKEN"
+  value = var.cloudflared_tunnel_token
+}
+
+resource "routeros_container" "cloudflared" {
+  remote_image  = "cloudflare/cloudflared:2026.10.0-arm64"
+  interface     = routeros_interface_veth.cloudflared.name
+  envlist       = routeros_container_envs.cloudflared-token.name
+  cmd           = "tunnel run"
+  root_dir      = "usb1-part1/cloudflared"
+  hostname      = "cloudflared"
+  dns           = "172.31.255.1"
+  logging       = true
+  start_on_boot = true
+
+  depends_on = [
+    routeros_container_config.config,
+    routeros_ip_address.cloudflared,
   ]
-  endpoint_address     = "162.159.193.1"
-  endpoint_port        = "2408"
-  persistent_keepalive = "30s"
-}
-
-resource "routeros_ip_address" "warp" {
-  address   = "100.96.0.1/12"
-  interface = routeros_interface_wireguard.warp.name
-}
-
-# Clamp TCP MSS to fit the WARP MTU (1420 - 40 = 1380) for connections in either
-# direction. Path MTU discovery doesn't work for LoadBalancer IPs: Cilium never
-# delivers the ICMP "fragmentation needed" sent to the VIP to the backend pod
-# (it loops between router and node until TTL expires), so without this the
-# ingress gateways send 1500-byte packets that get dropped at the WARP interface
-# and TLS handshakes from Cloudflare One clients hang.
-# https://github.com/cilium/cilium/issues/34380
-resource "routeros_ip_firewall_mangle" "warp-mss-in" {
-  action       = "change-mss"
-  chain        = "forward"
-  protocol     = "tcp"
-  tcp_flags    = "syn"
-  tcp_mss      = "1381-65535"
-  new_mss      = "1380"
-  in_interface = routeros_interface_wireguard.warp.name
-  passthrough  = true
-  comment      = "clamp MSS to WARP MTU (1420 - 40)"
-}
-
-resource "routeros_ip_firewall_mangle" "warp-mss-out" {
-  action        = "change-mss"
-  chain         = "forward"
-  protocol      = "tcp"
-  tcp_flags     = "syn"
-  tcp_mss       = "1381-65535"
-  new_mss       = "1380"
-  out_interface = routeros_interface_wireguard.warp.name
-  passthrough   = true
-  comment       = "clamp MSS to WARP MTU (1420 - 40)"
 }
 
 resource "routeros_ip_cloud" "set" {

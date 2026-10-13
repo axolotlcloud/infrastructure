@@ -20,13 +20,8 @@ variable "password" {
   sensitive   = true
 }
 
-variable "warp_public_key" {
-  description = "Cloudflare WARP PoP public key"
-  type        = string
-}
-
-variable "warp_private_key" {
-  description = "Cloudflare WARP client private key"
+variable "cloudflared_tunnel_token" {
+  description = "Cloudflare Tunnel token for the cloudflared container"
   type        = string
   sensitive   = true
 }
