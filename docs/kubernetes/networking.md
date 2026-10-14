@@ -36,14 +36,18 @@ In our case, we have Istio set up in ambient mode, as we do not currently have a
 
 We use the Kubernetes standard, [Gateway API](https://gateway-api.sigs.k8s.io/), to configure our Istio service mesh for north/south and east/west traffic.
 
+There are two ingress gateways: a public gateway for traffic proxied through Cloudflare, and an internal gateway for devices on our network and VPN. Each service's route is attached to one or both of the gateways, depending on where the service should be accessible from[^2]. Traffic from the gateways to services on our cluster in the service mesh is transparently encrypted with mTLS.
+
 ### Kiali
 
 [Kiali](https://kiali.io) allows us to configure, visualize, validate, and troubleshoot our service mesh. Below is a graph of Argo CD traffic from Kiali.
 
 ![Kiali](../assets/kiali.png)
 
-We do not, however, use Kiali to configure our service mesh, as we store all configuration declaratively in a git repository so that we can perform GitOps[^2].
+We do not, however, use Kiali to configure our service mesh, as we store all configuration declaratively in a git repository so that we can perform GitOps[^3].
 
 [^1]: Bullet points were quoted from Istio documentation [here](https://istio.io/latest/docs/overview/what-is-istio/).
 
-[^2]: Learn more about GitOps [here](./gitops.md).
+[^2]: Learn more about how requests reach the cluster [here](../foundation/networking/accessing-services.md).
+
+[^3]: Learn more about GitOps [here](./gitops.md).

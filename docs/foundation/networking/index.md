@@ -19,7 +19,7 @@ Each of the 3 nodes in the cluster has a 10Gb link to the switch, and is BGP pee
 Each node also has a KVM over IP module for out-of-band management (OOBM), which is connected directly to the router with a 1Gb link.
 
 <figure markdown="span">
-    ![Network](../assets/network.svg){ width="600" }
+    ![Network](../../assets/network.svg){ width="600" }
 </figure>
 
 ## Cloudflare
@@ -28,8 +28,10 @@ We use various services provided by Cloudflare, including 1.1.1.1, Access, Pages
 
 ### Access & Proxy w/ mTLS
 
-Cloudflare is set up to proxy traffic to our cluster's ingress gateway with mTLS. This means that a client certificate will be presented by Cloudflare on every request, which we can verify to ensure that we only accept traffic from Cloudflare. This is extremely important for Cloudflare Access so that an actor is not able to bypass the Cloudflare network and send requests directly to our router.
+Cloudflare is set up to proxy traffic to our cluster's public ingress gateway with mTLS[^1]. This means that a client certificate will be presented by Cloudflare on every request, which we can verify to ensure that we only accept traffic from Cloudflare. This is extremely important for Cloudflare Access so that an actor is not able to bypass the Cloudflare network and send requests directly to our router.
 
-### WARP Connector
+### Tunnel & VPN
 
-Another important part of our networking infrastructure is [WARP Connector](https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/private-net/warp-connector/), which allows us to connect to internal services on our private network, such as OOBM, via WARP (which is a WireGuard VPN under the hood). WARP Connector is set up directly on the router itself so that node failure will not affect connectivity. Thanks to [Anim Mouse's article](https://www.animmouse.com/p/setup-cloudflare-warp-connector-on-mikrotik/) for this setup!
+Another important part of our networking infrastructure is Cloudflare Tunnel, which connects our network to Cloudflare. Together with the Cloudflare One client, it works as our VPN, allowing us to connect to internal services on our private network from anywhere. The tunnel's connector, `cloudflared`, runs in a [container](https://manual.mikrotik.com/docs/containers/) directly on the router itself so that node failure does not affect connectivity to our OOBM.
+
+[^1]: Learn more about how requests reach the cluster [here](./accessing-services.md).

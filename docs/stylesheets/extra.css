@@ -1,0 +1,10 @@
+/* Diagrams have light and dark versions; only show the one for the current color scheme. */
+[data-md-color-scheme="default"] .only-dark,
+[data-md-color-scheme="slate"] .only-light {
+  display: none;
+}
+
+.md-typeset .only-light,
+.md-typeset .only-dark {
+  border-radius: 0.4rem;
+}
