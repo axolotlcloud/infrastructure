@@ -30,6 +30,7 @@ rails:
     OIDC_REDIRECT_URI: https://finance.axolotl.cloud/auth/openid_connect/callback
     WEBAUTHN_RP_ID: finance.axolotl.cloud
     WEBAUTHN_ALLOWED_ORIGINS: https://finance.axolotl.cloud
+    POSTHOG_FEEDBACK_ENABLED: "false"
   # Extra environment variables with full EnvVar objects (supports valueFrom/secretKeyRef)
   extraEnvVars:
   - name: DATABASE_URL

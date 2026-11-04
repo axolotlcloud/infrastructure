@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
 - ./backup.objectbucketclaim.yaml
 - ./backup.objectstoreuser.yaml
-- ./chart
 - ./entra
 - ./httproute.yaml
 - ./namespace.yaml
@@ -18,3 +17,27 @@ resources:
 - ./sealedsecret.yaml
 - ./secretstore.rbac.yaml
 - ./secretstore.yaml
+
+helmCharts:
+- releaseName: sure
+  namespace: sure
+  name: sure
+  repo: https://we-promise.github.io/sure
+  version: 0.7.6
+  valuesFile: values.yaml
+
+patches:
+- patch: |
+    $patch: delete
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: sure-test-connection
+# The chart's templates don't set metadata.namespace, and kustomize's namespace field doesn't
+# reach Helm output, so set it on each kind the chart renders with these values.
+- target:
+    kind: (Service|Deployment|Job)
+  patch: |-
+    - op: add
+      path: /metadata/namespace
+      value: sure
