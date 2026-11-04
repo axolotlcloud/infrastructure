@@ -8,3 +8,21 @@ spec:
   storage:
     size: 16Gi
   imageName: ghcr.io/tensorchord/cloudnative-vectorchord:17-0.4.3
+  # Base backups + continuous WAL archiving to the private Ceph RGW store
+  # (in-tree Barman Cloud; the Barman Cloud Plugin is not installed).
+  backup:
+    retentionPolicy: "14d"
+    barmanObjectStore:
+      destinationPath: s3://axolotl-sure-backups/
+      endpointURL: http://rook-ceph-rgw-axolotl-private-object-store.rook-ceph.svc:80
+      s3Credentials:
+        accessKeyId:
+          name: rook-ceph-object-user-axolotl-private-object-store-axolotl-sure-backups
+          key: AccessKey
+        secretAccessKey:
+          name: rook-ceph-object-user-axolotl-private-object-store-axolotl-sure-backups
+          key: SecretKey
+      wal:
+        compression: gzip
+      data:
+        compression: gzip

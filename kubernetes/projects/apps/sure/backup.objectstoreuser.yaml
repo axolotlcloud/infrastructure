@@ -1,0 +1,11 @@
+apiVersion: ceph.rook.io/v1
+kind: CephObjectStoreUser
+metadata:
+  name: axolotl-sure-backups
+  namespace: sure
+spec:
+  store: axolotl-private-object-store
+  clusterNamespace: rook-ceph
+  displayName: Axolotl Cloud - Sure Backups
+  quotas:
+    maxBuckets: 1

@@ -2,12 +2,15 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
+- ./backup.objectbucketclaim.yaml
+- ./backup.objectstoreuser.yaml
 - ./chart
 - ./entra
 - ./httproute.yaml
 - ./namespace.yaml
 - ./objectbucketclaim.yaml
 - ./objectstoreuser.yaml
+- ./postgres.scheduledbackup.yaml
 - ./postgres.yaml
 - ./redis.externalsecret.yaml
 - ./redis.sealedsecret.yaml
